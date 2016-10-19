@@ -1,0 +1,1393 @@
+{% extends 'mobileWeb/blocks/base.html' %}
+
+{% block content %}
+		
+{% block css %}	
+		<style>
+			#backBtn{
+				position: absolute;				
+				color: #ffffff;
+				border-radius: 20px;
+				border: 1px solid #ffffff;
+				bottom:10px;
+				left: 3%;
+				width: 30%;
+				font-size: 13px;
+			}
+			[data-role="nd2tab"]{
+				min-height: 400px;
+				padding-bottom: 200px;
+				background-color: #f5f5f5;
+			}	
+
+		/*상세 게임 상태*/
+			div.outer{
+				position: relative;
+				height: 148px;
+			}
+			#backImaA{
+				position: absolute;
+				left: 10px;
+				top: 10px;
+			}			
+			div.imgBackground{
+				/*position: relative;*/
+			}
+			table.detailTable{
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				left: 0;
+				top:0;				
+			}
+			td.imgs{				
+				vertical-align: middle;
+				padding-top:2%;
+				padding-left:2%;
+			}
+			td.gameTeam_home, td.gameTeam_away{
+				text-align: center;
+			}
+			td.bookmark{
+				vertical-align: top;
+				padding-top:4%;
+				padding-right:4%;
+			}
+			
+			tr.detailRow td:nth-child(1){
+				width: 8%;	
+			}
+			.detailRow td:nth-child(2){
+				width: 25%;				
+			}
+			.detailRow td:nth-child(3){
+				width: 34%;
+				text-align: center;				
+			}
+			.detailRow td:nth-child(4){
+				width: 25%;	
+			}
+			.detailRow td:nth-child(5){
+				width: 8%;	
+			}
+			div.progressWrap{
+				margin-bottom: 5px;
+			}		
+			span.detailProgress{
+				font-size: 12px;				
+				border-radius: 20px;
+				padding: 3px 7px 3px 7px;
+				background-color: transparent;
+			}
+			.before{
+				color: #999999;
+				border: 1px solid #999999;
+			}
+			.homeWin{
+				color: #f10000;
+				border: 1px solid #f10000;
+			}
+			.homeLose{
+				color: #01a8ff;
+				border: 1px solid #01a8ff;
+			}
+			.homeDraw{
+				color: #f7cb00;
+				border: 1px solid #f7cb00;	
+			}
+			div.timeWrap{
+				
+			}
+			div.detailDate{
+				font-size:11px;
+				/*line-height: 12px!important;*/
+				color: #ffffff;
+			}
+			div.leftTime{
+				font-size: 11px;
+				/*line-height: 12px!important;*/
+				color: #47c0ff;
+			}
+			.detailScore{
+
+			}	
+			.detailScore div{
+				display: inline-block;
+			}
+			.detailHome, .detailAway{
+				color: #ffffff;
+				font-size: 13px;
+			}
+			.beforeGame{
+				color: #ffffff;
+				font-size: 25px;
+			}
+			.detailHomeScore, .detailAwayScore{
+				color: #ffffff;
+				font-size: 35px;
+			}
+			div.vsWordWrap{
+				height: 22px;				
+			}
+			#vsWord{
+				color: #ffffff;
+				margin-left:20px;
+				margin-right:20px;				
+			}
+			
+			
+		/*상태바*/
+			#voteStatusBar{
+				margin-top: 10px;
+				margin-bottom: 10px;
+				padding-left: 8px;
+				padding-right: 8px;
+			}
+			#voteStatusBar div{
+				display: inline-block;}
+			.winBar{
+				background-color: #edc4c6;
+				height: 4px;}
+			.drawBar{
+				background-color: #f3e3c8;
+				height: 4px;}
+			.loseBar{
+				background-color: #c7e2ed;
+				height: 4px;}		
+				
+		/*투표 상태바 & 투표 버튼*/
+			#voteCount {
+				margin-bottom: 10px;
+			}			
+			#voteCount div:nth-child(1){
+				margin-right: 2%;
+				margin-left: 2%;
+			}
+			#voteCount div:nth-child(2){
+				margin-right: 2%;	
+			}
+			.voteDiv{
+				display: inline-block;
+				margin: 0 auto;
+				width: 30%;	
+				text-align: center;
+			}
+			.voteDiv2{				
+				display: inline-block;
+				margin: 0 auto;
+				width: 46%;	
+				text-align: center;	
+			}
+			.voteBtn {
+				text-align: center!important;
+				display: inline-block!important;				
+				border-radius: 25px!important;
+				font-weight: bold!important;
+				font-size: 17px!important;
+				padding-top: 7px;
+				padding-bottom: 7px;
+			}
+			.winBtn{
+				color: #ff5a6d!important;
+				border: 1px solid #ff5a6d!important;
+				}
+			.drawBtn{
+				color: #f7cb00!important;
+				border: 1px solid #f7cb00!important;
+				margin-right: 8px!important;}
+			.loseBtn{
+				color: #01a8ff!important;
+				border: 1px solid #01a8ff!important;}
+			.voteNum{
+				color: #999999;
+				font-size: 13px;}
+			.zmdi-arrow-back{
+				color:#cccccc;}	
+
+			ul[data-role="nd2tabs"]{
+				border-top: 1px solid #e6e6e6;
+				border-bottom: 1px solid #e6e6e6;
+			}
+			/*ul[data-role="nd2tabs"]{
+				overflow-x: auto!important;
+				white-space:nowrap!important;
+				vertical-align: middle;
+				list-style: none!important;
+				padding: 0!important;
+				margin: 0!important;
+			}
+			ul[data-role="nd2tabs"] li{
+				display: inline;				
+			}*/
+
+
+		/*분석*/
+			div.analysisDiv{		  	
+		  	background-color: #ffffff;
+		  	border-bottom: 1px solid #d9d9d9;
+		  	height: 100px;
+		  }
+		  .thumbArea, .infoArea{
+		  	display: inline-block;		  	
+		  }
+		  div.thumbArea{
+		  	line-height: 98px;
+		  	width: 23%;
+		  	float: left;
+		  	vertical-align: middle;
+		  	text-align: center;
+		  }
+		  div.infoArea{
+		  	width: 77%;	  	
+		  	padding-top: 10px;
+		  	padding-bottom: 10px;
+		  }
+		  div.infoTitle{
+		  	font-size: 15px;
+		  	margin-top: 3px;
+		  	margin-bottom: 3px;
+		  	border: 1px solid transparent;
+				max-width: 95%;				
+				overflow: hidden;
+				text-overflow:ellipsis;
+				white-space:nowrap;
+				word-wrap:normal;
+		  }
+			
+			.listTop{
+				color:#f10000;
+				font-size: 12px;}
+
+			[data-role="listview"] li{
+				background-color: #ffffff;				
+			} 	
+			.listBottom{
+				font-size: 11px!important;
+			}
+			.nickname{								
+				font-size: 13px;
+				color: #666666;}
+			.listDetail{
+				color: #999999;
+			}
+
+		/*추천 유저 리그 디바이저 div*/
+			.leagueDivision{
+				line-height: 30px;
+				vertical-align: middle;
+				padding-left: 10px;
+		    background: #9a9a9a; /* For browsers that do not support gradients */
+		    background: -webkit-linear-gradient(left, #bbbbbb , #eaeaea); /* For Safari 5.1 to 6.0 */
+		    background: -o-linear-gradient(right, #bbbbbb, #eaeaea); /* For Opera 11.1 to 12.0 */
+		    background: -moz-linear-gradient(right, #bbbbbb, #eaeaea); /* For Firefox 3.6 to 15 */
+		    background: linear-gradient(to right, #bbbbbb, #eaeaea); /* Standard syntax (must be last) */				
+			}
+			
+		/*추천유저 Div*/
+			.recoPicDiv{				
+				margin: 6px 6px 25px 6px;
+				background-color: #ffffff;
+				}
+			div.recoWrap{
+				height: 60px;
+				border-bottom: 1px solid #d9d9d9;
+			}
+			div.recoThumb, div.recoInfo{
+				display: inline-block;
+
+			}
+			.recoThumb{
+				float: left;
+				width: 40%;
+			}
+			.recoInfo{
+				font-size: 14px;
+				padding-left: 10px;
+				line-height: 15px;
+				padding-top: 16px;
+			}
+			.recoNickname{
+				display: inline-block;				
+				font-size: 14px;
+				color: #333333;
+				width: 50%;
+				vertical-align: middle;
+				line-height: 15px;
+			}
+			div.recoBet{
+				position: relative;			
+				border-bottom: 1px solid #d9d9d9;				
+			}
+			
+			.kindBet, .noDraw, .yesDraw{
+				height: 40px;				
+				display: inline-block;
+				text-align: center;
+				line-height: 40px;
+			}
+			.kindBet{				
+				width: 22%;
+				border-right:1px solid #d9d9d9; 
+			}			
+			.noDraw{				
+				width: 39%;
+			}
+			.yesDraw{
+				width: 26%;				
+			}
+			.yellow{
+				background-color: #fdf486;
+			}
+			/*.accurateRate{				
+				font-size: 13px;
+			}*/
+			
+			.recoUser{
+				vertical-align: middle;				
+			}
+			.recoThumb img{			
+				margin: 10px 10px 10px 13px;
+			}
+		
+		/*배당*/
+			[data-tab="bet"]{
+				padding: 6px;
+			}
+			div.betNotice{
+				margin: 13px 0px;
+				color: #333333;
+				font-size: 14px;
+				font-weight: bold;
+			}
+			.betNotice img{
+				float: right;
+			}
+			
+			table.betTable{								
+				color: #cccccc;				
+				background-color: #ffffff;
+				width: 100%;
+				border-collapse: collapse;
+				text-align: center;				
+			}
+			tr.betFirstTr{
+				line-height: 32px;
+				color: #333333;
+				font-weight: bold;
+				font-size: 14px;
+			}
+			tr.betSecondTr{
+				height: 45px;
+				line-height: 16px;
+			}
+			
+			.betTable td:nth-child(1){
+				font-size: 14px;
+				color: #333333;
+				font-weight: bold;
+			}
+			.betTable td{
+				width: 25%;
+				border: 1px solid #eaeaea;
+			}		
+			
+			td.betd div{				
+				display: inline-block;
+				vertical-align: middle;
+			}			
+			div.betRadioImg{				
+				width: 30px;				
+			}
+			.radioOn, .star_fill{
+				display: none;
+			}
+			.sam{
+				color: #333333;
+			}
+			.num{
+				width: 45px;
+				color: #787878;
+			}
+			div.endMent{
+				margin-top: 10px;
+				font-size: 13px;
+			}			
+			
+			
+			
+
+		/*뉴스*/
+			[data-tab="news"]{
+				padding: 6px;
+			}
+			.articleArea{
+		  	position: relative;
+		  	margin-bottom: 6px;
+		  }
+		  .articleBrief{
+		  	width: 100%;
+		  	background-color: #000000;
+		  	opacity: 0.6;
+		  	position: absolute;
+		  	bottom: 0px;
+		  	left:0px;
+		  	height: 50px;
+		  	padding-top: 5px;	
+		  }
+		  .articleTheme{
+		  	padding-left: 10px;		  	
+		  	font-size: 14px;
+		  	color: #ffffff; }
+		  .articleFrom{
+		  	padding-left: 10px;
+		  	font-size: 11px;
+		  	color: #eaeaea; }
+
+			.blockBet{
+				position: absolute;
+				height: 40px;
+				line-height: 40px;
+				color: #ffffff;				
+				left: 22%;
+				top: 0;
+				background-color: #333333;
+				opacity: 0.8;				
+				width: 78%;
+				vertical-align: middle;	
+				font-size: 12px;
+				padding-left: 20px;
+			}
+			.blockImg{
+				display: inline-block;				
+			}			
+			div.blockImg{
+				font-size: 15px;
+				line-height: 16px;		
+				margin-left: 15px;
+				text-align: center;
+				border: 1px solid #ffffff;
+				padding: 2px 6px 2px 6px;
+				border-radius: 15px;
+			}
+			.blockImg img{
+				opacity: 1!important;
+			}
+
+		#loading {
+			width: 100%;   
+			height: 100%;   
+			top: 0px;
+			left: 0px;
+			position: fixed;   
+			display: block;   
+			opacity: 0.7;   
+			background-color: #fff;   
+			z-index: 99;   
+			text-align: center; 
+		}		 
+		#loading-image {   
+		 position: absolute;   
+		 top: 45%;  
+		 left: 45%; 
+		 z-index: 100; } 
+				
+
+		.sticky {
+		  top: 0;
+		  position: fixed;
+		  z-index: 500;
+		  background-color: #ffffff;
+		  overflow-x: auto;
+		}
+		div#compareCmt{
+			margin: 0 auto;
+			width: 180px;
+			margin-top: 20px;
+			border-radius: 2px;
+			color: #f10000;
+			border: 1px solid #f10000;
+			text-align: center;
+			font-size: 17px;
+			line-height: 25px;
+		}
+
+		/* Modal Content/Box */
+			.modal-content {
+				background-color: #fefefe;
+				margin: 40% auto; /* 15% from the top and centered */				
+				border: 1px solid #888;
+				width: 82%; /* Could be more or less, depending on screen size */
+			}		
+			.modalMent{
+				margin-top: 20px;
+				margin-bottom: 20px;				
+				text-align: center;
+				font-size: 20px;				
+				font-weight: bold;
+				color:#8c8c8c;
+			}	
+
+		/* The Close Button */
+			div.radioDiv{
+				margin-top: 20px;
+				margin-bottom: 20px;
+				
+			}
+			
+			div.radioImg{
+				line-height: 20px;
+				vertical-align: middle;
+				margin-left: 30px;
+				margin-right: 25px;
+				display: inline;
+			}
+			span.betKind{
+				font-size: 18px;
+				font-weight: bold;
+			}			
+			
+			.selectBtn{
+				margin-top: 20px;
+				margin-bottom: 20px;
+				margin-right: 10px;
+				text-align: right;
+			}
+			.cancel, .seeAnalisys {								
+				font-size: 15px;
+				color: #f10000;
+				margin: 10px;				
+			}
+			.tofadeIn{
+				display: inline;
+			}	
+			.tofadeOut{
+				display: none;
+			}
+			
+		
+/*스와이프css*/
+		.swipe {
+  padding-bottom:20px;
+  position:relative;
+  z-index:1;
+}
+.swipe ul{
+	padding: 0;
+}
+.swipe li div, .swipe div div div {
+  margin:0 10px;
+  padding:50px 10px;
+  background:#1db1ff;
+  font-weight:bold;
+  color:#fff;
+  font-size:20px;
+  text-align:center;
+}		
+		
+		  
+		  
+		</style>
+{% endblock %}
+
+
+{% block main %}
+
+		<!--<div data-role="page">-->
+			<!--header-->
+			<!--<div data-role="header" data-position="fixed" class="wow fadeInDown" data-wow-delay="0.2s">					
+				<a href="#" class="ui-btn ui-btn-left wow fadeIn" data-wow-delay='0.8s' data-rel="back">
+					<img id="backImg" src="{{STATIC_URL}}mobileWeb_img/ic_arrow_back.png" alt="" width="25px" height="20px">
+				</a>
+				<h5 class="wow fadeIn" data-wow-delay='0.4s'>{{game.home}} vs {{game.away}}</h5>
+			</div>-->
+
+		<!--게임 바탕이미지-->	
+		
+			<div class="outer">
+				<div class="imgBackground">
+					{% if game.sport == 1 %}
+						<img src="{{STATIC_URL}}mobileWeb_img/bg_baseball.png" alt="" width="100%">						
+					{% elif game.sport == 2 %}
+						<img src="{{STATIC_URL}}mobileWeb_img/bg_soccer.png" alt="" width="100%">
+					{% elif game.sport == 3 %}
+						<img src="{{STATIC_URL}}mobileWeb_img/bg_volleyball.png" alt="" width="100%">
+					{% elif game.sport == 4 %}
+						<img src="{{STATIC_URL}}mobileWeb_img/bg_basketball.png" alt="" width="100%">
+					{% endif %}
+				</div>
+
+				<a id="backImaA" href="#" class="ui-btn ui-btn-left wow fadeIn" data-wow-delay='0.8s' data-rel="back">
+					<img id="backImg" src="{{STATIC_URL}}mobileWeb_img/ic_arrow_back.png" alt="" width="25px" height="20px">
+				</a>
+
+				<table class="detailTable">
+					<tr class="detailRow" >
+						<td class="imgs">
+							{% if game.liveLink %}
+								<img src="{{STATIC_URL}}mobileWeb_img/liveLink.png" alt="" width="18px" height="18px">
+							{% endif %}
+							{% if game.ratioExist %}
+								<img src="{{STATIC_URL}}mobileWeb_img/ratioExist.png" alt="" width="18px" height="18px">
+							{% endif %}								
+						</td>
+						<td class="gameTeam_home">
+							<span class="homeSpan">
+								<img src="{{game.homePic}}" alt="" width="40px" height="40px"><br>
+								<span class="detailHome">{{game.home}}</span>
+							</span>
+						</td>
+						<td class="tdGameScore">
+							<div class="progressWrap">
+							{% if game.progress == '경기전' or game.progress == '취소'%} 
+								<span class="detailProgress before">{{ game.progress }}
+							{% elif game.progress == '홈패' %} 
+								<span class="detailProgress homeLose">{{ game.progress }}
+							{% elif game.progress == '홈승' %} 
+								<span class="detailProgress homeWin">{{ game.progress }}
+							{% elif game.progress == '무승부' %} 
+								<span class="detailProgress homeDraw">{{ game.progress }}
+							{% else %}
+								<span class="detailProgress homeWin">{{ game.progress }}
+							{% endif %}
+				     		</span>
+				     	</div>
+
+				     	<div class="timeWrap">
+				     		<div class="detailDate" date="{{game.date}}"></div>
+				     		{% if game.progress != '경기전' %}
+				     		<span></span>
+				     		{% elif game.progress == '경기전' %}
+				     		<div class="leftTime" date="{{game.date}}"></div>
+				     		{% endif %}
+				     	</div>
+				     	
+				     	<div class="detailScore">
+					     	{% if game.progress == '경기전' %}
+					     		<span class="beforeGame">-</span>
+					     	{% else %}
+									<span class="detailHomeScore" homescore="{{ game.homescore }}"></span>
+								{% endif %}
+								<div class="vsWordWrap"><span id="vsWord">vs</span></div>
+								{% if game.progress == '경기전' %}
+					     		<span class="beforeGame">-</span>
+					     	{% else %}
+									<span class="detailAwayScore" awayscore="{{ game.awayscore }}"></span>
+								{% endif %}
+							</div>
+						</td>
+						<td class="gameTeam_away">
+							<span class="awaySpan">
+								<img src="{{game.awayPic}}" alt="" width="40px" height="40px"><br>
+								<span class="detailAway">{{game.away}}</span>
+							</span>
+						</td>
+						<td class="bookmark">
+							<img src="{{STATIC_URL}}mobileWeb_img/ic_star_line.png" alt="" width="20px" height="20px">
+							<img src="{{STATIC_URL}}mobileWeb_img/ic_star_fill.png" class="star_fill" alt="" width="20px" height="20px">
+						</td>
+					</tr>					
+				</table>
+				
+			</div>
+
+			<div id="voteStatusBar">	
+				<div class="winBar" rate="{{game.protogames.0.homeCount}}"></div><div class="drawBar" rate="{{game.protogames.0.drawCount}}"></div><div class="loseBar" rate="{{game.protogames.0.awayCount}}"></div>
+			</div>			
+				
+			
+			<div id="voteCount">
+				{% if game.protogames.0.draw == None %}
+				<div class="voteDiv2">
+					<button class="voteBtn winBtn">승</button><br>
+					<span class="voteNum">{{game.protogames.0.homeCount}}표</span>
+					<span class="voteNum">[{{game.protogames.0.win}}]</span>
+				</div>
+				<div class="voteDiv2">
+					<button class="voteBtn loseBtn">패</button><br>
+					<span class="voteNum">{{game.protogames.0.awayCount}}표</span>
+					<span class="voteNum">[{{game.protogames.0.lose}}]</span>
+				</div>
+				{% elif game.protogames.0.draw %}
+				<div class="voteDiv">
+					<button class="voteBtn winBtn">승</button><br>
+					<span class="voteNum">{{game.protogames.0.homeCount}}표</span>
+					<span class="voteNum">[{{game.protogames.0.win}}]</span>
+				</div>
+				<div class="voteDiv">
+					<button class="voteBtn drawBtn">무</button><br>
+					<span class="voteNum">{{game.protogames.0.drawCount}}표</span>
+					<span class="voteNum">[{{game.protogames.0.draw}}]</span>
+				</div>
+				<div class="voteDiv">
+					<button class="voteBtn loseBtn">패</button><br>
+					<span class="voteNum">{{game.protogames.0.awayCount}}표</span>
+					<span class="voteNum">[{{game.protogames.0.lose}}]</span>
+				</div>
+				{% endif %}
+			</div>		
+
+
+
+			
+				<ul class="menu" data-role="nd2tabs" data-swipe="true">
+					<li data-tab="broadcasting">중계</li>
+					<li data-tab="analisys">분석글</li>
+					<li data-tab="recoPic" >추천픽</li>
+					<li data-tab="bet" data-tab-active="true">배당</li>
+					<li data-tab="matchInfo">팀정보</li>
+					<li data-tab="leagueInfo">리그정보</li>
+					<li data-tab="foreignPic">해외픽</li>
+					<!--<li data-tab="news">뉴스</li>-->
+				</ul>
+			
+
+			<!--class="ui-content wow fadeIn"-->
+				<div role="main" data-inset="false" data-wow-delay="0.2s">
+					
+					<div data-role="nd2tab"	data-tab="broadcasting" >
+						<div class="leagueDivision">중계중인 채팅방</div>
+					</div>
+
+					<div data-role="nd2tab"	data-tab="analisys" id="analDiv"></div>
+
+					<div data-role="nd2tab"	data-tab="recoPic"></div>
+
+					<div data-role="nd2tab"	data-tab="bet">
+						<div class="betNotice">회원님의 예상을 아래에서 선택해주세요.</div>
+						<div class="betTableArea">
+							<table class="betTable">
+								<tr class="betFirstTr">
+									<td>유형</td>
+									<td>승(언더)</td>
+									<td>무</td>
+									<td>패(오버)</td>
+								</tr>								
+								{% for proto in game.protogames %}
+								<tr class="betSecondTr">								
+									<td class="betType" protoGameId="{{proto.gameId}}">
+									{% if proto.gameType == 0 %}
+										일반
+									{% elif proto.gameType == 1 %}
+										홈 핸디 {{proto.handiNum}}
+									{% elif proto.gameType == 2 %}
+										언더 오버 {{proto.handiNum}}
+									{% endif %}
+									</td>									
+									<td class="betd" protoGameId="{{proto.gameId}}">
+										<div class="betRadioImg">
+											<img class="radioBtn" src="{{STATIC_URL}}mobileWeb_img/bt_radiobt_off.png" width="20px" height="20px" alt="">
+											<img src="{{STATIC_URL}}mobileWeb_img/bt_radiobt_on.png" class="radioOn" width="20px" height="20px" alt="">
+										</div>
+										<div class="num">{{proto.win}}<br>{{proto.homeCount}}건</div>
+									</td>
+									{% if proto.draw == none %}
+									<td class="betd"></td>
+									{% elif proto.draw %}
+									<td class="betd" protoGameId="{{proto.gameId}}">
+										<div class="betRadioImg">
+											<img class="radioBtn" src="{{STATIC_URL}}mobileWeb_img/bt_radiobt_off.png" width="20px" height="20px" alt="">		
+											<img src="{{STATIC_URL}}mobileWeb_img/bt_radiobt_on.png" class="radioOn" width="20px" height="20px" alt="">
+										</div>
+										<div class="num">{{proto.draw}}<br>{{proto.drawCount}}건</div>
+									</td>
+									{% endif %}
+									<td class="betd" protoGameId="{{proto.gameId}}">
+										<div class="betRadioImg">
+											<img class="radioBtn" src="{{STATIC_URL}}mobileWeb_img/bt_radiobt_off.png" width="20px" height="20px" alt="">		
+											<img src="{{STATIC_URL}}mobileWeb_img/bt_radiobt_on.png" class="radioOn" width="20px" height="20px" alt="">
+										</div>
+										<div class="num">{{proto.lose}}<br>{{proto.awayCount}}건</div>
+									</td>
+								</tr>
+								{% endfor %}
+							</table>
+						
+							<div class="endMent">
+								배당표에서 예측결과를 선택하면 자동으로 '리그픽'으로 추가됩니다.<br>추가된 리그픽은 내 예측목록에서 모아서 확인 가능합니다.					
+							</div>
+							<!--// endNoticeBox-->
+						</div>
+						<!--// betTableArea-->
+						
+						
+						<div id="compareCmt">배당 비교 / 분석 보기</div><!--모달 버튼-->						
+						
+					</div>
+
+					<div data-role="nd2tab"	data-tab="matchInfo">
+						<!--include matchInfo.html -->
+					</div>
+
+					<div data-role="nd2tab"	data-tab="leagueInfo">
+						<!--include leagueInfo.html -->
+					</div>	
+				
+
+					<div data-role="nd2tab"	data-tab="foreignPic"></div>
+					<!--뉴스
+					<div data-role="nd2tab"	data-tab="news">						
+						<div class="articleArea">
+							<img src="{{STATIC_URL}}mobileWeb_img/bg_baseball.png" width="348px" height="136px">
+							<div class="articleBrief">							
+								<span class="articleTheme"><b>독일서 이방인 대접받는 보아텡 "웃지만 슬프다"</b></span><br>
+								<span class="articleFrom">연합뉴스 | 2016/05/31 15:01</span>							
+							</div>
+						</div>
+						<div class="articleArea">
+							<img src="{{STATIC_URL}}mobileWeb_img/bg_baseball.png" width="348px" height="136px">
+							<div class="articleBrief">							
+								<span class="articleTheme"><b>독일서 이방인 대접받는 보아텡 "웃지만 슬프다"</b></span><br>
+								<span class="articleFrom">연합뉴스 | 2016/05/31 15:01</span>							
+							</div>
+						</div>
+					</div>-->
+
+				</div>
+
+
+
+
+
+				<!--배당 모달-->	
+				<div id="reportModal" class="modal">					
+					<!-- Modal content -->
+					<div class="modal-content">						
+						<p class="modalMent">분석을 보실 배당을 선택해주세요.</p>						
+						<div id="selectType">
+							{% for proto in game.protogames %}
+								{% if proto.gameType == 0 %}
+								<div class="radioDiv">
+									<div class="radioImg">									
+										<img gameId="null" class="radioBtn radioOn" src="{{STATIC_URL}}mobileWeb_img/bt_radiobt_off.png" width="20px" height="20px" alt="" >
+										<img gameId="{{proto.gameId}}" class="selectImg" gameType="0" src="{{STATIC_URL}}mobileWeb_img/bt_radiobt_on.png"  width="20px" height="20px" alt="" >
+									</div><span class="betKind">일반</span>
+								</div>
+								{% elif proto.gameType == 1 %}
+								<div class="radioDiv">
+									<div class="radioImg">
+										<img gameId="null" class="radioBtn" src="{{STATIC_URL}}mobileWeb_img/bt_radiobt_off.png" width="20px" height="20px" alt="" >
+										<img gameId="{{proto.gameId}}" gameType="1" class="radioOn" gameId="{{proto.gameId}}" src="{{STATIC_URL}}mobileWeb_img/bt_radiobt_on.png"  width="20px" height="20px" alt="" >
+									</div><span class="betKind">홈 핸디 {{proto.handiNum}}</span>
+								</div>
+								{% elif proto.gameType == 2 %}
+								<div class="radioDiv">
+									<div class="radioImg" >
+										<img gameId="null" class="radioBtn" id="" src="{{STATIC_URL}}mobileWeb_img/bt_radiobt_off.png" width="20px" height="20px" alt="" >
+										<img gameId="{{proto.gameId}}" gameType="2" class="radioOn" gameId="{{proto.gameId}}" src="{{STATIC_URL}}mobileWeb_img/bt_radiobt_on.png"  width="20px" height="20px" alt="" >
+									</div><span class="betKind">언더 오버 {{proto.handiNum}}</span>
+								</div>
+								{% endif %}
+							{% endfor %}
+						</div>
+						
+						<p class="selectBtn">
+							<span class="cancel" data-dismiss="modal">취소</span>
+							<span class="seeAnalisys" onclick="compareNanalysis()" data-dismiss="modal" sport="{{game.sport}}">분석보기</span>
+						</p>
+					</div>
+				</div><!--end modal-->
+				
+		<!--</div>page-->
+
+
+<script>
+   
+	//리그픽 일반,언더,핸디 선택
+	$('td.betd').on('click', function(){
+		$(this).find('img:visible').hide().siblings().show().addClass('selectImg');
+		$(this).siblings().find('img.radioBtn').show().siblings().hide().removeClass('selectImg');
+	})
+
+
+	//일반,언더,핸디 모달에서 선택
+	$('.radioDiv').on('click', function(){
+		$(this).find('img:visible').hide().siblings().show().addClass('selectImg');
+		$(this).siblings().find('img.radioBtn').show().siblings().hide().removeClass('selectImg');
+	})
+
+	//모달 등장
+	$('#compareCmt').on('click', function(){
+		$('#reportModal').modal('show');
+	});
+	
+		
+	//배당 분석/비교 페이지로 이동
+	function compareNanalysis(){				
+			
+		if($('#selectType').find('img.selectImg').attr("gameId") != null){			
+			var gameId = $('#selectType').find('img.selectImg').attr("gameId");
+			var gameType = $('#selectType').find('img.selectImg').attr("gameType");
+			console.log(gameId, gameType);
+
+			$.get('/mobile/ratioInfo/', {gameId: gameId, gameType:gameType}, function(data){						
+				window.location.href = '/mobile/ratioInfo/?gameId='+gameId+'&gameType='+gameType+'&sport='+$('.seeAnalisys').attr('sport');
+			})
+		}		
+	}
+
+
+
+//메뉴 위에 고정
+	var menu = document.querySelector('.menu');
+	var menuPosition = menu.getBoundingClientRect();
+	var placeholder = document.createElement('div');
+	placeholder.style.width = menuPosition.width + 'px';
+	placeholder.style.height = menuPosition.height + 'px';
+	var isAdded = false;
+
+	window.addEventListener('scroll', function() {
+	    if (window.pageYOffset >= menuPosition.top && !isAdded) {
+	        menu.classList.add('sticky');
+	        menu.parentNode.insertBefore(placeholder, menu);
+	        isAdded = true;
+	    } else if (window.pageYOffset < menuPosition.top && isAdded) {
+	        menu.classList.remove('sticky');
+	        menu.parentNode.removeChild(placeholder);
+	        isAdded = false;
+	    }
+	});
+
+
+	//로딩 이미지
+	function removeLoading(){
+		var element = document.getElementById('loading');
+		if(element==null){
+			return;
+		}
+		element.parentNode.removeChild(element);
+	}
+
+
+	
+	//즐겨찾기 별
+	$('td.bookmark').on('click', function(){
+		$('img:visible', this).hide().siblings().show();
+	});		
+
+
+
+//투표수 상태바
+	$(document).ready(function(){
+		var winBar = $('.winBar')
+		var drawBar = $('.drawBar')
+		var loseBar = $('.loseBar')
+
+		var win = Math.floor(Number($('.winBar').attr("rate"))/(Number($('.winBar').attr("rate"))+Number($('.drawBar').attr("rate"))+Number($('.loseBar').attr("rate")))*100*10)/10;
+		var draw = Math.floor(Number($('.drawBar').attr("rate"))/(Number($('.winBar').attr("rate"))+Number($('.drawBar').attr("rate"))+Number($('.loseBar').attr("rate")))*100*10)/10;
+		var lose = Math.floor(Number($('.loseBar').attr("rate"))/(Number($('.winBar').attr("rate"))+Number($('.drawBar').attr("rate"))+Number($('.loseBar').attr("rate")))*100*10)/10;
+
+		console.log(win, draw, lose)
+
+		$(winBar).css({"width": win+'%'});
+		$(drawBar).css({"width": draw+'%'});
+		$(loseBar).css({"width": lose+'%'});
+	})
+
+
+function imgError(image){
+  image.onerror = "";
+  image.src = "{{STATIC_URL}}mobileWeb_img/onError.png";
+  return true;
+}
+
+//분석글 가져오기
+	var page = 0;
+	$(document).ready(function(){
+		$.post('/board/gameDocList/', {gameId:getParameter("gameId"), lastWritingId:0}, function(data){
+
+			//console.log(data);
+			page = data.lastWritingId;
+
+			var writingList = data.writingList
+			var list = '';				
+				for(var i=0; i < writingList.length; i++){
+					list +=	'<div class="analysisDiv">'+
+										'<div class="thumbArea">'+
+											'<img src="'+writingList[i].user.picKey+'" class="img-circle" width="50px" height="50px" onError="imgError(this);">'+
+										'</div>'+
+
+										'<div class="infoArea">'+
+											'<div class="listTop">[예측 - 대기중]</div>'+
+											'<div class="infoTitle"><b>'+writingList[i].title+'</b></div>'+
+											'<div class="listBottom">'+
+												'<div class="nickname">'+writingList[i].user.nickname+'</div>'+
+												'<div class="listDetail">'+
+													'<span class="detailDate2" date="'+formSlashDay(parseDate(writingList[i].date))+'">'+parseDate(writingList[i].date)+'</span>&nbsp;&nbsp;&nbsp;조회수&nbsp;<span style="font-size:13px;">'+writingList[i].readCount+'</span>&nbsp;&nbsp;&nbsp;'+
+													'<img src="{{STATIC_URL}}mobileWeb_img/ic_like.png" width="10px" height="10px">&nbsp;<span style="font-size:13px;">'+writingList[i].likeCount+'</span>&nbsp;&nbsp;&nbsp;'+
+													'<img src="{{STATIC_URL}}mobileWeb_img/ic_chatbubble.png" width="8px" height="8px">&nbsp;<span style="font-size:13px;">'+writingList[i].commentCount+'</span>'+
+												'</div>'+
+											'</div>'+
+										'</div>'+
+									'</div>';
+				}					
+				$('div[data-tab="analisys"]').append(list);
+		}).done(function(){			
+
+			var nextPage = page;
+
+			$(document).scroll(function(){				
+				
+				var scrollHeight = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight); //현재문서의 높이			  
+			  var scrollTop = Math.max(document.documentElement.scrollTop, document.body.scrollTop);//현재 스크롤탑의 값			  
+			  var clientHeight = document.documentElement.clientHeight;//현재 화면 높이 값
+
+			  if((scrollTop+clientHeight) == scrollHeight){ //스크롤이 마지막일때 
+
+					$.post('/board/gameDocList/', {gameId: getParameter("gameId"), lastWritingId: nextPage}, function(data){
+						console.log(nextPage)
+						//console.log(data);
+						nextPage = data.lastWritingId;
+
+						var writingList = data.writingList
+						var list = '';
+							list += '<div id="loading"><img id="loading-image" src="{{STATIC_URL}}mobileWeb_img/loadingGif.gif" alt="Loading..." /></div>';
+
+							for(var i=0; i < writingList.length; i++){
+								list +=	'<div class="analysisDiv">'+
+													'<div class="thumbArea">'+
+														'<img src="'+writingList[i].user.picKey+'" class="img-circle" width="50px" height="50px" onError="imgError(this);">'+
+													'</div>'+
+
+													'<div class="infoArea">'+
+														'<div class="listTop">[예측 - 대기중]</div>'+
+														'<div class="infoTitle"><b>'+writingList[i].title+'</b></div>'+
+														'<div class="listBottom">'+
+															'<div class="nickname">'+writingList[i].user.nickname+'</div>'+
+															'<div class="listDetail">'+
+																'<span class="detailDate2" date="'+formSlashDay(parseDate(writingList[i].date))+'">'+parseDate(writingList[i].date)+'</span>&nbsp;&nbsp;&nbsp;조회수&nbsp;<span style="font-size:13px;">'+writingList[i].readCount+'</span>&nbsp;&nbsp;&nbsp;'+
+																'<img src="{{STATIC_URL}}mobileWeb_img/ic_like.png" width="10px" height="10px">&nbsp;<span style="font-size:13px;">'+writingList[i].likeCount+'</span>&nbsp;&nbsp;&nbsp;'+
+																'<img src="{{STATIC_URL}}mobileWeb_img/ic_chatbubble.png" width="8px" height="8px">&nbsp;<span style="font-size:13px;">'+writingList[i].commentCount+'</span>'+
+															'</div>'+
+														'</div>'+
+													'</div>'+
+												'</div>';
+							}					
+							$('div[data-tab="analisys"]').append(list);
+							removeLoading();
+
+					})//post
+				}//if
+			})//scroll
+		})			
+
+		
+	})//document ready
+
+//추천픽 가져오기
+	$(document).ready(function(){
+		$.post('/main/whoPick/', {gameId: getParameter("gameId")}, function(data){
+			console.log(data.setList)
+			var setList = data.setList;
+			var data = '';
+				for(var i=0; i < setList.length; i++){
+					var obj = setList[i].userList[0].singleBetList[0]
+
+					data += '<div class="leagueDivision">'+setList[i].title+'</div>'+
+									'<div class="recoPicDiv">'+
+										
+										'<div class="recoUser">'+
+											
+											'<div class="recoWrap">'+
+												'<div class="recoThumb">'+
+													'<img src="'+setList[i].userList[0].user.picKey+'" class="img-circle" width="40px" height="40px" onError="imgError(this);">'+
+													'<div class="recoNickname"><b>'+setList[i].userList[0].user.nickname+'</b></div>'+
+												'</div>'+
+												'<div class="recoInfo">'+
+													'<span>'+setList[i].userList[0].text+'</span>'+
+												'</div>'+
+											'</div>'+
+											'<div class="recoBet">'+
+												'<div class="kindBet">'; //일반,홈핸디,언오버
+												if(obj.gameType == 0){
+					data +=					'일반';
+												}else if(obj.gameType == 1){
+					data +=					'홈 핸디'+parseDotZero(obj.handiNum);
+												}else if(obj.gameType == 2){
+					data +=					'언오버'+obj.handiNum;
+												}else{
+					data +=					'';	
+												}
+					data +=				'</div>';
+					//data +=				'<div class="noDraw">1.89</div><div class="noDraw">1.89</div>';
+
+												/*if(obj.isOpened == false){
+					data +=				'<div>'								
+												}*/
+											
+											if(obj.isOpened == true){
+												if(obj.draw == null){//무 배당이 없는경우
+													if(obj.singleChoice == 1){
+					data +=					'<div class="noDraw yellow" style="border-right:1px solid #d9d9d9">';
+														if(obj.gameType == 2){
+					data +=						'언더&nbsp;'+obj.win+'</div>';										
+														}else{
+					data +=						'승&nbsp;'+parseDotZero(obj.win)+'</div>';
+														}					
+					data +=					'<div class="noDraw">';
+														if(obj.gameType == 2){
+					data +=						'오버&nbsp;'+obj.lose+'</div>';
+														}else{
+					data +=						'패&nbsp;'+obj.lose+'</div>';
+														}
+					
+													}else if(obj.singleChoice == 2){
+					data +=					'<div class="noDraw" style="border-right:1px solid #d9d9d9">';
+														if(obj.gameType == 2){
+					data +=						'언더&nbsp;'+obj.win+'</div>';										
+														}else{
+					data +=						'승&nbsp;'+parseDotZero(obj.win)+'</div>';
+														}					
+					data +=					'<div class="noDraw yellow">';
+														if(obj.gameType == 2){
+					data +=						'오버&nbsp;'+obj.lose+'</div>';
+														}else{
+					data +=						'패&nbsp;'+obj.lose+'</div>';
+														}					
+													}
+												}
+												else{ // 무 배당이 있는 경우													
+													if(obj.singleChoice == 1){
+						data +=				'<div class="yesDraw yellow" style="border-right:1px solid #d9d9d9">'+'승&nbsp;'+parseDotZero(obj.win)+'</div>';
+						data +=				'<div class="yesDraw" style="border-right:1px solid #d9d9d9">'+'무&nbsp;'+obj.draw+'</div>';
+						data +=				'<div class="yesDraw">'+'패&nbsp;'+obj.lose+'</div>';
+													}
+													else if(obj.singleChoice == 4){
+						data +=				'<div class="yesDraw" style="border-right:1px solid #d9d9d9">'+'승&nbsp;'+parseDotZero(obj.win)+'</div>';
+						data +=				'<div class="yesDraw yellow" style="border-right:1px solid #d9d9d9">'+'무&nbsp;'+obj.draw+'</div>';
+						data +=				'<div class="yesDraw">'+'패&nbsp;'+obj.lose+'</div>';
+													}
+													else if(obj.singleChoice == 2){
+						data +=				'<div class="yesDraw" style="border-right:1px solid #d9d9d9">'+'승&nbsp;'+parseDotZero(obj.win)+'</div>';
+						data +=				'<div class="yesDraw" style="border-right:1px solid #d9d9d9">'+'무&nbsp;'+obj.draw+'</div>';
+						data +=				'<div class="yesDraw yellow">'+'패&nbsp;'+obj.lose+'</div>';														
+													}									
+												}													
+											}
+											else if(obj.isOpened == false){ //경기전 경기
+					
+					
+												if(obj.draw == null){//무 배당이 없는경우													
+				data +=					'<div class="noDraw" style="border-right:1px solid #d9d9d9">';
+													if(obj.gameType == 2){
+				data +=						'언더&nbsp;'+obj.win;				
+				data +=						'</div>';										
+													}else{
+				data +=						'승&nbsp;'+parseDotZero(obj.win)+'</div>';
+													}
+				
+				data +=					'<div class="noDraw">';
+													if(obj.gameType == 2){
+				data +=						'오버&nbsp;'+obj.lose+'</div>';
+													}else{
+				data +=						'패&nbsp;'+obj.lose+'</div>';
+													}																										
+												}
+												else{													
+						data +=				'<div class="yesDraw" style="border-right:1px solid #d9d9d9">'+'승&nbsp;'+parseDotZero(obj.win)+'</div>';
+						data +=				'<div class="yesDraw" style="border-right:1px solid #d9d9d9">'+'무&nbsp;'+obj.draw+'</div>';
+						data +=				'<div class="yesDraw">'+'패&nbsp;'+obj.lose+'</div>';
+												}
+				data +=						'<div class="blockBet">레몬을 선물하고 픽을 확인하세요'+
+														'<div class="blockImg"><img src="{{STATIC_URL}}mobileWeb_img/logo_lemon_small.png" width="14px" height="18px">&nbsp;X&nbsp;1</div>'+
+													'</div>';						
+											}	
+												
+												
+					
+					data +=			'</div>'; //recoBet
+
+					data +=		'</div>';//recoUser/
+										
+					data +=	'</div>';//recoPicDiv
+				}
+				$('div[data-tab="recoPic"]').append(data);
+							
+		})
+	});
+
+
+//남은시간 알려줌
+	$(function(){
+
+		var date = $('.leftTime').attr("date");
+		if(date){
+			var year = date.substring(0,4);
+			var month = date.substring(5,7);
+			var day = date.substring(8,10);
+			var hour = date.substring(11,13);
+			var minute = date.substring(14,16);
+			
+			var gameDate = new Date(year+'-'+month+'-'+day+'T'+hour+':'+minute);
+			
+			var nowDate = new Date();		
+			
+			days = (gameDate - nowDate)/1000/60/60/24;		
+			var daysRound = Math.floor(days);
+
+			hours = (gameDate - nowDate)/1000/60/60-(24*daysRound);
+			var hoursRound = Math.floor(hours);
+
+			var leftHour = (gameDate - nowDate)/1000/60/60-(24*daysRound);
+			var leftMinute = (gameDate - nowDate)/1000/60-(24*60*daysRound) - (60*hoursRound);
+			
+			if(daysRound < 1){			
+				if(leftHour < 1){
+					$('.leftTime').text(Math.floor(leftMinute)+'분 후 시작');
+				}else{
+					$('.leftTime').text(Math.floor(leftHour)+'시간 '+Math.floor(leftMinute)+'분 후 시작');
+				}
+			}
+			else{
+				$('.leftTime').text('');
+			}
+		}
+		
+	})
+// 슬래쉬 날짜로 파싱
+	function formSlashDay(date){
+		strArray = date.split('-');
+
+		if(strArray[1].substring(0,1)=="0"){
+			var month = strArray[1].substring(1,2);			
+		}else{
+			var month = strArray[1].substring(0,2);
+		}
+		if(strArray[2].substring(0,1)=="0"){
+			var day = strArray[2].substring(1,2);			
+		}else{
+			var day = strArray[2].substring(0,2);
+		}
+		return (month+'/'+day);
+	}
+//상세 경기 서버날짜 파싱
+	function parseDate(date){
+		var year = date.substring(0,4);
+		var month = date.substring(5,7);
+		var day = date.substring(8,10);
+		var hour = date.substring(11,13);
+		var minute = date.substring(14,16);
+
+		var realDate = new Date(year+'-'+month+'-'+day+'T'+hour+':'+minute);
+		//console.log(realDate)
+		var myyear = realDate.getFullYear();		
+		var mymonth = realDate.getMonth();
+		mymonth = mymonth+1;
+		var myweekday = realDate.getDate();
+		var myhour = realDate.getHours();
+		var myminute = realDate.getMinutes();
+
+		return myyear+"-"+((mymonth < 10) ? "0" : "") + mymonth+"-"+ (myweekday <10 ? "0" : "") + myweekday +" "+((myhour < 10) ? "0" : "")+ myhour+":"+((myminute < 10) ? "0" : "") + myminute;
+	}
+
+//날짜 파싱
+	$(document).ready(function(){
+		var dateArea = $('.detailDate');
+		//var dateArea2 = $('.detailDate2');
+
+		var date = $(dateArea).attr("date");
+		//var date2 = $(dateArea2).attr("date");
+
+		$(dateArea).html(parseDate(date));
+		//$(dateArea2).html(parseDate(date2));
+	});
+
+//점수 정수화 시키기
+	$(document).ready(function(){
+		var home = $('span.detailHomeScore');
+		var away = $('span.detailAwayScore');
+		$(home).html(parseInt($(home).attr('homescore')));
+		$(away).html(parseInt($(away).attr('awayscore')));
+	
+//이기는 쪽 빨캉캉조		
+		var game = $('td.tdGameScore');	
+		if(parseInt($(home).attr("homescore")) - parseInt($(away).attr("awayscore")) > 0){
+			$(home).css('color','#f10000')
+		}
+	 	if(parseInt($(away).attr("awayscore")) - parseInt($(home).attr("homescore")) > 0){				
+			$(away).css('color','#f10000')
+		}	
+	})
+
+//해외픽, 팀정보, 리그정보 가져오기
+	getParameter = function(name){	 	
+    search=location.search;
+    if(!search){
+        //파라미터가 하나도 없을때
+        document.write("에러 출력 텍스트");
+        return false;
+    }
+ 
+    search=search.split("?");
+    data=search[1].split("=");
+    if(search[1].indexOf(name)==(-1) || data[0]!=name){
+        //해당하는 파라미터가 없을때.
+        return "";
+        return;
+    }
+    if(search[1].indexOf("&")==(-1)){
+        //한개의 파라미터일때.
+        data=search[1].split("=");
+        return data[1];
+    }else{
+    //여러개의 파라미터 일때.
+    data=search[1].split("&"); //엠퍼센트로 자름.
+    for(i=0;i<=data.length-1;i++){
+        l_data=data[i].split("=");
+        if(l_data[0]==name){
+            return l_data[1];
+            break;
+        }else continue;
+        }
+    }
+	}
+
+	var gameId = getParameter("gameId"); //매겨변수 이름이 gameId
+	$(function(){		
+		console.log(gameId);
+		$.get('/web/predictInfo/', {gameId: gameId}, 
+			function(data){				
+				$('div[data-tab="foreignPic"]').html(data);				
+		});
+		$.get('/web/matchInfo/', {gameId: gameId}, 
+			function(data){
+				$('div[data-tab="matchInfo"]').html(data);				
+		});
+		$.get('/web/leagueInfo/', {gameId: gameId}, 
+			function(data){
+				$('div[data-tab="leagueInfo"]').html(data);					
+		});
+	});				
+
+//배당 소수점 만들기
+	function parseDotZero(num){		
+		var str = num.toString()		
+		var dot = str.indexOf(".")		
+		if(dot==-1){			
+			return str+'.0';
+		}
+		else{
+			return num;
+		}
+	}
+
+//승무패 버튼->배당 탭으로
+/*
+	$('button.winBtn').on('click', function(){
+		console.log('win');
+		$(this).css('background-color','#FF5A6D');
+		$(this).css('font-color','#ffffff');
+	})
+	$('button.drawBtn').on('click', function(){
+		$(this).css('background-color', '#f7cb00');
+		$(this).css('color','#ffffff');
+	})
+	$('button.loseBtn').on('click', function(){
+		$(this).css('background-color', '#01a8ff');
+		$(this).css('color','#ffffff');
+	})
+*/
+</script>
+
+
+{% endblock %}
+{% endblock %}

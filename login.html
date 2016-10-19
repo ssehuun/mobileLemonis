@@ -1,0 +1,95 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>로그인</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css" />
+		<link rel="stylesheet" href="{{STATIC_URL}}mobileWeb_vendor/waves/waves.min.css" />
+		<link rel="stylesheet" href="{{STATIC_URL}}mobileWeb_vendor/wow/animate.css" />
+		<link rel="stylesheet" href="{{STATIC_URL}}mobileWeb_css/nativedroid2.css" />
+
+		<!--nativdroid2.css import를 가져옴-->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
+		<link rel="stylesheet" href="{{STATIC_URL}}mobileWeb_css/flexboxgrid.min.css" />		
+		<link rel="stylesheet" href="//fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic" />
+		<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,300,500,400italic,700,900" />
+		<!-- end nativedroid2.css-->
+
+		<meta name="mobile-web-app-capable" content="yes">
+	 	<meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	
+		<style>
+			div.loginLogoArea{
+				text-align: center;
+			}
+			div.infoArea{
+				text-align: center;
+			}
+			div.btnArea div{
+				text-align: center;
+			}
+			div.loginBtn, div.signUpBtn{
+				width: 85%;
+				line-height: 40px;
+				border-radius: 20px;
+				text-align: center;
+				vertical-align: middle;
+			}
+			.loginBtn{
+				color: #ffffff;
+				background-color: #f10000;
+				margin-bottom: 10px;
+			}
+			.signUpBtn{
+				color: #f10000;
+				background-color: transparent;
+				border: 1px solid #f10000;
+				margin-bottom: 60px;
+			}
+			#email, #pwd{
+				width: 60%;
+			}
+		</style>
+	</head>
+	<body>
+
+		<div data-role="page">			
+
+			<div role="main" data-inset="false" ata-wow-delay="0.2s">				
+				<div class="loginLogoArea">
+					<img src="{{STATIC_URL}}mobileWeb_img/logo_login.png" alt="" width="100px" height="100px">
+				</div>
+
+				<div class="infoArea">
+					
+					<span>
+						<img src="{{STATIC_URL}}mobileWeb_img/ic_login_mail.png" alt="" width="20px" height="20px">
+						<input type="email" required="required" placeholder="이메일 주소" id="email">
+					</span>
+					<img src="{{STATIC_URL}}mobileWeb_img/ic_login_pw.png" alt="" width="20px" height="20px">
+					<input type="password" required="required" placeholder="비밀번호" id="pwd">
+				</div>
+				
+				<div class="btnArea">
+					<div class="loginBtn">로그인</div>
+					<div class="signUpBtn">회원가입</div>
+					<div><img src="{{STATIC_URL}}mobileWeb_img/bt_login_kakao.png" alt="" width="85%" height="40px"></div>
+				</div>	
+			</div>
+
+		</div>
+
+
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+		<script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>		
+		<script src="//ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
+		<script src="{{STATIC_URL}}mobileWeb_vendor/waves/waves.min.js"></script>
+		<script src="{{STATIC_URL}}mobileWeb_vendor/wow/wow.min.js"></script>
+		<script src="{{STATIC_URL}}mobileWeb_js/nativedroid2.js"></script>
+		<script src="{{STATIC_URL}}mobileWeb_js/nd2settings.js"></script>
+
+	</body>
+</html>

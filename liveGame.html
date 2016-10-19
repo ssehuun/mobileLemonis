@@ -1,0 +1,3933 @@
+{% extends 'mobileWeb/blocks/base.html' %}
+
+{% block content %}
+
+{% block css %}
+	<style>		
+		.fixed {
+			position:fixed!important;
+			top:0!important;
+		}
+		[data-role="nd2tab"]{
+			min-height: 400px;
+			margin-bottom: 200px;
+		}
+		
+
+	/*날짜*/  
+		.dateList {
+			line-height: 31px;
+			border-bottom: 1px solid #cccccc;
+			border-top: 1px solid #cccccc;
+		}		
+		div.calendar, div.controlDate, div.reset{
+			display: inline-block;
+		}
+		div.calendar, div.reset{
+			width: 31px;
+			vertical-align: middle;
+			text-align: center;			
+		}
+		.controlDate{			
+			background-color: #f2f2f2;
+			width: 82%;
+		}
+		.controlDate div{
+			height: 100%;
+			font-size: 14px;
+			display: inline-block;	
+			text-align: center;
+		}
+		.reset{
+			float: right;
+		}
+		
+		.controlDate div:nth-child(1){
+			width: 33%;
+			color: #eaeaea!important;
+			border-left: 1px solid #cccccc;
+			border-right: 1px solid #cccccc;
+			text-align: center;
+		}
+		.controlDate div:nth-child(2){
+			width: 34%;			
+			border-right: 1px solid #cccccc;			
+			text-align: center;
+		}
+		.controlDate div:nth-child(3){
+			width: 33%;
+			border-right: 1px solid #cccccc;
+			text-align: center;
+		}
+		#today, #yesterday, #tomorrow{text-decoration: none;}
+		input #datepicker{
+			display: inline;
+			width: 35%;
+		}
+		/*.hid{
+			display: none;
+		}*/
+		.showed{
+			display: block;
+		}
+		div.ui-datepicker{
+			font-size:13px;
+		}
+	/* end date*/	
+
+
+	/*큰 테이블*/		
+		table.gameBigTable{
+			height: 130px;			
+		}
+		
+		/*td.imgs img{
+			margin-bottom: 3px;}*/
+		
+		tr.soccerRow td:nth-child(1), tr.baseBallRow td:nth-child(1), tr.baseketBallRow td:nth-child(1), tr.volleyBallRow td:nth-child(1){
+			width: 10%;
+			text-align: center;
+		}
+		tr.soccerRow td:nth-child(2),  tr.baseketBallRow td:nth-child(2), tr.volleyBallRow td:nth-child(2){
+			width: 27%;
+			text-align: center;
+		}
+		tr.baseBallRow td:nth-child(2){
+			width: 15%;
+			text-align: center;	
+		}
+
+
+		tr.soccerRow td:nth-child(3),  tr.baseketBallRow td:nth-child(3), tr.volleyBallRow td:nth-child(3){
+			width: 36%;
+			text-align: center;			
+		}
+		tr.baseBallRow td:nth-child(3){
+			width: 60%;
+							
+		}
+
+
+
+		tr.soccerRow td:nth-child(4),  tr.baseketBallRow td:nth-child(4), tr.volleyBallRow td:nth-child(4){
+			width: 27%;
+			text-align: center;
+		}
+		tr.baseBallRow td:nth-child(4){
+			width: 15%;
+			text-align: center;	
+		}
+
+
+		tr.soccerRow td:nth-child(5),  tr.baseketBallRow td:nth-child(5), tr.volleyBallRow td:nth-child(5){
+			width: 5%;
+			vertical-align: top;
+			padding-top: 10px;
+		}
+		tr.baseBallRow td:nth-child(5){
+			width: 5%;
+			vertical-align: top;
+			padding-top: 10px;	
+		}
+		td.soccerGameScore{			
+			text-align: center;
+			vertical-align: middle;
+		}
+		
+		div.wrapProgress{			
+			
+		}
+
+		span.brProgress{			
+			border-radius: 20px;
+			padding: 2px 5px;			
+			font-size: 12px;
+		}
+		.winTeam{
+			color: #f10000;
+		}
+		.gray{
+			color: #868686;
+			border: 1px solid #868686;			
+		}
+		.blue{			
+			color: #007fff;
+			border: 1px solid #007fff;
+		}
+		.red{
+			color: #f10000;
+			border: 1px solid #f10000;
+		}
+		.yellow{
+			color: #eccf04;
+			border: 1px solid #eccf04;
+		}
+		div.dateWrapDiv{
+			margin-top: 5px;
+			text-align: center;
+		}
+		div.brGameDate{
+			font-size: 12px;
+			color: #666666;
+		}
+		div.leftTime{
+			font-size: 11px;
+			color: #f10000;
+		}
+		div.brHomeDiv, div.brAwayDiv{
+			text-align: center;
+			display: inline-block;
+			width: 35%;
+		}
+		.brHomeDiv{
+			padding-left: 25px;
+		}
+		.brAwayDiv{
+			padding-right: 25px;
+		}
+		.brHomeScore, .brAwayScore{
+			font-size: 30px;				
+		}
+		.brHomePitcher, .brAwayPitcher{
+			display: inline-block;
+			font-size: 10px;
+			line-height: 11px;
+			width: 35%;
+			word-break: keep-all;			
+			vertical-align: middle;
+		}
+		.brHomePitcher{
+			text-align: right;}
+		.brAwayPitcher{
+			text-align: left;}
+		
+		div.BrBaseBallSBoard{
+			display: inline-block;						
+			vertical-align: middle;
+			width:30%;
+			text-align: center;
+		}
+		span.baseVsWord{
+			display: inline-block;			
+			font-size: 18px;
+			color: #999999;			
+		}
+		span.vsWord{
+			display: inline-block;			
+			font-size: 18px;
+			margin: 0px 20%;
+			color: #999999;
+			padding-bottom: 15px;
+		}
+		tr.soccerVote, .baseBallVote, .volleyBallVote, .basketBallVote{			
+			border-bottom: 1px solid #cccccc;	
+		}
+		td.vote{
+			padding-left: 30px;
+			padding-right: 30px;
+		}
+		div.voteStatusBar{
+			margin-top: 5px;
+			margin-bottom: 5px;			
+		}
+		.voteStatusBar div{
+			display: inline-block;}
+		.winBar, .bbwinBar, .vwinBar{
+			background-color: #edc4c6;
+			height: 5px;}
+		.drawBar, .bbdrawBar, .vdrawBar{
+			background-color: #f3e3c8;
+			height: 5px;}
+		.loseBar, .bbloseBar, .vloseBar{
+			background-color: #c7e2ed;
+			height: 5px;}
+
+
+		.winVote{
+			width: 50%;
+			border: 2px solid #edc4c6;}
+		.drawVote{
+			width: 30%;
+			border: 2px solid #f3e3c8;}
+		.loseVote{
+			width: 17%;
+			border: 2px solid #c7e2ed;}		
+		
+		.bigImg{
+			margin-bottom: 5px;
+		}
+		.bigHomeTeam, .bigAwayTeam{
+			font-size: 13px;
+			word-break: keep-all;
+			text-align: center;
+		}
+		
+
+	/*작은 테이블 리스트*/	
+		
+		table.gameTable{			
+			font-size: 13px;			
+			width: 100%;	
+		}
+		
+	/*리그 디바이저 div*/
+		div.leagueDivision{			
+			position: relative;
+			width: 100%;
+		}
+		img.leagueImg{
+			position: absolute;
+			left: 0;
+			z-index: 0;
+		}
+		img.divisionLine{
+			position: absolute;
+			right: 0;			
+		}
+		.ballImg{
+			position: absolute;
+			top:3px;
+			left:16%;
+		}
+		.ballImg span{
+			font-size: 13px;
+		}
+		.leagueDate{
+			position: absolute;
+			color: #999999;
+			top:3px;
+			right: 5px;
+		}
+		span.date{
+			float: right;
+		}
+	/* end 리그 디바이저*/
+		tr.rowGame{
+			border-bottom: 1px solid #cccccc;
+			height: 45px;
+		}		
+		.rowGame td:nth-child(1){
+			width: 5%;
+		}
+		.rowGame td:nth-child(2){
+			width: 32%;
+		}
+		.rowGame td:nth-child(3){
+			width: 27%;			
+			text-align: center;
+		}
+		.rowGame td:nth-child(4){			
+			width: 33%;
+		}
+		.rowGame td:nth-child(5){
+			text-align: center;
+			width: 3%;
+		}
+		/*td.gameDate{
+			padding-left: 2px;
+			font-size: 12px;
+		}*/
+		.gameDate div{
+			margin-left: 2px;
+			font-size: 13px;	
+		}
+		
+
+		td.gameScore div{			
+			display: inline-block;			
+		}
+		div.homeScore, div.awayScore{
+			display: inline-block;
+			font-size: 1.6em;
+			width: 30%;
+		}
+		.homeScore{
+			text-align: right;}
+		.awayScore{
+			text-align: left;}
+		
+		div.scoreBoard{	
+			display: inline-block;
+			line-height: 1.2;
+			vertical-align: middle;
+			width:40%;		
+			/*background-color: #ffffff;*/
+			margin-bottom: 5px;		
+			
+		}
+		div.baseBallSBoard{
+			text-align: center;
+			display: inline-block;
+			font-size: 12px;
+			line-height: 2;
+			vertical-align: middle;
+			width:30%;			
+		}
+		span.inBoard{
+			display: inline-block;
+			margin-right: 3px;
+			margin-left: 3px;
+			font-size: 11px;
+			/*border-radius: 20px;
+			padding: 5% 10% 5% 10%;*/
+		}
+		.endGameBackColor{
+			background-color: #f3f3f3;
+		}
+
+
+		td.tdBaseBallScore{
+			width: 31%!important;
+			vertical-align: middle;				
+		}
+		td.tdBaseBallScore div{			
+			display: inline-block;
+		}
+		.homePitcher, .awayPitcher{
+			display: inline-block;
+			line-height: 11px;
+			vertical-align: middle;
+			font-size: 9px;
+			width: 33%;
+			word-break: keep-all;			
+		}
+		.homePitcher{
+			text-align: right;
+		}
+		.awayPitcher{
+			text-align: left;
+		}
+
+
+
+		.before{
+			color: #999999;			
+		}
+		.homeWin{
+			/*border: 1px solid #f10000;*/
+			color: #f10000;
+		}
+		.homeLose{
+			/*border: 1px solid #01abff;*/
+			color: #01abff;
+		}
+		.homeDraw{
+			color: #f7cb00;
+			/*border: 1px solid #f7cb00;*/
+		}
+		div.homeSpan{			
+			margin-left: 5%;		
+			display: inline-block;
+		}
+		.homeSpan img{
+			vertical-align: middle;			
+		}
+		div.homeTeam{
+			display: inline-block;			
+			word-break: keep-all;
+			max-width: 59px;
+			font-size: 12px;
+			vertical-align: middle;
+			line-height: 13px;
+		}
+		div.awayTeam{
+			display: inline-block;
+			max-width: 65px;
+			word-break: keep-all;
+			font-size: 12px;
+			line-height: 13px;
+			vertical-align: middle;
+			text-align: right;
+		}
+		div.awaySpan{
+			float: right;
+			display: inline-block;			
+			margin-right: 3%;
+		}
+		
+		.bookmark img{
+			margin-right: 10px;
+		}		
+		.navOn{
+			display: none;
+		}		
+	
+	/*토토 승부식 탭*/
+		table.seungBuTable{
+			width: 100%;			
+		}
+		tr.seungBuTr{
+			height: 72px;			
+		}
+		div.seungHome, div.seungScore, div.seungAway{
+			display: inline-block;
+			text-align: center;
+		}
+		.seungHome, .seungAway{
+			width: 35%;
+		}
+		.seungScore{
+			width: 27%;
+		}
+		.seungScore div{
+			display: inline-block;
+			text-align: center;
+		}
+		div.seungWrapProgress{
+			margin:10px 10px 10px 10px;
+			text-align: center;
+		}
+		.seungHomeScore, .seungAwayScore{
+			font-size: 20px;
+		}
+		tr.seungBetTr{
+			height: 35px;
+			border-collapse: collapse;
+		}
+		.seungBetTr td{			
+			border: 1px solid #eaeaea;
+		}
+		.seungBetTr td:nth-child(1), td:nth-child(2){
+			font-size: 12px;
+		}
+		.seungBetTr td:nth-child(3), .seungBetTr td:nth-child(4), .seungBetTr td:nth-child(5){
+			font-size: 14px;
+			color: #888888;
+		}
+		tr.seungBetTr td:nth-child(1){
+			width: 10%;
+			text-align: center;
+			background-color: #f6f6f6;
+		}
+		tr.seungBetTr td:nth-child(2){
+			width: 20%;
+			text-align: center;
+			background-color: #f6f6f6;
+		}
+		tr.seungBetTr td:nth-child(3){
+			width: 25%;
+			text-align: center;
+			background-color: #fafafa;
+		}
+		tr.seungBetTr td:nth-child(4){
+			width: 20%;
+			text-align: center;
+			background-color: #fafafa;
+		}
+		tr.seungBetTr td:nth-child(5){
+			width: 25%;
+			text-align: center;
+			background-color: #fafafa;
+		}
+		span.seungVs{			
+			border-radius: 10px;
+			padding: 2px 8px 2px 8px ;			
+			font-size: 12px;
+			color: #999999;						
+			text-align: center;
+			border: 1px solid #999999;
+		}
+		.seungWin{
+			background-color: #fde882!important;			
+			color: black!important;
+		}
+		.backgroundGray{
+			background-color: #efefef;
+		}
+
+	/*토토 축구승무패*/
+	.infoArea{
+		position: relative;		
+	}
+	.totoInfo{
+		position: absolute;
+		top: 30px;
+		left: 20px;		
+		color: black;
+		font-size: 13px;
+		line-height: 18px;	
+	}
+	table.seungMuPeTable{
+		width: 100%;
+		border-collapse: collapse;
+	}
+	tr.seungMuPeTr{
+		line-height: 40px;
+		vertical-align: middle;
+		border-top: 1px solid #cccccc;
+	}	
+	
+	tr.seungMuPeTr td:nth-child(1){
+		width: 16%;
+		text-align: center;		
+	}
+	tr.seungMuPeTr td:nth-child(2){
+		width: 28%;		
+	}
+	tr.seungMuPeTr td:nth-child(3){
+		width: 28%;
+		text-align: center;
+	}	
+	tr.seungMuPeTr td:nth-child(4){
+		width: 28%;
+	}
+	
+	tr.seungMuPeTr td:nth-child(3) div{
+		display: inline-block;
+	}
+	.smpHome{
+		display: inline-block;
+		margin-left: 5px;
+	}
+	.smpAway{
+		display: inline-block;
+		margin-right: 5px;	
+		float: right;
+	}
+	.smpHomeTeam{
+		padding-left: 5px;
+		font-size: 12px;
+	}
+	.smpAwayTeam{
+		padding-right: 5px;	
+		font-size: 12px;
+	}
+
+	tr.seungMuPeTr td:nth-child(3) div:nth-child(1), .seungMuPeTr td:nth-child(3) div:nth-child(3){
+		width: 20%;
+	}
+	tr.seungMuPeTr td:nth-child(3) div:nth-child(2){
+		width: 60%;	
+	}
+	/*.smpScoreArea{
+		margin-left: 10px;
+		margin-right: 10px;
+	}*/
+	
+
+	tr.seungMuPeVote{
+		height: 50px;
+	}
+	.seungMuPeVote td .voteDiv{
+		display: inline-block;
+		width: 33%;
+	}
+	
+	span.winDiv, span.drawDiv, span.loseDiv{
+		font-size: 16px;
+		float: left;
+		margin-left: 13px;
+		margin-top: 5px;
+	}
+	div.rateDiv{
+		display: inline-block;
+		font-size: 13px;
+		text-align: center;
+	}	
+	div.voteDiv{
+		text-align: center;
+	}
+	td.voteBarTd{
+		padding-left: 10px;
+		padding-right: 10px;
+		line-height: 30px;
+		vertical-align: middle;
+		background-color: #efefef;
+		text-align: center;
+	}
+	.voteBarTd div{
+		display: inline-block;
+	}
+	
+		
+	
+	.draw{
+		color: #eccf04;	
+	}
+	.lose{
+		color: #007fff;
+	}
+	
+
+
+	/*상세 리그 선택*/
+		div.leagueSelect{
+			height: 30px;
+			border-top: 1px solid #cccccc;
+			vertical-align: middle;
+			overflow-x: auto;
+		}
+		ul.ulSelect{
+			white-space:nowrap;
+			overflow-x: auto;
+			line-height: 30px;
+			vertical-align: middle;
+			list-style: none;
+			padding: 0!important;
+			margin: 0!important;
+			background-color: #fafafa;
+		}
+		.ulSelect li{
+			display: inline;			
+			font-size: 12px;
+			color: #8c8c8c;
+			margin-right: 10px;
+			margin-left: 10px;
+		}
+		.ulSelect li:hover{
+			color: #f10000;
+		}
+
+
+
+
+	/*토토 탭 회차*/
+		.roundList1{
+			display: none;
+			position: absolute;
+			visibility: hidden;
+			width: 100%;
+		}
+		.roundList1, .roundList2 {
+			line-height: 31px;
+			border-bottom: 1px solid #cccccc;
+			border-top: 1px solid #cccccc;
+		}		
+		div.calendar, div.controlRound, div.reset, div.soccerRound{
+			display: inline-block;
+		}
+		div.calendar, div.reset{
+			width: 31px;
+			vertical-align: middle;
+			text-align: center;			
+		}
+		.controlRound, .soccerRound{			
+			background-color: #f2f2f2;
+			width: 82%;
+		}
+		.controlRound div, .soccerRound div{
+			height: 100%;
+			font-size: 14px;
+			display: inline-block;	
+			text-align: center;
+		}
+		/*.reset{			
+			float: right;
+		}*/
+		.reset img{
+			text-align: center;
+			vertical-align: middle;
+		}
+		div.ui-datepicker{
+			font-size:13px;
+		}
+		.ui-datepicker-trigger{
+			width: 16px;
+			height: 16px;
+			vertical-align:middle}
+		
+		.controlRound div:nth-child(1), .soccerRound div:nth-child(1){
+			width: 33%;
+			color: #eaeaea!important;
+			border-left: 1px solid #cccccc;
+			border-right: 1px solid #cccccc;
+			text-align: center;
+		}
+		.controlRound div:nth-child(2), .soccerRound div:nth-child(2){
+			width: 34%;			
+			border-right: 1px solid #cccccc;			
+			text-align: center;
+		}
+		.controlRound div:nth-child(3), .soccerRound div:nth-child(3){
+			width: 33%;
+			border-right: 1px solid #cccccc;
+			text-align: center;
+		}
+		#thisRound, #prevRound, #nextRound, #thisRound2, #prevRound2, #nextRound2{text-decoration: none;}
+		input #datepicker{
+			display: inline;
+			
+		}		
+		.silver{
+			color: #959595;
+		}
+	/*뺑뺑이*/
+		#loading {
+		 width: 100%;   
+		 height: 100%;   
+		 top: 0px;
+		 left: 0px;
+		 position: fixed;   
+		 display: block;   
+		 opacity: 1;   
+		 background-color: #fff;   
+		 z-index: 99;   
+		 text-align: center; }  
+		 
+		#loading-image {   
+		 position: absolute;   
+		 top: 45%;  
+		 left: 45%; 
+		 z-index: 100; } 
+		.under{color: blue;}
+		.over{color: red;}
+		.parseHandi{
+			color: blue;
+		}
+
+		/*all Tab*/
+		.endColor{
+			background-color: #efefef;
+		}
+
+		div.sCenterDiv{
+			text-align: center;			
+			display: inline-block;
+			line-height: 40px;
+			vertical-align: middle;			
+		}
+
+	/*야구 카운트 찍는 div*/			
+		div.bCenterDiv{
+			text-align: center;
+			width: 26%;			
+			display: inline-block;
+			line-height: 40px;
+			vertical-align: middle;
+			clear: both;	
+		}
+		div.hCount, div.aCount{
+			width: 37%;
+			display: inline-block;
+			text-align: center;
+			line-height: 40px;
+			vertical-align: middle;
+		}
+		div.homeCountWrap{
+			display: inline-block;
+			text-align: left;
+			width: 27px;
+			height: 30px;
+			margin-top: 5px;
+		}
+		div.awayCountWrap{
+			display: inline-block;
+			text-align: right;
+			width: 27px;			
+			height: 30px;
+			margin-top: 5px;
+		}
+		div.countImg{			
+			line-height: 9px!important;
+			vertical-align: middle;
+		}
+		div.awayBase, div.homeBase{
+			width: 30px;
+			height: 20px;
+			display: inline-block;
+		}
+		.homeBase{
+			display: inline-block;			
+			float: left;			
+		}
+		.awayBase{
+			display: inline-block;
+			float: right;			
+		}
+		div.realTimePlayer{
+			color: #646464;
+			font-size: 11px;
+		}
+		
+
+		
+	</style>
+{% endblock %}
+	
+{% block main %}	
+
+		<!--<div data-role="page" id="liveGame">-->
+
+			<!--<nd2-include data-src="examples/fragments/panel.left.html"></nd2-include>-->
+
+			<!--header-->			
+<div id="loading"><img id="loading-image" src="{{STATIC_URL}}mobileWeb_img/loadingGif.gif" alt="Loading..." /></div>		
+			<div data-role="header" data-position="fixed" class="wow fadeInDown" data-wow-delay="0.2s">				
+				<!--<a href="#leftpanel" class="ui-btn ui-btn-left wow fadeIn" data-wow-delay='0.8s'>
+					<img id="naviconImg" src="{{STATIC_URL}}mobileWeb_img/ic_navicon.png" alt="" width="20px" height="15px">
+				</a>
+				<h1 class="wow fadeIn" data-wow-delay='0.4s'>
+					<img src="{{STATIC_URL}}mobileWeb_img/ic_logo.png" alt="logo" width="82px" height="28px">
+				</h1>-->
+				<ul data-role="nd2tabs" data-swipe="true">
+					<li data-tab="fav" class="fav" >
+						<img src="{{STATIC_URL}}mobileWeb_img/ic_star_small.png" alt="" width="15px" height="15px">
+						<img src="{{STATIC_URL}}mobileWeb_img/ic_star_small_R.png" alt="" width="15px" height="15px" class="navOn">
+					</li>
+					<li data-tab="all" data-tab-active="true">
+						<img src="{{STATIC_URL}}mobileWeb_img/ic_all.png" alt="" width="20px" height="12px">
+						<img src="{{STATIC_URL}}mobileWeb_img/ic_all_red.png" alt="" width="20px" height="12px" class="navOn">
+					</li>
+					<li data-tab="soccer">
+						<img src="{{STATIC_URL}}mobileWeb_img/ic_soccer.png" alt="" width="15px" height="15px">
+						<img src="{{STATIC_URL}}mobileWeb_img/ic_soccer_red.png" alt="" width="15px" height="15px" class="navOn">
+					</li>
+					<li data-tab="baseBall">
+						<img src="{{STATIC_URL}}mobileWeb_img/ic_baseBall.png" alt="" width="15px" height="15px">
+						<img src="{{STATIC_URL}}mobileWeb_img/ic_baseBall_red.png" alt="" width="15px" height="15px" class="navOn">
+					</li>
+					<li data-tab="basketBall">
+						<img src="{{STATIC_URL}}mobileWeb_img/ic_basketBall.png" alt="" width="15px" height="15px">
+						<img src="{{STATIC_URL}}mobileWeb_img/ic_basketBall_red.png" alt="" width="15px" height="15px" class="navOn">
+					</li>
+					<li data-tab="volleyBall">
+						<img src="{{STATIC_URL}}mobileWeb_img/ic_volleyBall.png" alt="" width="15px" height="15px">
+						<img src="{{STATIC_URL}}mobileWeb_img/ic_volleyBall_red.png" alt="" width="15px" height="15px" class="navOn">
+					</li>
+					<li data-tab="toto">토토</li>
+				</ul>
+
+				<div class="leagueSelect" style="display: none;">
+					<ul class="ulSelect">						
+					</ul>
+				</div>
+
+				<!--날짜-->
+				<div class="dateList">
+					<div class="calendar">
+						<input class="ui-datepicker-trigger" type="hidden" id="datepicker" >
+					</div><div class="controlDate">
+						<div class="date">
+							<a href="#" id="yesterday" value="">
+								<img src="{{STATIC_URL}}mobileWeb_img\ic_chevron_left.png" width="7px" height="12px">&nbsp;&nbsp;
+								<span id="datePrev"></span>
+							</a>
+						</div><div class="date">
+							<a id="today" href="#" value="">Today</a>
+						</div><div class="date">
+							<a href="#" id="tomorrow" value="">
+								<span id="dateAfter"></span>&nbsp;&nbsp;
+								<img src="{{STATIC_URL}}mobileWeb_img\ic_chevron_right.png" width="7px" height="12px">
+							</a>
+						</div>
+					</div><div class="reset">
+						<img src="{{STATIC_URL}}mobileWeb_img/ic_reset.png" alt="" width="16px" height="16px">
+					</div>				
+				</div>
+
+				<div class="roundList1 hid" style="display: none;">
+					<div class="calendar">
+						<input class="ui-datepicker-trigger" type="hidden" id="datepicker1" >
+					</div><div class="controlRound">
+						<div class="date">
+							<a href="#" id="prevRound" value="">
+								<img src="{{STATIC_URL}}mobileWeb_img/ic_chevron_left.png" width="7px" height="12px">&nbsp;&nbsp;
+								<span id="left"></span>
+							</a>
+						</div><div class="date">
+							<a id="thisRound" href="#" value=""></a>
+						</div><div class="date">
+							<a href="#" id="nextRound" value="">
+								<span id="right"></span>&nbsp;&nbsp;
+								<img src="{{STATIC_URL}}mobileWeb_img/ic_chevron_right.png" width="7px" height="12px">
+							</a>
+						</div>
+					</div><div class="reset">
+						<img src="{{STATIC_URL}}mobileWeb_img/ic_reset.png" alt="" width="16px" height="16px">
+					</div>
+				</div>
+
+				<div class="roundList2" style="display: none;">
+					<div class="calendar">
+						<input class="ui-datepicker-trigger" type="hidden" id="datepicker2" >
+					</div><div class="soccerRound">
+						<div class="date">
+							<a href="#" id="prevRound2" value="">
+								<img src="{{STATIC_URL}}mobileWeb_img/ic_chevron_left.png" width="7px" height="12px">&nbsp;&nbsp;
+								<span id="left2"></span>
+							</a>
+						</div><div class="date">
+							<a id="thisRound2" href="#" value=""></a>
+						</div><div class="date">
+							<a href="#" id="nextRound2" value="">
+								<span id="right2"></span>&nbsp;&nbsp;
+								<img src="{{STATIC_URL}}mobileWeb_img/ic_chevron_right.png" width="7px" height="12px">
+							</a>
+						</div>
+					</div><div class="reset">
+						<img src="{{STATIC_URL}}mobileWeb_img/ic_reset.png" alt="" width="16px" height="16px">
+					</div>
+				</div>
+
+			</div>
+			<!-- end header-->
+
+						
+			<!--liveGame main    class="ui-content wow fadeIn" 뺌-->
+			<div role="main" data-inset="false" data-wow-delay="0.2s">	
+			
+				<!--<a href="/mobile/account" class="ui-btn-fab ui-btn-fab-bottom ui-btn-raised clr-primary ui-mini">	
+					<img src="{{STATIC_URL}}mobileWeb_img/bt_accountBook.png" width="65px" height="65px">
+				</a>-->
+
+				<!--fav-->
+					<div data-role="nd2tab"	data-tab="fav" >
+						<div id="fav"></div>
+					</div>
+					
+					<!--all-->
+					<div data-role="nd2tab"	data-tab="all">
+						<div id="all">
+							
+						</div>
+					</div>
+
+					<div data-role="nd2tab"	data-tab="soccer">						
+						<div id="soccerArea">
+							
+						</div>						
+					</div>
+
+					<div data-role="nd2tab"	data-tab="baseBall">
+						<div id="baseBallArea"></div>	
+					</div>
+
+					<div data-role="nd2tab"	data-tab="basketBall">
+						<div id="basketBall"></div>
+					</div>
+
+					<div data-role="nd2tab"	data-tab="volleyBall">
+						<div id="volleyBall"></div>
+					</div>
+
+					<div data-role="nd2tab"	data-tab="toto">
+						<div id="toto"></div>
+					</div>			
+				
+			</div>			
+			<!-- end liveGame-->
+
+			
+
+		<!--</div>end page-->		
+
+	
+		
+
+<script>
+	allArray = [];
+	soccerArray = [];
+	baseArray = [];
+	baseketArray = [];
+	volleyArray = [];
+	
+	var socket = new WebSocket("ws://52.196.32.106:8001/new-messages/")
+	console.log(socket);
+	socket.onopen = function(){
+		console.log("Connection open");
+	}
+	socket.onmessage = function(event){
+		console.log(event.data);
+		var msg = JSON.parse(event.data);
+
+		if(msg.new_val.sport == 1){ //야구
+			console.log(msg.new_val.sport);
+			console.log(msg.new_val.gameId);
+			for(var k=0; k < allArray.length; k++){
+				if(msg.new_val.gameId == allArray[k].gameId){					
+					allArray.splice(k,1,msg.new_val)
+
+					var newRow = $('tr.rowGame');
+					for(var r=0; r < newRow.length; r++){
+						if($(newRow[r]).attr("gameId") == msg.new_val.gameId){							
+							$(newRow[r]).replaceWith(allDiv(msg.new_val));
+						}
+					}
+					
+				}
+			}
+			for(var d=0; d < baseArray.length; d++){
+				if(msg.new_val.gameId == baseArray[d].gameId){					
+					console.log(baseArray[d].progress);
+					baseArray.splice(d,1,msg.new_val);
+					console.log(baseArray[d].progress);
+
+					var oneBaseballRow = $('tr.baseBallRow');
+					for(var g=0; g < oneBaseballRow.length; g++){
+						if($(oneBaseballRow[g]).attr("gameId") == msg.new_val.gameId){							
+							$(oneBaseballRow[g]).replaceWith(baseBallDiv(msg.new_val));
+						}
+					}
+					
+				}
+			}
+		}
+		else if(msg.new_val.sport == 2){	//축구
+			console.log(msg.new_val.sport);
+			console.log(msg.new_val.gameId);
+			for(var k=0; k < allArray.length; k++){
+				if(msg.new_val.gameId == allArray[k].gameId){					
+					allArray.splice(k,1,msg.new_val);
+
+					var newRow = $('tr.rowGame');
+					for(var r=0; r < newRow.length; r++){
+						if($(newRow[r]).attr("gameId") == msg.new_val.gameId){
+							//console.log(allDiv(msg.new_val));
+							$(newRow[r]).replaceWith(allDiv(msg.new_val));
+						}
+					}								
+				}
+			}
+			for(var a=0; a < soccerArray.length; a++){
+				if(msg.new_val.gameId == soccerArray[a].gameId){					
+					console.log(soccerArray[a].progress);
+					soccerArray.splice(a,1,msg.new_val);
+					console.log(soccerArray[a].progress);
+
+					var oneSoccerRow = $('tr.soccerRow');
+					for(var r=0; r < oneSoccerRow.length; r++){
+						if($(oneSoccerRow[r]).attr("gameId") == msg.new_val.gameId){							
+							$(oneSoccerRow[r]).replaceWith(soccerDiv(msg.new_val));
+						}
+					}
+					//soccerArea();					
+				}
+			}
+
+		}
+		else if(msg.new_val.sport == 3){	//배구
+			console.log(msg.new_val.sport);
+			console.log(msg.new_val.gameId);
+			for(var k=0; k < allArray.length; k++){
+				if(msg.new_val.gameId == allArray[k].gameId){					
+					allArray.splice(k,1,msg.new_val);
+
+					var newRow = $('tr.rowGame');
+					for(var r=0; r < newRow.length; r++){
+						if($(newRow[r]).attr("gameId") == msg.new_val.gameId){
+							//console.log(allDiv(msg.new_val));
+							$(newRow[r]).replaceWith(allDiv(msg.new_val));
+						}
+					}			
+					//allArea();					
+				}
+			}
+			for(var b=0; b < volleyArray.length; b++){
+				if(msg.new_val.gameId == volleyArray[b].gameId){					
+					console.log(volleyArray[b].progress);
+					volleyArray.splice(b,1,msg.new_val);
+					console.log(volleyArray[b].progress);
+
+					var oneVolleyRow = $('tr.volleyBallRow');
+					for(var v=0; v < oneVolleyRow.length; v++){
+						if($(oneVolleyRow[v]).attr("gameId") == msg.new_val.gameId){							
+							$(oneVolleyRow[v]).replaceWith(volleyBallDiv(msg.new_val));
+						}
+					}
+					//volleyballArea();					
+				}
+			}			
+		}
+		else if(msg.new_val.sport == 4){	//농구
+			console.log(msg.new_val.sport);
+			console.log(msg.new_val.gameId);
+			for(var k=0; k < allArray.length; k++){
+				if(msg.new_val.gameId == allArray[k].gameId){					
+					allArray.splice(k,1,msg.new_val);
+					//allArea();					
+				}
+			}
+			for(var c=0; c < baseketArray.length; c++){
+				if(msg.new_val.gameId == baseketArray[b].gameId){					
+					console.log(baseketArray[c].progress);
+					baseketArray.splice(c,1,msg.new_val);
+					console.log(baseketArray[c].progress);
+					//basketballArea();					
+				}
+			}
+		}		
+	}
+
+	function baseBallDiv(game){
+		var baseBall = '';
+		baseBall +='<tr class="baseBallRow" onclick="gameDetail(this);" baseLeague="'+game.league+'" gameId="'+game.gameId+'" sport="'+game.sport+'" progress="'+game.progress+'">'+
+									'<td class="imgs">';
+									if(game.liveLink){
+		baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/liveLink.png" alt="" width="18px" height="18px">';
+									}
+									if(game.ratioExist){
+		baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/ratioExist.png" alt="" width="18px" height="18px">';
+									}
+		baseBall +=		'</td>'+
+									'<td class="gameTeam_home">'+											
+										'<span class="homeSpan">'+
+											'<img class="bigImg" src="'+game.homePic+'" alt="" width="40px" height="40px" onError="imgError(this);">'+
+											'<div class="bigHomeTeam">'+game.home+'</div>'+														
+										'</span>'+
+									'</td>'+
+									'<td class="baseBallGameScore">'+
+										'<div class="wrapProgress">';
+
+					baseBall +=	'<div class="hCount">';
+											if(game.progress != '경기전' && game.progress != '홈승' && game.progress != '홈패' && game.progress != '무승부'){
+												if(game.attack == 1){//홈팀공격												
+						baseBall +=	'<div class="homeBase">';	
+													if(game.baseState === "000"){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_000.png" width="30px" height="20px">';								
+													}else if(game.baseState === "001"){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_001.png" width="30px" height="20px">';
+													}else if(game.baseState === "010"){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_010.png" width="30px" height="20px">';
+													}else if(game.baseState === "011"){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_011.png" width="30px" height="20px">';
+													}else if(game.baseState === "100"){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_100.png" width="30px" height="20px">';
+													}else if(game.baseState === "101"){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_101.png" width="30px" height="20px">';
+													}else if(game.baseState === "110"){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_110.png" width="30px" height="20px">';
+													}else if(game.baseState === "111"){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_111.png" width="30px" height="20px">';
+													}
+						baseBall +=	'</div>';//homeBase
+
+						baseBall +=		'<div class="homeCountWrap">';
+						baseBall +=			'<div class="countImg">';
+													if(game.ballCount == 0){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_ball0.png" width="21px" height="5px">';
+													}else if(game.ballCount == 1){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_ball1.png" width="21px" height="5px">';
+													}else if(game.ballCount == 2){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_ball2.png" width="21px" height="5px">';
+													}else if(game.ballCount == 3){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_ball3.png" width="21px" height="5px">';
+													}
+						baseBall +=			'</div>';
+						baseBall +=			'<div class="countImg">';
+													if(game.strikeCount == 0){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_strike0.png" width="12px" height="5px">';
+													}else if(game.strikeCount == 1){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_strike1.png" width="12px" height="5px">';
+													}else if(game.strikeCount == 2){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_strike2.png" width="12px" height="5px">';
+													}
+						baseBall +=			'</div>';
+						baseBall +=			'<div class="countImg">';
+													if(game.outCount == 0){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_out0.png" width="12px" height="5px">';
+													}else if(game.outCount == 1){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_out1.png" width="12px" height="5px">';
+													}else if(game.outCount == 2){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_out2.png" width="12px" height="5px">';
+													}
+						baseBall +=			'</div>';
+						baseBall +=		'</div>';//homeCountWrap		
+												}//if
+											}//if	
+				baseBall +=		'</div>';//hCount				
+
+
+
+				baseBall +=		'<div class="bCenterDiv">';
+											if(game.progress == "홈승"){
+				baseBall +=				'<span class="brProgress red" progress="'+game.progress+'">'+game.progress+'</span>';
+											}else if(game.progress == "홈패"){
+				baseBall +=				'<span class="brProgress blue" progress="'+game.progress+'">'+game.progress+'</span>';
+											}
+											else if(game.progress == "무승부"){
+				baseBall +=				'<span class="brProgress yellow" progress="'+game.progress+'">'+game.progress+'</span>';	
+											}
+											else if(game.progress == "경기전" || game.progress == "취소"){
+				baseBall +=				'<span class="brProgress gray" progress="'+game.progress+'">'+game.progress+'</span>';
+											}else{
+				baseBall +=				'<span class="brProgress red" progress="'+game.progress+'">'+game.progress+'</span>';
+											}
+				baseBall +=		'</div>';	//bCenterDiv		
+
+								
+				baseBall +=		'<div class="aCount">';
+											if(game.progress != '경기전' && game.progress != '홈승' && game.progress != '홈패' && game.progress != '무승부'){
+												if(game.attack == 0){//어웨이 공격		
+						baseBall +=		'<div class="awayCountWrap">';
+						baseBall +=			'<div class="countImg">';
+													if(game.ballCount == 0){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_ball0.png" width="21px" height="5px">';
+													}else if(game.ballCount == 1){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_ball1.png" width="21px" height="5px">';
+													}else if(game.ballCount == 2){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_ball2.png" width="21px" height="5px">';
+													}else if(game.ballCount == 3){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_ball3.png" width="21px" height="5px">';
+													}
+						baseBall +=		'</div>';
+						baseBall +=		'<div class="countImg">';
+													if(game.strikeCount == 0){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_strike0.png" width="12px" height="5px">';
+													}else if(game.strikeCount == 1){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_strike1.png" width="12px" height="5px">';
+													}else if(game.strikeCount == 2){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_strike2.png" width="12px" height="5px">';
+													}
+						baseBall +=		'</div>';
+						baseBall +=		'<div class="countImg">';
+													if(game.outCount == 0){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_out0.png" width="12px" height="5px">';
+													}else if(game.outCount == 1){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_out1.png" width="12px" height="5px">';
+													}else if(game.outCount == 2){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_out2.png" width="12px" height="5px">';
+													}
+						baseBall +=		'</div>';
+						baseBall +=		'</div>';//awayCountWrap
+
+						baseBall +=		'<div class="awayBase">';
+													if(game.baseState === "000"){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_000.png" width="30px" height="20px">';								
+													}else if(game.baseState === "001"){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_001.png" width="30px" height="20px">';
+													}else if(game.baseState === "010"){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_010.png" width="30px" height="20px">';
+													}else if(game.baseState === "011"){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_011.png" width="30px" height="20px">';
+													}else if(game.baseState === "100"){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_100.png" width="30px" height="20px">';
+													}else if(game.baseState === "101"){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_101.png" width="30px" height="20px">';
+													}else if(game.baseState === "110"){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_110.png" width="30px" height="20px">';
+													}else if(game.baseState === "111"){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_111.png" width="30px" height="20px">';
+													}		
+						baseBall +=		'</div>';
+												}//if
+											}//if
+				baseBall +=		'</div>';//aCount												
+									
+		baseBall +=			'</div>';//div.wrapProgress
+
+
+
+		baseBall +=		'<div class="vsWrapDiv">';
+									if(game.progress == "경기전" && (game.league == "KBO" || game.league == "NPB" || game.league=="MLB")){
+										if(game.homeFirstPitcher){
+		baseBall +=				'<div class="brHomePitcher">'+game.homeFirstPitcher+'</div>';
+										}else{
+		baseBall +=				'<div class="brHomeDiv"></div>';
+										}
+									}else{
+		baseBall +=			'<div class="brHomeDiv">'								
+										if(game.homescore - game.awayscore > 0){
+		baseBall +=				'<span class="brHomeScore winTeam">'+game.homescore+'</span>';
+										}
+										else if(game.progress == "취소"){
+		baseBall +=				'<span class="brHomeScore"></span>';
+										}								
+										else{
+		baseBall +=				'<span class="brHomeScore">'+game.homescore+'</span>';				
+										}
+		baseBall +=			'</div>'									
+									}
+									
+									if(game.progress == "경기전" && (game.league == "KBO" || game.league == "NPB" || game.league=="MLB")){
+		baseBall +=			'<div class="BrBaseBallSBoard"><span class="baseVsWord">vs</span></div>';
+									}else{
+		baseBall +=			'<div class="baseBallSBoard"><span class="vsWord">vs</span></div>';								
+									}						
+
+
+									if(game.progress == "경기전" && (game.league == "KBO" || game.league == "NPB" || game.league=="MLB")){
+										if(game.awayFirstPitcher){
+		baseBall +=				'<div class="brAwayPitcher">'+game.awayFirstPitcher+'</div>';								
+										}else{
+		baseBall +=				'<div class="brAwayDiv"></div>';
+										}
+									}else{
+		baseBall +=			'<div class="brAwayDiv">'								
+										if(game.awayscore - game.homescore > 0){
+		baseBall +=				'<span class="brAwayScore winTeam">'+game.awayscore+'</span>';
+										}
+										else if(game.progress == "취소"){
+		baseBall +=				'<span class="brAwayScore"></span>';
+										}		
+										else{
+		baseBall +=				'<span class="brAwayScore">'+game.awayscore+'</span>';
+										}
+		baseBall +=			'</div>';
+									}
+		baseBall +=			'</div>';//	vsWrapDiv
+												
+		
+								//경기 날짜, 남은시간, 실시간 투수 타자
+		baseBall +=	'<div class="dateWrapDiv">';
+									if(game.progress == "경기전"){
+		baseBall +=		'<div class="brGameDate">'+parseLeagueDate(game.date)+'</div>';								
+		baseBall +=		'<div class="leftTime">'+dDayTime(game.date)+'</div>';
+									}else if(game.progress == "홈승" || game.progress == "홈패" || game.progress == "무승부"){
+		baseBall +=		'<div class="brGameDate">'+parseLeagueDate(game.date)+'</div>';
+									}else{
+										if(game.attack == 1){
+		baseBall +=		'<div class="realTimePlayer">타자 '+game.homePlayer+' vs '+'투수 '+game.awayPlayer+'</div>';									
+										}else if(game.attack == 0){
+		baseBall +=		'<div class="realTimePlayer">투수 '+game.homePlayer+' vs '+'타자 '+game.awayPlayer+'</div>';																		
+										}		
+									}
+		baseBall +=	'</div>';
+
+		baseBall +=		'</td>'+ 
+									'<td class="gameTeam_away">'+
+										'<span class="awaySpan">'+
+											'<img class="bigImg" src="'+game.awayPic+'" alt="" width="40px" height="40px" onError="imgError(this);">'+
+											'<div class="bigAwayTeam">'+game.away+'</div>'+														
+										'</span>'+
+									'</td>'+
+									'<td class="bookmark">'+
+										'<img src="{{STATIC_URL}}mobileWeb_img/ic_star_line.png" alt="" width="20px" height="20px">'+							
+									'</td>'+
+								'</tr>';
+		return baseBall;
+	}
+
+	function soccerDiv(game){
+		var soccer = '';
+		soccer +=	'<tr class="soccerRow endBack" onclick="gameDetail(this);" soccerLeague="'+game.league+'" gameId="'+game.gameId+'" sport="'+game.sport+'" progress="'+game.progress+'">'+
+									'<td class="imgs">';
+									if(game.liveLink){
+		soccer +=				'<img src="{{STATIC_URL}}mobileWeb_img/liveLink.png" alt="" width="18px" height="18px">';
+									}
+									if(game.ratioExist){
+		soccer +=				'<img src="{{STATIC_URL}}mobileWeb_img/ratioExist.png" alt="" width="18px" height="18px">';
+									}
+		soccer +=			'</td>'+
+
+									'<td class="gameTeam_home">'+											
+										'<span class="homeSpan">'+
+											'<img class="bigImg" src="'+game.homePic+'" alt="" width="40px" height="40px" onError="imgError(this);">'+
+											'<div class="bigHomeTeam">'+game.home+'</div>'+
+										'</span>'+
+									'</td>'+
+									'<td class="soccerGameScore">';
+		soccer +=				'<div class="wrapProgress">';
+		soccer +=					'<div class="sCenterDiv">';						
+									if(game.progress == "홈승"){
+		soccer +=				'<span class="brProgress red" progress="'+game.progress+'">'+game.progress+'</span><br>';					
+									}else if(game.progress == "홈패"){
+		soccer +=				'<span class="brProgress blue" progress="'+game.progress+'">'+game.progress+'</span><br>';		
+									}
+									else if(game.progress == "무승부"){
+		soccer +=				'<span class="brProgress yellow" progress="'+game.progress+'">'+game.progress+'</span><br>';		
+									}
+									else if(game.progress == "경기전" || game.progress == "취소"){
+		soccer +=				'<span class="brProgress gray" progress="'+game.progress+'">'+game.progress+'</span><br>';	
+									}else{
+		soccer +=				'<span class="brProgress red" progress="'+game.progress+'">'+game.progress+'</span><br>';
+									}
+		soccer +=					'</div>';//sCenterDiv
+		soccer +=				'</div>';//wrapProgress
+		
+										if(game.progress == "경기전"){
+		soccer +=					'<span class="brHomeScore"></span>';
+										}
+										else if(game.progress == "취소"){
+		soccer +=					'<span class="brHomeScore"></span>';
+										}
+										else{
+											if(game.homescore - game.awayscore > 0){
+		soccer +=					'<span class="brHomeScore winTeam" home="'+game.homescore+'">'+game.homescore+'</span>';										
+											}else{
+		soccer +=					'<span class="brHomeScore" home="'+game.homescore+'">'+game.homescore+'</span>';
+											}
+										}
+															
+		soccer +=				'<span class="vsWord">vs</span>';					
+										if(game.progress == "경기전"){
+		soccer +=					'<span class="brAwayScore"></span>';
+										}
+										else if(game.progress == "취소"){
+		soccer +=					'<span class="brAwayScore"></span>';
+										}
+										else{
+											if(game.awayscore - game.homescore > 0){
+		soccer +=					'<span class="brAwayScore winTeam">'+game.awayscore+'</span>';
+											}else{
+		soccer +=					'<span class="brAwayScore">'+game.awayscore+'</span>';										
+											}
+										}
+
+
+		soccer +=				'<div class="brGameDate">'+parseLeagueDate(game.date)+'</div>';
+										if(game.progress == "경기전"){
+		soccer +=					'<div class="leftTime">'+dDayTime(game.date)+'</div>';
+										}												
+		soccer +=			'</td>'+
+									'<td class="gameTeam_away">'+
+										'<span class="awaySpan">'+
+											'<img class="bigImg" src="'+game.awayPic+'" alt="" width="40px" height="40px" onError="imgError(this);">'+
+											'<div class="bigAwayTeam">'+game.away+'</div>'+
+										'</span>'+
+									'</td>'+
+									'<td class="bookmark">'+
+										'<img src="{{STATIC_URL}}mobileWeb_img/ic_star_line.png" alt="" width="20px" height="20px">'+							
+									'</td>'+
+								'</tr>';
+		return soccer;		
+	}
+	
+	
+	function allDiv(game){
+		var all = '';
+		all +='<tr class="rowGame" onclick="gameDetail(this);" gameId="'+game.gameId+'" sport="'+game.sport+'" progress="'+game.progress+'">'+
+							'<td class="gameDate"><div>'+parseGameDate(game.date)+'</div></td>'+
+							'<td class="gameTeam_home">'+
+								'<div class="homeSpan">'+
+									'<img src="'+game.homePic+'" alt="" width="27px" height="30px" onError="imgError(this);">&nbsp;'+
+									'<div class="homeTeam">'+game.home+'</div>'+
+								'</div>'+											
+							'</td>';
+
+							if(game.progress == "경기전" && (game.league == "KBO" || game.league == "NPB" || game.league=="MLB")){
+		all +=			'<td class="tdBaseBallScore">';					
+							}
+							else{
+		all +=			'<td class="gameScore">';
+							}
+							
+								if(game.progress == "경기전" && (game.league == "KBO" || game.league == "NPB" || game.league=="MLB")){
+									if(game.homeFirstPitcher){
+		all +=					'<div class="homePitcher">'+game.homeFirstPitcher+'</div>';
+									}else{
+		all +=					'<div>-&nbsp;&nbsp;&nbsp;</div>';	
+									}
+								}
+								else if(game.progress == "경기전" && (game.league != "KBO" && game.league != "NPB" && game.league!="MLB")){
+		all +=				'<div>-&nbsp;&nbsp;&nbsp;</div>';
+								}
+								else if(game.progress == "취소"){
+		all +=				'<div class="homeScore"></div>';
+								}
+								else{												
+									if(game.homescore - game.awayscore > 0){
+		all +=					'<div class="homeScore winTeam">'+game.homescore+'</div>';
+									}else{
+		all +=					'<div class="homeScore" home="'+game.homescore+'">'+game.homescore+'</div>';
+									}					
+								}
+
+								
+		//경기 상태
+								if(game.progress == "경기전" && (game.league != "KBO" && game.league != "NPB" && game.league!="MLB")){
+		all +=				'<div class="scoreBoard" progress="'+game.progress+'">';
+		all +=					'<span class="inBoard" progress="'+game.progress+'">VS</span>';
+		all +=				'</div>';
+								}
+								else if(game.progress == "경기전" && (game.league == "KBO" || game.league == "NPB" || game.league=="MLB")){
+		all +=				'<div class="baseBallSBoard" progress="'+game.progress+'">';
+		all +=					'<span>VS</span>';
+		all +=				'</div>';
+								}
+								else{
+		all +=				'<div class="scoreBoard" progress="'+game.progress+'">';					
+										if(game.progress == '홈승' || game.progress == '홈패' || game.progress == '무승부'){
+		all +=						'<span class="inBoard" progress="'+game.progress+'">종료</span>';
+										}else if(game.progress == '취소'){
+		all +=						'<span class="inBoard" progress="'+game.progress+'">취소</span>';
+										}else{
+		all +=						'<span class="inBoard winTeam" progress="'+game.progress+'">'+game.progress+'</span>';
+										}
+		all +=				'</div>';
+								}
+		all +=			'</div>';
+
+
+								if(game.progress == "경기전" && (game.league == "KBO" || game.league == "NPB" || game.league=="MLB")){
+									if(game.awayFirstPitcher){
+		all +=					'<div class="awayPitcher">'+game.awayFirstPitcher+'</div>';
+									}else{
+		all +=					'<div>&nbsp;&nbsp;&nbsp;-</div>';
+									}
+								}
+								else if(game.progress == "경기전" && (game.league != "KBO" && game.league != "NPB" && game.league!="MLB")){
+		all +=				'<div>&nbsp;&nbsp;&nbsp;-</div>';
+								}
+								else if(game.progress == "취소"){
+		all +=				'<div class="awayScore"></div>';
+								}
+								else{
+									if(game.awayscore - game.homescore > 0){
+		all +=					'<div class="awayScore winTeam">'+game.awayscore+'</div>';
+									}else{
+		all +=					'<div class="awayScore">'+game.awayscore+'</div>';
+									}					
+								}
+		all +=		'</td>'+
+							'<td class="gameTeam_away">'+
+								'<div class="awaySpan">'+
+									'<div class="awayTeam">'+game.away+'</div>&nbsp;'+
+									'<img src="'+game.awayPic+'" alt="" width="27px" height="30px" onError="imgError(this);">'+
+								'</div>'+								
+							'</td>'+
+							'<td class="bookmark">'+
+								'<img src="{{STATIC_URL}}mobileWeb_img/ic_star_line.png" alt="" width="20px" height="20px">'+
+							'</td>'+
+						'</tr>';
+		return all;
+		
+	}
+
+	function volleyBallDiv(game){
+		var volleyBall = "";		
+
+		volleyBall +=	'<tr class="volleyBallRow endBack" onclick="gameDetail(this);" volleyLeague="'+game.league+'" gameId="'+game.gameId+'" sport="'+game.sport+'" progress="'+game.progress+'">'+
+									'<td class="imgs">';
+									if(game.liveLink){
+		volleyBall +=				'<img src="{{STATIC_URL}}mobileWeb_img/liveLink.png" alt="" width="18px" height="18px">';
+									}
+									if(game.ratioExist){
+		volleyBall +=				'<img src="{{STATIC_URL}}mobileWeb_img/ratioExist.png" alt="" width="18px" height="18px">';
+									}
+		volleyBall +=	'</td>'+
+									'<td class="gameTeam_home">'+
+										'<span class="homeSpan">'+
+											'<img class="bigImg" src="'+game.homePic+'" alt="" width="40px" height="40px" onError="imgError(this);">'+
+											'<div class="bigHomeTeam">'+game.home+'</div>'+
+										'</span>'+
+									'</td>'+
+									'<td class="soccerGameScore">';
+		volleyBall +=		'<div class="wrapProgress">';
+		volleyBall +=			'<div class="sCenterDiv">';
+									if(game.progress == "홈승"){
+		volleyBall +=				'<span class="brProgress red" progress="'+game.progress+'">'+game.progress+'</span><br>';					
+									}else if(game.progress == "홈패"){
+		volleyBall +=				'<span class="brProgress blue" progress="'+game.progress+'">'+game.progress+'</span><br>';													
+									}
+									else if(game.progress == "무승부"){
+		volleyBall +=				'<span class="brProgress yellow" progress="'+game.progress+'">'+game.progress+'</span><br>';												
+									}
+									else if(game.progress == "경기전"){
+		volleyBall +=				'<span class="brProgress gray" progress="'+game.progress+'">'+game.progress+'</span><br>';												
+									}else{
+		volleyBall +=				'<span class="brProgress red" progress="'+game.progress+'">'+game.progress+'</span><br>';
+									}
+		volleyBall +=			'</div>';//sCenterDiv
+		volleyBall +=		'</div>';//wrapProgress
+		
+										if(game.progress == "경기전"){
+		volleyBall +=					'<span class="brHomeScore"></span>';
+										}else{
+											if(game.homescore - game.awayscore > 0){
+		volleyBall +=					'<span class="brHomeScore winTeam" home="'+game.homescore+'">'+game.homescore+'</span>';										
+											}else{
+		volleyBall +=					'<span class="brHomeScore" home="'+game.homescore+'">'+game.homescore+'</span>';
+											}
+										}
+															
+		volleyBall +=				'<span class="vsWord">vs</span>';					
+										if(game.progress == "경기전"){
+		volleyBall +=					'<span class="brAwayScore" home="'+game.awayscore+'"></span>';
+										}else{
+											if(game.awayscore - game.homescore > 0){
+		volleyBall +=					'<span class="brAwayScore winTeam">'+game.awayscore+'</span>';
+											}else{
+		volleyBall +=					'<span class="brAwayScore">'+game.awayscore+'</span>';										
+											}
+										}
+
+
+		volleyBall +=		'<div class="brGameDate">'+parseLeagueDate(game.date)+'</div>';
+										if(game.progress == "경기전"){
+		volleyBall +=					'<div class="leftTime">'+dDayTime(game.date)+'</div>';
+										}												
+		volleyBall +=		'</td>'+ 
+									'</td>'+ 
+									'<td class="gameTeam_away">'+
+										'<span class="awaySpan">'+
+											'<img class="bigImg" src="'+game.awayPic+'" alt="" width="40px" height="40px" onError="imgError(this);">'+
+											'<div class="bigAwayTeam">'+game.away+'</div>'+
+										'</span>'+
+									'</td>'+
+									'<td class="bookmark">'+
+										'<img src="{{STATIC_URL}}mobileWeb_img/ic_star_line.png" alt="" width="20px" height="20px">'+							
+									'</td>'+
+								'</tr>';
+		return volleyBall;		
+	}
+
+
+
+//오늘 날짜로 기본세팅
+	$(document).ready(function(){
+
+		var now = new Date();		
+		var day = ("0" + now.getDate()).slice(-2);
+		var month = ("0" + (now.getMonth() + 1)).slice(-2);
+		var today = now.getFullYear()+"-"+(month)+"-"+(day);
+		
+		//$('#datepicker').val(today);
+		$('#today').attr('value', today);
+
+		//$("#today").text((now.getMonth()+1)+'/'+now.getDate()); //오늘날짜 써넣기
+		$("#today").text('Today');	
+		
+		$("#yesterday").attr("value", getDay(today,-1));
+		$("#datePrev").text(formSlashDay($("#yesterday").attr("value")));//어제날짜 써넣기
+
+		$("#tomorrow").attr("value",getDay(today,+1));
+		$("#dateAfter").text(formSlashDay($("#tomorrow").attr("value")))//내일날짜 써넣기
+
+		var dateFilter = {dateFilter:today}
+		//var jsondata = JSON.stringify(dateFilter)
+		$.ajax({
+			type: "GET",
+			type: "POST",
+			data: dateFilter,
+			dataType: "json",
+			url: '/mobile/mainLive/',			
+			success: function(data){				
+				var gameArr = data.data.games;
+					allArray = gameArr;
+				
+				for(var i=0 in gameArr){					
+					if(gameArr[i].sport == 2){						
+						soccerArray.push(gameArr[i])
+					}else if(gameArr[i].sport == 1){
+						baseArray.push(gameArr[i])
+					}else if(gameArr[i].sport == 4){
+						baseketArray.push(gameArr[i])
+					}else if(gameArr[i].sport == 3){
+						volleyArray.push(gameArr[i])
+					}
+				}//for
+				allArea();
+				soccerArea();
+				baseballArea();
+				basketballArea();
+				volleyballArea();
+			}
+		})//ajax
+		
+
+		var load = '<div id="loading"><img id="loading-image" src="{{STATIC_URL}}mobileWeb_img/loadingGif.gif" alt="Loading..." /></div>';
+		$('#all').html(load);
+		//$('div.roundList1').hide();
+		$('div.roundList1').removeClass('showed');
+		$('div.roundList1').addClass('hid');		
+		$('div.roundList2').hide();		
+	})// end document
+
+	console.log(window.allArray);
+
+	//날짜 바뀌면 해당 경기 띄우기
+	$(document).ready(function(){
+		$("#datepicker").change(function(){
+	  	
+
+			var changeDate = $('#datepicker').val();			
+
+			$('#today').attr("value", changeDate);
+			$("#today").text(formSlashDay(changeDate));//날짜 화면에띄우기
+					
+			$("#yesterday").attr("value", getDay(changeDate,-1)); //바뀐날짜에 -1
+			$("#datePrev").text(formSlashDay($("#yesterday").attr("value")));//어제날짜 파싱
+
+			$("#tomorrow").attr("value", getDay(changeDate,+1)); //바뀐날짜에 +1
+			$("#dateAfter").text(formSlashDay($("#tomorrow").attr("value")));//어제날짜 파싱
+			
+			var dateFilter = {dateFilter:changeDate}
+			allArray = [];
+			soccerArray = [];
+			baseArray = [];
+			baseketArray = [];
+			volleyArray = [];			
+
+			$.ajax({
+				//type: "get",
+				type: "POST",
+				data: dateFilter,
+				url: '/mobile/mainLive/',
+				//url: 'http://app.lemonis.co.kr/main/mainLive/',
+				async:false,
+				success: function(data){
+					var gameArr = data.data.games;
+					allArray = gameArr;
+					console.log(gameArr);
+					for(var i=0 in gameArr){					
+						if(gameArr[i].sport == 2){						
+							soccerArray.push(gameArr[i])
+						}else if(gameArr[i].sport == 1){
+							baseArray.push(gameArr[i])
+						}else if(gameArr[i].sport == 4){
+							baseketArray.push(gameArr[i])
+						}else if(gameArr[i].sport == 3){
+							volleyArray.push(gameArr[i])
+						}
+					}//for
+					allArea();
+					soccerArea();
+					baseballArea();
+					basketballArea();
+					volleyballArea();
+				}//success
+			})
+			$('div.roundList1').hide();
+			$('div.roundList2').hide();
+
+			
+			/*var load = '<div id="loading"><img id="loading-image" src="{{STATIC_URL}}mobileWeb_img/loadingGif.gif" alt="Loading..." /></div>';
+			$('#all').html(load);*/
+			/*$('#soccerArea').html(load);
+			$('#baseBallArea').html(load);
+			$('#basketBall').html(load);
+			$('#volleyBall').html(load);*/
+		})
+	});  
+
+	//이전 날짜 가져오기	
+	$(document).ready(function(){
+		$("#yesterday").click(function(){
+			var now = new Date();		
+			var day = ("0" + now.getDate()).slice(-2);
+			var month = ("0" + (now.getMonth() + 1)).slice(-2);
+			var today = now.getFullYear()+"-"+(month)+"-"+(day);			
+	
+  		var yesterday = $("#yesterday").attr("value"); //오늘날짜로 세팅되면 어제내일 값이 세팅되어있어야함  		
+  		
+  		$("#today").attr("value", yesterday);
+  		if($("#today").attr("value") == today){
+  			$("#today").text("Today");
+  		}else{
+  			$("#today").text(formSlashDay(yesterday));	
+  		}
+  		
+
+  		$("#yesterday").attr("value", getDay(yesterday, -1));//어제날짜 파싱
+  		if($("#yesterday").attr("value") == today){
+  			$("#datePrev").text("Today");
+  		}else{
+  			$("#datePrev").text(formSlashDay($("#yesterday").attr("value"))) //원래 yesterday-1 한 값을 #datePrev value값으로 넣기  			
+  		}
+  		
+
+			$("#tomorrow").attr("value", getDay(yesterday, +1)) //원래 yesterday+1 한 값을 #datePrev value값으로 넣기
+			
+			if( $("#tomorrow").attr("value") == today){ //이전 날짜가 오늘 날짜면 Today텍스트로
+				$("#dateAfter").text("Today");	
+			}else{
+				$("#dateAfter").text(formSlashDay($("#tomorrow").attr("value")));	
+			}			
+			
+			
+			var dateFilter = {dateFilter:yesterday}
+			allArray = [];
+			soccerArray = [];
+			baseArray = [];
+			baseketArray = [];
+			volleyArray = [];			
+
+			$.ajax({
+				//type: "get",
+				type: "POST",
+				data: dateFilter,
+				url: '/mobile/mainLive/',
+				//url: 'http://app.lemonis.co.kr/main/mainLive/',
+				async:false,
+				success: function(data){
+					var gameArr = data.data.games;
+					allArray = gameArr;
+					console.log(allArray);
+					
+					for(var i=0 in gameArr){					
+						if(gameArr[i].sport == 2){						
+							soccerArray.push(gameArr[i]);							
+						}else if(gameArr[i].sport == 1){
+							baseArray.push(gameArr[i])
+						}else if(gameArr[i].sport == 4){
+							baseketArray.push(gameArr[i])
+						}else if(gameArr[i].sport == 3){
+							volleyArray.push(gameArr[i])
+						}
+					}					
+					allArea();
+					soccerArea();
+					baseballArea();
+					basketballArea();
+					volleyballArea();
+				}
+			})
+			
+			$('div.roundList1').hide();
+			$('div.roundList2').hide();
+
+			/*var load = '<div id="loading"><img id="loading-image" src="{{STATIC_URL}}mobileWeb_img/loadingGif.gif" alt="Loading..." /></div>';
+			$('#all').html(load);
+			$('#soccerArea').html(load);
+			$('#baseBallArea').html(load);
+			$('#basketBall').html(load);
+			$('#volleyBall').html(load);*/
+			
+		});
+	})	
+
+	//다음 날짜 가져오기
+	$(document).ready(function(){
+		$("#tomorrow").click(function(){
+			var now = new Date();		
+			var day = ("0" + now.getDate()).slice(-2);
+			var month = ("0" + (now.getMonth() + 1)).slice(-2);
+			var today = now.getFullYear()+"-"+(month)+"-"+(day);
+			
+  		var tomorrow = $("#tomorrow").attr("value"); //오늘날짜로 세팅되면 어제내일 값이 세팅되어있어야함  		
+  		
+  		$("#today").attr("value", tomorrow);
+  		if($("#today").attr("value") == today){
+  			$("#today").text("Today")
+  		}else{
+  			$("#today").text(formSlashDay(tomorrow))	
+  		}
+  		
+
+  		$("#yesterday").attr("value", getDay(tomorrow, -1));//어제날짜 파싱
+  		if($("#yesterday").attr("value") == today){
+  			$("#datePrev").text("Today");
+  		}else{
+  			$("#datePrev").text(formSlashDay($("#yesterday").attr("value"))) //원래 yesterday-1 한 값을 #datePrev value값으로 넣기  			
+  		}
+  		
+
+			$("#tomorrow").attr("value", getDay(tomorrow, +1)) //원래 yesterday+1 한 값을 #datePrev value값으로 넣기
+			if($("#tomorrow").attr("value") == today){
+				$("#dateAfter").text("Today");
+			}else{
+				$("#dateAfter").text(formSlashDay($("#tomorrow").attr("value")));	
+			}
+						
+			var dateFilter = {dateFilter:tomorrow}
+			allArray = [];
+			soccerArray = [];
+			baseArray = [];
+			baseketArray = [];
+			volleyArray = [];			
+
+			$.ajax({
+				//type: "get",
+				type: "POST",
+				data: dateFilter,
+				url: '/mobile/mainLive/',
+				//url: 'http://app.lemonis.co.kr/main/mainLive/',
+				async:false,
+				success: function(data){
+					var gameArr = data.data.games;
+					allArray = gameArr;
+					
+					console.log(allArray);
+					for(var i=0 in gameArr){					
+						if(gameArr[i].sport == 2){						
+							soccerArray.push(gameArr[i])
+						}else if(gameArr[i].sport == 1){
+							baseArray.push(gameArr[i])
+						}else if(gameArr[i].sport == 4){
+							baseketArray.push(gameArr[i])
+						}else if(gameArr[i].sport == 3){
+							volleyArray.push(gameArr[i])
+						}
+					}
+					allArea();
+					soccerArea();
+					baseballArea();
+					basketballArea();
+					volleyballArea();
+				}
+			})
+			$('div.roundList1').hide();
+			$('div.roundList2').hide();
+
+			
+			/*var load = '<div id="loading"><img id="loading-image" src="{{STATIC_URL}}mobileWeb_img/loadingGif.gif" alt="Loading..." /></div>';
+			$('#all').html(load);
+			$('#soccerArea').html(load);
+			$('#baseBallArea').html(load);
+			$('#basketBall').html(load);
+			$('#volleyBall').html(load);*/
+		});
+	})	
+
+	
+
+	$("li[data-tab='fav']").on('click', function(){
+		
+		if($(this).children('img:nth-child(2)').hasClass('.navOn') == false){
+			console.log($(this).children('img').hasClass('.navOn'));
+			$('img:visible', this).hide().siblings().show();
+		}else if($(this).children('img').hasClass('.navOn') == true){
+			$('img:visible', this).show();
+		}
+
+		
+		$(this).siblings().children('img:nth-child(1)').show();
+		$(this).siblings().children('img:nth-child(2)').hide();
+		
+		$('.leagueSelect').hide();
+		$('div.roundList2').hide();
+		$('div.roundList1').hide();
+		$('div.roundList1').addClass('hid');
+	})
+	$("li[data-tab='all']").on('click', function(){
+		$('img:visible', this).hide().siblings().show();
+		$(this).siblings().children('img:nth-child(1)').show();
+		$(this).siblings().children('img:nth-child(2)').hide();
+
+		$('.leagueSelect').hide();
+		$('div.roundList2').hide();
+		$('div.roundList1').hide();
+		$('div.roundList1').addClass('hid');
+	})
+
+//축구 탭 누를때
+	$("li[data-tab='soccer']").on('click', function(){
+		$('img:visible', this).hide().siblings().show();
+		$(this).siblings().children('img:nth-child(1)').show();
+		$(this).siblings().children('img:nth-child(2)').hide();
+		
+		
+		var leagueArray = [];
+
+		for(var i=0; i < soccerArray.length; i++){
+			if(leagueArray.indexOf(soccerArray[i].leagueObject.leagueName) == -1){ //해당 문자열이 없으면				
+				leagueArray.push(soccerArray[i].leagueObject.leagueName);				
+			}
+		}
+		console.log(leagueArray);
+
+		$('ul.ulSelect').empty();
+		$('ul.ulSelect').append('<li onclick="soccerArea();">전체</li>');
+		for(var k=0; k < leagueArray.length; k++){
+			$('ul.ulSelect').append('<li class="socSelect" onclick="filterSoccer(this)" socLeague="'+leagueArray[k]+'">'+leagueArray[k]+'</li>');
+		}
+
+		$('div.leagueSelect').show();
+		$('div.roundList1').hide();
+		$('div.roundList2').hide();
+		$('div.dateList').show();
+	})
+
+	function filterSoccer(param){
+		var info = $('tr.soccerInfo');
+		var row  = $('tr.soccerRow');
+		var vote = $('tr.soccerVote');
+
+		for(var i=0; i < soccerArray.length; i++){
+			if($(row[i]).attr('soccerLeague') != $(param).attr('socLeague')){
+				$(row[i]).hide();
+				$(info[i]).hide();
+				$(vote[i]).hide();
+			}else{
+				$(row[i]).show();
+				$(info[i]).show();
+				$(vote[i]).show();
+			}
+		}
+		soccerLeagueAssort();//축구 리그별로 정렬
+	}
+
+//야구 탭 누를때
+	$("li[data-tab='baseBall']").on('click', function(){		
+		$('img:visible', this).hide().siblings().show();
+		$(this).siblings().children('img:nth-child(1)').show();
+		$(this).siblings().children('img:nth-child(2)').hide();
+
+		var leagueArray1 = [];		
+
+		for(var i=0; i < baseArray.length; i++){
+			if(leagueArray1.indexOf(baseArray[i].leagueObject.leagueName) == -1){ //해당 문자열이 없으면				
+				leagueArray1.push(baseArray[i].leagueObject.leagueName);				
+			}
+		}
+		console.log(leagueArray1)
+
+		$('ul.ulSelect').empty();
+		$('ul.ulSelect').append('<li onclick="baseballArea();">전체</li>');
+		for(var k=0; k < leagueArray1.length; k++){
+			$('ul.ulSelect').append('<li class="baseSelect" onclick="filterbaseBall(this)" baseLeague="'+leagueArray1[k]+'">'+leagueArray1[k]+'</li>');
+		}
+		$('div.leagueSelect').show();
+		$('div.roundList1').hide();
+		$('div.roundList2').hide();
+		$('div.dateList').show();
+
+	})
+
+	function filterbaseBall(param){
+		var info = $('tr.baseBallInfo');
+		var row  = $('tr.baseBallRow');
+		var vote = $('tr.baseBallVote');
+
+		for(var i=0; i < baseArray.length; i++){
+			if($(row[i]).attr('baseLeague') != $(param).attr('baseLeague')){
+				$(row[i]).hide();
+				$(info[i]).hide();
+				$(vote[i]).hide();
+			}else{
+				$(row[i]).show();
+				$(info[i]).show();
+				$(vote[i]).show();
+			}
+		}		
+		baseBallLeagueAssort();//야구 리그별로 정렬
+	}	
+
+
+
+	$("li[data-tab='basketBall']").on('click', function(){
+		$('img:visible', this).hide().siblings().show();
+		$(this).siblings().children('img:nth-child(1)').show();
+		$(this).siblings().children('img:nth-child(2)').hide();
+		
+		var leagueArray2 = [];
+
+		for(var i=0; i < baseketArray.length; i++){
+			if(leagueArray2.indexOf(baseketArray[i].leagueObject.leagueName) == -1){ //해당 문자열이 없으면				
+				leagueArray2.push(baseketArray[i].leagueObject.leagueName);				
+			}
+		}		
+
+		$('ul.ulSelect').empty();
+		$('ul.ulSelect').append('<li onclick="showAllBasket();">전체</li>');
+		for(var k=0; k < leagueArray2.length; k++){
+			$('ul.ulSelect').append('<li class="basketSelect" onclick="filterbaseketBall(this)" basketLeague="'+leagueArray2[k]+'">'+leagueArray2[k]+'</li>');
+		}
+		$('div.leagueSelect').show();
+		$('div.roundList1').hide();
+		$('div.roundList1').addClass('hid');
+		$('div.roundList2').hide();
+		$('div.dateList').show();
+	})
+
+	function filterbaseketBall(param){
+		var info = $('tr.baseketBallInfo');
+		var row  = $('tr.baseketBallRow');
+		var vote = $('tr.baseketBallVote');
+
+		for(var i=0; i < baseketArray.length; i++){
+			if($(row[i]).attr('baseketLeague') != $(param).attr('basketLeague')){
+				$(row[i]).hide();
+				$(info[i]).hide();
+				$(vote[i]).hide();
+			}else{
+				$(row[i]).show();
+				$(info[i]).show();
+				$(vote[i]).show();
+			}
+		}		
+		baseketBallLeagueAssort();//농구 리그별로 정렬
+	}	
+
+
+//배구 탭 누르면 
+	$("li[data-tab='volleyBall']").on('click', function(){
+		$('img:visible', this).hide().siblings().show();
+		$(this).siblings().children('img:nth-child(1)').show();
+		$(this).siblings().children('img:nth-child(2)').hide();
+		
+		var leagueArray3 = [];
+
+		for(var i=0; i < volleyArray.length; i++){
+			if(leagueArray3.indexOf(volleyArray[i].leagueObject.leagueName) == -1){ //해당 문자열이 없으면				
+				leagueArray3.push(volleyArray[i].leagueObject.leagueName);				
+			}
+		}		
+
+		$('ul.ulSelect').empty();
+		$('ul.ulSelect').append('<li onclick="volleyballArea();">전체</li>');
+		for(var k=0; k < leagueArray3.length; k++){
+			$('ul.ulSelect').append('<li class="volleySelect" onclick="filterVolleyBall(this)" volleyLeague="'+leagueArray3[k]+'">'+leagueArray3[k]+'</li>');
+		}
+		$('div.leagueSelect').show();
+		$('div.roundList1').hide();
+		//$('div.roundList1').addClass('hid');
+		$('div.roundList2').hide();
+		$('div.dateList').show();	
+	})		
+
+
+	function filterVolleyBall(param){
+		var info = $('tr.volleyBallInfo');
+		var row  = $('tr.volleyBallRow');
+		var vote = $('tr.volleyBallVote');
+
+		for(var i=0; i < volleyArray.length; i++){
+			if($(row[i]).attr('volleyLeague') != $(param).attr('volleyLeague')){
+				$(row[i]).hide();
+				$(info[i]).hide();
+				$(vote[i]).hide();
+			}else{
+				$(row[i]).show();
+				$(info[i]).show();
+				$(vote[i]).show();
+			}
+		}		
+		volleyBallLeagueAssort();//축구 리그별로 정렬
+	}
+
+	totoArray = [];
+	seungBuArr = [];
+	seungMuPeArr = [];
+
+//토토 탭 누르면
+	$("li[data-tab='toto']").on('click', function(){
+
+		//로딩이미지
+		var load = '<div id="loading"><img id="loading-image" src="{{STATIC_URL}}mobileWeb_img/loadingGif.gif" alt="Loading..." /></div>';
+		$('#toto').html(load);
+
+		//$(this).siblings('img:nth-child(1)').hide();
+		$(this).siblings('img:nth-child(2)').hide();
+		$(this).siblings('img:nth-child(1)').show();
+
+		$('ul.ulSelect').empty();
+		$('ul.ulSelect').append('<li id="seungBuLi" onclick="seungBuToto();">승부식</li><li id="seungMuPeLi" onclick="seungMuPeToto();">축구승무패</li>');		
+		
+		$('div.dateList').hide(); //datepicker 숨기고
+		$('div.leagueSelect').show();
+		//$('div.roundList1').removeClass("hid");
+		//$('div.roundList1').addClass("showed");
+		$('div.roundList1').show().css('visibility','visible');
+		$('div.roundList2').hide();
+	
+
+		//토토 승부식/승무패 가져오기
+		$.post('/getTotoTypeList/', function(data){	
+			var typeList = data.typeList;
+			
+			//console.log(typeList[0].nowRound, typeList[0].typeId, typeList[0].typeName);
+			var seungBu = {roundNum: typeList[0].nowRound, typeId: typeList[0].typeId}//승부식
+			
+			//console.log(typeList[1].nowRound, typeList[1].typeId, typeList[1].typeName);
+			var seungMuPe = {roundNum: typeList[1].nowRound, typeId: typeList[1].typeId}//승무패
+
+			totoArray.push(seungBu, seungMuPe);
+
+			$('#thisRound').text(parseRound(typeList[0].nowRound)+'회차');
+			
+			$('#prevRound').attr("value", parseRound(typeList[0].nowRound)-1)
+			$('#left').text(parseRound(typeList[0].nowRound)-1+'회차');
+
+			$('#nextRound').attr("value", parseRound(typeList[0].nowRound)+1)
+			$('#right').text(parseRound(typeList[0].nowRound)+1+'회차');
+
+
+			$('#thisRound2').text(parseRound(typeList[1].nowRound)+'회차');
+			
+			$('#prevRound2').attr("value", parseRound(typeList[1].nowRound)-1)
+			$('#left2').text(parseRound(typeList[1].nowRound)-1+'회차');
+
+			$('#nextRound2').attr("value", parseRound(typeList[1].nowRound)+1)
+			$('#right2').text(parseRound(typeList[1].nowRound)+1+'회차');
+			
+
+			$.post('/getTotoGameList/', {roundNum: typeList[0].nowRound, typeId: typeList[0].typeId}, function(data){
+				seungBuArr = data;
+				seungBuToto();
+			})
+			$.post('/getTotoGameList/', {roundNum: typeList[1].nowRound, typeId: typeList[1].typeId}, function(data){
+				seungMuPeArr = data;
+				//console.log(data);
+				//seungMuPeToto();
+			})		
+		})
+	})
+
+	//토토 승부식 이전회차
+	$('#prevRound').on('click', function(){
+		var load = '<div id="loading"><img id="loading-image" src="{{STATIC_URL}}mobileWeb_img/loadingGif.gif" alt="Loading..." /></div>';
+		$('#toto').html(load);
+
+		var prev = $('#prevRound').attr('value')
+		$('#thisRound').text(prev+'회차');
+
+		prev = Number(prev);
+
+		$('#prevRound').attr("value", prev-1);
+		$('#left').text((prev-1)+'회차');
+		$('#nextRound').attr("value", prev+1);
+		$('#right').text((prev+1)+'회차');
+
+		console.log(seungBuArr.info.roundNum)
+		seungBuArr.info.roundNum = seungBuArr.info.roundNum-1;	
+
+		console.log(seungBuArr.info.roundNum);
+
+		$.post('/getTotoGameList/',{typeId:seungBuArr.info.typeId, roundNum:seungBuArr.info.roundNum}, function(data){
+
+			seungBuArr = data;
+			seungBuToto();			
+			
+		})
+
+	})
+	//토토 승부식 다음회차
+	$('#nextRound').on('click', function(){
+		var load = '<div id="loading"><img id="loading-image" src="{{STATIC_URL}}mobileWeb_img/loadingGif.gif" alt="Loading..." /></div>';
+		$('#toto').html(load);
+
+		var next = $('#nextRound').attr('value')
+		$('#thisRound').text(next+'회차');
+
+		next = Number(next);
+		
+		$('#prevRound').attr("value", next-1);
+		$('#left').text((next-1)+'회차');
+		$('#nextRound').attr("value", next+1);
+		$('#right').text((next+1)+'회차');
+
+		seungBuArr.info.roundNum = Number(seungBuArr.info.roundNum)+1;		
+
+		console.log(seungBuArr.info.roundNum);
+
+		$.post('/getTotoGameList/',{typeId:seungBuArr.info.typeId, roundNum:seungBuArr.info.roundNum}, function(data){
+			seungBuArr = data;
+			seungBuToto();
+		})
+	})
+
+	//축구 승무패 이전회차
+	$('#prevRound2').on('click', function(){
+		var load = '<div id="loading"><img id="loading-image" src="{{STATIC_URL}}mobileWeb_img/loadingGif.gif" alt="Loading..." /></div>';
+		$('#toto').html(load);
+
+		var prev = $('#prevRound2').attr('value')
+		$('#thisRound2').text(prev+'회차');
+
+		prev = Number(prev);
+
+		$('#prevRound2').attr("value", prev-1);
+		$('#left2').text((prev-1)+'회차');
+		$('#nextRound2').attr("value", prev+1);
+		$('#right2').text((prev+1)+'회차');
+
+		console.log(seungMuPeArr.info.roundNum)
+		seungMuPeArr.info.roundNum = seungMuPeArr.info.roundNum-1;	
+
+		console.log(seungMuPeArr.info.roundNum);
+
+		$.post('/getTotoGameList/',{typeId:seungMuPeArr.info.typeId, roundNum:seungMuPeArr.info.roundNum}, function(data){
+			seungMuPeArr = data;
+			seungMuPeToto();
+		})
+	})
+	//축구 승무패 다음회차
+	$('#nextRound2').on('click', function(){
+		var load = '<div id="loading"><img id="loading-image" src="{{STATIC_URL}}mobileWeb_img/loadingGif.gif" alt="Loading..." /></div>';
+		$('#toto').html(load);
+
+		var next = $('#nextRound2').attr('value')
+		$('#thisRound2').text(next+'회차');
+
+		next = Number(next);
+		
+		$('#prevRound2').attr("value", next-1);
+		$('#left2').text((next-1)+'회차');
+		$('#nextRound2').attr("value", next+1);
+		$('#right2').text((next+1)+'회차');
+
+		seungMuPeArr.info.roundNum = Number(seungMuPeArr.info.roundNum)+1;		
+
+		console.log(seungMuPeArr.info.roundNum);
+
+		$.post('/getTotoGameList/',{typeId:seungMuPeArr.info.typeId, roundNum:seungMuPeArr.info.roundNum}, function(data){
+			seungMuPeArr = data;
+			seungMuPeToto();
+		})
+	})
+
+
+	
+
+
+</script>
+
+
+
+<script>
+function imgError(image){
+  image.onerror = "";
+  image.src = "{{STATIC_URL}}mobileWeb_img/onError.png";
+  return true;
+}
+function leagueImgError(image){
+  image.onerror = "";
+  image.src = "";
+  image.style = "outline=none";  
+  return true;
+}
+//로딩 이미지 지우기
+	function removeLoading(){
+		var element = document.getElementById('loading');
+		if(element==null){
+			return;
+		}
+		element.parentNode.removeChild(element);
+	}
+function allArea(){	
+	var gameArr = allArray;
+	var all = "";			
+
+		all += '<table class="gameTable">';
+
+	for(var i=0 in gameArr){
+		
+	  all +=	'<tr class="allRowGameInfo" sport="'+gameArr[i].sport+'" leagueName="'+gameArr[i].league+'">'+
+							'<td colspan="5">'+
+								'<div class="leagueDivision">'+
+									'<img src="{{STATIC_URL}}mobileWeb_img/divisionline_league.png" alt="" class="divisionline" width="100%" height="24px">'+
+									'<img src="'+gameArr[i].leaguePic+'" alt="" width="50px" height="24px" class="leagueImg" onError="leagueImgError(this);">'+							
+									
+									'<div class="ballImg">'+													
+										'<span class="allGameLeague">'+gameArr[i].league+'</span>';
+										if(gameArr[i].ratioExist){
+		all +=						'&nbsp;&nbsp;<img src="{{STATIC_URL}}mobileWeb_img/proto.png" width="35px" height="11px">';
+										}													
+		all +=				'</div>'+
+									'<span class="leagueDate">'+parseLeagueDate(gameArr[i].date)+'</span>'+
+								'</div>'+
+							'</td>'+
+						'</tr>'+
+						'<tr class="rowGame" onclick="gameDetail(this);" gameId="'+gameArr[i].gameId+'" sport="'+gameArr[i].sport+'" progress="'+gameArr[i].progress+'">'+
+							'<td class="gameDate"><div>'+parseGameDate(gameArr[i].date)+'</div></td>'+
+							'<td class="gameTeam_home">'+
+								'<div class="homeSpan">'+
+									'<img src="'+gameArr[i].homePic+'" alt="" width="27px" height="30px" onError="imgError(this);">&nbsp;'+
+									'<div class="homeTeam">'+gameArr[i].home+'</div>';
+								'</div>'+											
+							'</td>';
+
+							if(gameArr[i].progress == "경기전" && (gameArr[i].league == "KBO" || gameArr[i].league == "NPB" || gameArr[i].league=="MLB")){
+		all +=			'<td class="tdBaseBallScore">';					
+							}
+							else{
+		all +=			'<td class="gameScore">';
+							}
+							
+								if(gameArr[i].progress == "경기전" && (gameArr[i].league == "KBO" || gameArr[i].league == "NPB" || gameArr[i].league=="MLB")){
+									if(gameArr[i].homeFirstPitcher){
+		all +=					'<div class="homePitcher">'+gameArr[i].homeFirstPitcher+'</div>';
+									}else{
+		all +=					'<div>-&nbsp;&nbsp;&nbsp;</div>';	
+									}
+								}
+								else if(gameArr[i].progress == "경기전" && (gameArr[i].league != "KBO" && gameArr[i].league != "NPB" && gameArr[i].league!="MLB")){
+		all +=				'<div>-&nbsp;&nbsp;&nbsp;</div>';
+								}
+								else if(gameArr[i].progress == "취소"){
+		all +=				'<div class="homeScore"></div>';
+								}
+								else{												
+									if(gameArr[i].homescore - gameArr[i].awayscore > 0){
+		all +=					'<div class="homeScore winTeam">'+gameArr[i].homescore+'</div>';
+									}else{
+		all +=					'<div class="homeScore" home="'+gameArr[i].homescore+'">'+gameArr[i].homescore+'</div>';
+									}					
+								}
+
+								
+		//경기 상태
+								if(gameArr[i].progress == "경기전" && (gameArr[i].league != "KBO" && gameArr[i].league != "NPB" && gameArr[i].league!="MLB")){
+		all +=				'<div class="scoreBoard" progress="'+gameArr[i].progress+'">';
+		all +=					'<span class="inBoard" progress="'+gameArr[i].progress+'">VS</span>';
+		all +=				'</div>';
+								}
+								else if(gameArr[i].progress == "경기전" && (gameArr[i].league == "KBO" || gameArr[i].league == "NPB" || gameArr[i].league=="MLB")){
+		all +=				'<div class="baseBallSBoard" progress="'+gameArr[i].progress+'">';
+		all +=					'<span>VS</span>';
+		all +=				'</div>';
+								}
+								else{
+		all +=				'<div class="scoreBoard" progress="'+gameArr[i].progress+'">';					
+										if(gameArr[i].progress == '홈승' || gameArr[i].progress == '홈패' || gameArr[i].progress == '무승부'){
+		all +=						'<span class="inBoard" progress="'+gameArr[i].progress+'">종료</span>';
+										}else if(gameArr[i].progress == '취소'){
+		all +=						'<span class="inBoard" progress="'+gameArr[i].progress+'">취소</span>';
+										}else{
+		all +=						'<span class="inBoard winTeam" progress="'+gameArr[i].progress+'">'+gameArr[i].progress+'</span>';
+										}
+		all +=				'</div>';
+								}
+		all +=			'</div>';
+
+
+								if(gameArr[i].progress == "경기전" && (gameArr[i].league == "KBO" || gameArr[i].league == "NPB" || gameArr[i].league=="MLB")){
+									if(gameArr[i].awayFirstPitcher){
+		all +=					'<div class="awayPitcher">'+gameArr[i].awayFirstPitcher+'</div>';
+									}else{
+		all +=					'<div>&nbsp;&nbsp;&nbsp;-</div>';
+									}
+								}
+								else if(gameArr[i].progress == "경기전" && (gameArr[i].league != "KBO" && gameArr[i].league != "NPB" && gameArr[i].league!="MLB")){
+		all +=				'<div>&nbsp;&nbsp;&nbsp;-</div>';
+								}
+								else if(gameArr[i].progress == "취소"){
+		all +=				'<div class="awayScore"></div>';
+								}
+								else{
+									if(gameArr[i].awayscore - gameArr[i].homescore > 0){
+		all +=					'<div class="awayScore winTeam">'+gameArr[i].awayscore+'</div>';
+									}else{
+		all +=					'<div class="awayScore">'+gameArr[i].awayscore+'</div>';
+									}					
+								}
+		all +=		'</td>'+
+							'<td class="gameTeam_away">'+
+								'<div class="awaySpan">'+
+									'<div class="awayTeam">'+gameArr[i].away+'</div>&nbsp;'+
+									'<img src="'+gameArr[i].awayPic+'" alt="" width="27px" height="30px" onError="imgError(this);">'+
+								'</div>'+								
+							'</td>'+
+							'<td class="bookmark">'+
+								'<img src="{{STATIC_URL}}mobileWeb_img/ic_star_line.png" alt="" width="20px" height="20px">'+
+							'</td>'+
+						'</tr>';
+	}//end for
+		all += '</table>';
+		$('#all').empty();										
+		$('#all').append(all);
+		//parseBeforeGame();
+		allLeagueAssort();
+		colorProgress();
+		removeLoading();
+
+}
+
+function soccerArea(){
+
+	/*해당 날짜 리그 뽑아서 찍기*/
+	/*var leagueArray = [];
+	console.log(soccerArray.length);
+	for(var i=0; i < soccerArray.length; i++){
+		if(leagueArray.indexOf(soccerArray[i].leagueObject.leagueName) == -1){ //해당 문자열이 없으면				
+			leagueArray.push(soccerArray[i].leagueObject.leagueName);				
+		}
+	}
+	$('ul.ulSelect').empty();
+	$('ul.ulSelect').append('<li onclick="soccerArea();">전체</li>');
+	for(var k=0; k < leagueArray.length; k++){
+		$('ul.ulSelect').append('<li class="socSelect" onclick="filterSoccer(this)" socLeague="'+leagueArray[k]+'">'+leagueArray[k]+'</li>');
+	}*/
+
+	
+	var gameArr = soccerArray;
+	//console.log(gameArr);
+	
+	gameArr.sort(function(a, b){return b.leagueObject.leagueWeight - a.leagueObject.leagueWeight});//leagueWeight 큰 순서대로
+	
+	/*for(var i=0; i<gameArr.length; i++){
+		console.log(gameArr[i].leagueObject.leagueWeight);
+	}*/
+	
+	var soccer = "";
+		soccer += '<table class="gameBigTable">';
+
+	for(var i=0 in gameArr){
+		//console.log(gameArr[i].leagueObject.leagueWeight);
+		soccer +=	'<tr class="soccerInfo" sport="'+gameArr[i].sport+'" soccerLeague="'+gameArr[i].league+'">'+
+								'<td colspan="5">'+
+									'<div class="leagueDivision">'+
+										'<img src="'+gameArr[i].leaguePic+'" alt="" width="50px" height="24px" class="leagueImg" onError="leagueImgError(this);">'+
+										'<img src="{{STATIC_URL}}mobileWeb_img/divisionline_league.png" alt="" width="100%" height="24px">'+													
+
+										'<div class="ballImg">'+															
+											'<span class="soccerLeague">'+gameArr[i].league+'</span>';
+											if(gameArr[i].ratioExist){
+		soccer +=						'&nbsp;&nbsp;<img src="{{STATIC_URL}}mobileWeb_img/proto.png" width="35px" height="11px">';
+											}													
+		soccer +=				'</div>'+											
+										'<span class="leagueDate">'+parseLeagueDate(gameArr[i].date)+'</span>'+
+									'</div>'+
+								'</td>'+
+							'</tr>'+
+
+								'<tr class="soccerRow endBack" onclick="gameDetail(this);" soccerLeague="'+gameArr[i].league+'" gameId="'+gameArr[i].gameId+'" sport="'+gameArr[i].sport+'" progress="'+gameArr[i].progress+'">'+
+									'<td class="imgs">';
+									if(gameArr[i].liveLink){
+		soccer +=				'<img src="{{STATIC_URL}}mobileWeb_img/liveLink.png" alt="" width="18px" height="18px">';
+									}
+									if(gameArr[i].ratioExist){
+		soccer +=				'<img src="{{STATIC_URL}}mobileWeb_img/ratioExist.png" alt="" width="18px" height="18px">';
+									}
+		soccer +=			'</td>'+
+
+									'<td class="gameTeam_home">'+											
+										'<span class="homeSpan">'+
+											'<img class="bigImg" src="'+gameArr[i].homePic+'" alt="" width="40px" height="40px" onError="imgError(this);">'+
+											'<div class="bigHomeTeam">'+gameArr[i].home+'</div>'+
+										'</span>'+
+									'</td>'+
+									'<td class="soccerGameScore">';
+		soccer +=				'<div class="wrapProgress">';
+		soccer +=					'<div class="sCenterDiv">';
+									if(gameArr[i].progress == "홈승"){
+		soccer +=				'<span class="brProgress red" progress="'+gameArr[i].progress+'">'+gameArr[i].progress+'</span><br>';					
+									}else if(gameArr[i].progress == "홈패"){
+		soccer +=				'<span class="brProgress blue" progress="'+gameArr[i].progress+'">'+gameArr[i].progress+'</span><br>';		
+									}
+									else if(gameArr[i].progress == "무승부"){
+		soccer +=				'<span class="brProgress yellow" progress="'+gameArr[i].progress+'">'+gameArr[i].progress+'</span><br>';		
+									}
+									else if(gameArr[i].progress == "경기전" || gameArr[i].progress == "취소"){
+		soccer +=				'<span class="brProgress gray" progress="'+gameArr[i].progress+'">'+gameArr[i].progress+'</span><br>';	
+									}else{
+		soccer +=				'<span class="brProgress red" progress="'+gameArr[i].progress+'">'+gameArr[i].progress+'</span><br>';
+									}
+		soccer +=					'</div>';
+		soccer +=				'</div>';
+		
+										if(gameArr[i].progress == "경기전"){
+		soccer +=					'<span class="brHomeScore"></span>';
+										}
+										else if(gameArr[i].progress == "취소"){
+		soccer +=					'<span class="brHomeScore"></span>';
+										}
+										else{
+											if(gameArr[i].homescore - gameArr[i].awayscore > 0){
+		soccer +=					'<span class="brHomeScore winTeam" home="'+gameArr[i].homescore+'">'+gameArr[i].homescore+'</span>';										
+											}else{
+		soccer +=					'<span class="brHomeScore" home="'+gameArr[i].homescore+'">'+gameArr[i].homescore+'</span>';
+											}
+										}
+															
+		soccer +=				'<span class="vsWord">vs</span>';					
+										if(gameArr[i].progress == "경기전"){
+		soccer +=					'<span class="brAwayScore"></span>';
+										}
+										else if(gameArr[i].progress == "취소"){
+		soccer +=					'<span class="brAwayScore"></span>';
+										}
+										else{
+											if(gameArr[i].awayscore - gameArr[i].homescore > 0){
+		soccer +=					'<span class="brAwayScore winTeam">'+gameArr[i].awayscore+'</span>';
+											}else{
+		soccer +=					'<span class="brAwayScore">'+gameArr[i].awayscore+'</span>';										
+											}
+										}
+
+
+		soccer +=				'<div class="brGameDate">'+parseLeagueDate(gameArr[i].date)+'</div>';
+										if(gameArr[i].progress == "경기전"){
+		soccer +=					'<div class="leftTime">'+dDayTime(gameArr[i].date)+'</div>';
+										}												
+		soccer +=			'</td>'+
+									'<td class="gameTeam_away">'+
+										'<span class="awaySpan">'+
+											'<img class="bigImg" src="'+gameArr[i].awayPic+'" alt="" width="40px" height="40px" onError="imgError(this);">'+
+											'<div class="bigAwayTeam">'+gameArr[i].away+'</div>'+
+										'</span>'+
+									'</td>'+
+									'<td class="bookmark">'+
+										'<img src="{{STATIC_URL}}mobileWeb_img/ic_star_line.png" alt="" width="20px" height="20px">'+							
+									'</td>'+
+								'</tr>'+
+								'<tr class="soccerVote" sport="'+gameArr[i].sport+'" soccerLeague="'+gameArr[i].league+'">'+
+									'<td class="vote" colspan="5">'+										
+										'<div class="voteStatusBar">'+
+											'<div class="winBar" rate="'+gameArr[i].homeCount+'"></div>'+
+											'<div class="drawBar" rate="'+gameArr[i].drawCount+'"></div>'+
+											'<div class="loseBar" rate="'+gameArr[i].awayCount+'"></div>'+
+										'</div>'+
+									'</td>'+
+								'</tr>';								
+	}//end for
+		soccer += '</table>';
+		$('#soccerArea').empty();
+		$('#soccerArea').append(soccer);
+
+		var winBar = $('.winBar')
+		var drawBar = $('.drawBar')
+		var loseBar = $('.loseBar')
+		var voteTr = $('.soccerVote');
+
+		for(var i=0; i < voteTr.length; i++){
+			var win = Math.floor(Number($(winBar[i]).attr("rate"))/(Number($(winBar[i]).attr("rate"))+Number($(drawBar[i]).attr("rate"))+Number($(loseBar[i]).attr("rate")))*100*10)/10;
+			var draw = Math.floor(Number($(drawBar[i]).attr("rate"))/(Number($(winBar[i]).attr("rate"))+Number($(drawBar[i]).attr("rate"))+Number($(loseBar[i]).attr("rate")))*100*10)/10;
+			var lose = Math.floor(Number($(loseBar[i]).attr("rate"))/(Number($(winBar[i]).attr("rate"))+Number($(drawBar[i]).attr("rate"))+Number($(loseBar[i]).attr("rate")))*100*10)/10;
+
+			if($(winBar[i]).attr("rate") == 0 && $(drawBar[i]).attr("rate") == 0 && $(loseBar[i]).attr("rate") == 0){
+				$(winBar[i]).css({"width": '33%'});
+				$(drawBar[i]).css({"width": '33%'});
+				$(loseBar[i]).css({"width": '33%'});				
+			}else{
+				$(winBar[i]).css({"width": win+'%'});
+				$(drawBar[i]).css({"width": draw+'%'});
+				$(loseBar[i]).css({"width": lose+'%'});	
+			}			
+		}
+
+		endGameBackColor();//게임종료시 배경
+		soccerLeagueAssort();//축구 리그별로 정렬
+		removeLoading();//로딩 끝나면 지우기
+}
+
+
+function baseballArea(){
+	/*날짜 바뀔때마다 야구 리그 뽑아서 넣기*/
+	/*var leagueArray1 = [];		
+
+	for(var i=0; i < baseArray.length; i++){
+		if(leagueArray1.indexOf(baseArray[i].leagueObject.leagueName) == -1){ //해당 문자열이 없으면				
+			leagueArray1.push(baseArray[i].leagueObject.leagueName);				
+		}
+	}
+	//console.log(leagueArray1)
+
+	$('ul.ulSelect').empty();
+	$('ul.ulSelect').append('<li onclick="showAllBase();">전체</li>');
+	for(var k=0; k < leagueArray1.length; k++){
+		$('ul.ulSelect').append('<li class="baseSelect" onclick="filterbaseBall(this)" baseLeague="'+leagueArray1[k]+'">'+leagueArray1[k]+'</li>');
+	}*/
+
+	/*날짜별로 야구경기 찍기*/
+	var gameArr = baseArray;
+	gameArr.sort(function(a, b){return b.leagueObject.leagueWeight - a.leagueObject.leagueWeight});//leagueWeight 큰 순서대로 정렬
+	/*for(var i=0; i<gameArr.length; i++){
+		console.log(gameArr[i].leagueObject.leagueWeight);
+	}*/
+	var baseBall = "";
+		baseBall += '<table class="gameBigTable">';
+
+	for(var i=0 in gameArr){		
+		baseBall +=	'<tr class="baseBallInfo" sport="'+gameArr[i].sport+'">'+
+									'<td colspan="5">'+
+										'<div class="leagueDivision">'+
+											'<img src="'+gameArr[i].leaguePic+'" alt="" width="50px" height="24px" class="leagueImg" onError="leagueImgError(this);">'+
+											'<img src="{{STATIC_URL}}mobileWeb_img/divisionline_league.png" alt="" width="100%" height="24px">'+
+											'<div class="ballImg">'+															
+												'<span class="baseBallLeague">'+gameArr[i].league+'</span>';
+												if(gameArr[i].ratioExist){
+		baseBall +=						'&nbsp;&nbsp;<img src="{{STATIC_URL}}mobileWeb_img/proto.png" width="35px" height="11px">';
+												}													
+		baseBall +=				'</div>'+														
+											'<span class="leagueDate">'+parseLeagueDate(gameArr[i].date)+'</span>'+
+										'</div>'+
+									'</td>'+
+								'</tr>'+
+
+								'<tr class="baseBallRow" onclick="gameDetail(this);" baseLeague="'+gameArr[i].league+'" gameId="'+gameArr[i].gameId+'" sport="'+gameArr[i].sport+'" progress="'+gameArr[i].progress+'">'+
+									'<td class="imgs">';
+									if(gameArr[i].liveLink){
+		baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/liveLink.png" alt="" width="18px" height="18px">';
+									}
+									if(gameArr[i].ratioExist){
+		baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/ratioExist.png" alt="" width="18px" height="18px">';
+									}
+		baseBall +=		'</td>'+
+									'<td class="gameTeam_home">'+											
+										'<span class="homeSpan">'+
+											'<img class="bigImg" src="'+gameArr[i].homePic+'" alt="" width="40px" height="40px" onError="imgError(this);">'+
+											'<div class="bigHomeTeam">'+gameArr[i].home+'</div>'+														
+										'</span>'+
+									'</td>'+
+									'<td class="baseBallGameScore">'+
+										'<div class="wrapProgress">';
+
+				baseBall  +=	'<div class="hCount">';
+											if(gameArr[i].progress != '경기전' && gameArr[i].progress != '홈승' && gameArr[i].progress != '홈패' && gameArr[i].progress != '무승부'){
+												if(gameArr[i].attack == 1){//홈팀공격											
+					baseBall +=		'<div class="homeBase">';		
+													if(gameArr[i].baseState === "000"){
+						baseBall +=		'<img src="{{STATIC_URL}}mobileWeb_img/relay_000.png" width="30px" height="20px">';								
+													}else if(gameArr[i].baseState === "001"){
+						baseBall +=		'<img src="{{STATIC_URL}}mobileWeb_img/relay_001.png" width="30px" height="20px">';
+													}else if(gameArr[i].baseState === "010"){
+						baseBall +=		'<img src="{{STATIC_URL}}mobileWeb_img/relay_010.png" width="30px" height="20px">';
+													}else if(gameArr[i].baseState === "011"){
+						baseBall +=		'<img src="{{STATIC_URL}}mobileWeb_img/relay_011.png" width="30px" height="20px">';
+													}else if(gameArr[i].baseState === "100"){
+						baseBall +=		'<img src="{{STATIC_URL}}mobileWeb_img/relay_100.png" width="30px" height="20px">';
+													}else if(gameArr[i].baseState === "101"){
+						baseBall +=		'<img src="{{STATIC_URL}}mobileWeb_img/relay_101.png" width="30px" height="20px">';
+													}else if(gameArr[i].baseState === "110"){
+						baseBall +=		'<img src="{{STATIC_URL}}mobileWeb_img/relay_110.png" width="30px" height="20px">';
+													}else if(gameArr[i].baseState === "111"){
+						baseBall +=		'<img src="{{STATIC_URL}}mobileWeb_img/relay_111.png" width="30px" height="20px">';
+													}
+						baseBall +=	'</div>';//homeBase
+
+						baseBall +=	'<div class="homeCountWrap">';
+						baseBall +=		'<div class="countImg">';
+													if(gameArr[i].ballCount == 0){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_ball0.png" width="21px" height="5px">';
+													}else if(gameArr[i].ballCount == 1){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_ball1.png" width="21px" height="5px">';
+													}else if(gameArr[i].ballCount == 2){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_ball2.png" width="21px" height="5px">';
+													}else if(gameArr[i].ballCount == 3){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_ball3.png" width="21px" height="5px">';
+													}
+						baseBall +=		'</div>';
+						baseBall +=		'<div class="countImg">';
+													if(gameArr[i].strikeCount == 0){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_strike0.png" width="12px" height="5px">';
+													}else if(gameArr[i].strikeCount == 1){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_strike1.png" width="12px" height="5px">';
+													}else if(gameArr[i].strikeCount == 2){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_strike2.png" width="12px" height="5px">';
+													}
+						baseBall +=		'</div>';
+						baseBall +=		'<div class="countImg">';							
+													if(gameArr[i].outCount == 0){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_out0.png" width="12px" height="5px">';
+													}else if(gameArr[i].outCount == 1){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_out1.png" width="12px" height="5px">';
+													}else if(gameArr[i].outCount == 2){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_out2.png" width="12px" height="5px">';
+													}
+						baseBall +=		'</div>';
+						baseBall +=	'</div>';//homeCountWrap		
+												}//if
+											}//if
+				baseBall +=		'</div>';//hCount
+
+				baseBall +=		'<div class="bCenterDiv">';
+												if(gameArr[i].progress == "홈승"){
+				baseBall +=			'<span class="brProgress red" progress="'+gameArr[i].progress+'">'+gameArr[i].progress+'</span>';
+												}else if(gameArr[i].progress == "홈패"){
+				baseBall +=			'<span class="brProgress blue" progress="'+gameArr[i].progress+'">'+gameArr[i].progress+'</span>';
+												}else if(gameArr[i].progress == "무승부"){
+				baseBall +=			'<span class="brProgress yellow" progress="'+gameArr[i].progress+'">'+gameArr[i].progress+'</span>';	
+												}else if(gameArr[i].progress == "경기전" || gameArr[i].progress == "취소"){
+				baseBall +=			'<span class="brProgress gray" progress="'+gameArr[i].progress+'">'+gameArr[i].progress+'</span>';
+												}else{
+				baseBall +=			'<span class="brProgress red" progress="'+gameArr[i].progress+'">'+gameArr[i].progress+'</span>';
+												}												
+				baseBall +=		'</div>';
+
+
+				baseBall +=		'<div class="aCount">';
+											if(gameArr[i].progress != '경기전' && gameArr[i].progress != '홈승' && gameArr[i].progress != '홈패' && gameArr[i].progress != '무승부'){
+												if(gameArr[i].attack == 0){//어웨이 공격		
+						baseBall +=		'<div class="awayCountWrap">';
+						baseBall +=			'<div class="countImg">';
+													if(gameArr[i].ballCount == 0){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_ball0.png" width="21px" height="5px">';
+													}else if(gameArr[i].ballCount == 1){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_ball1.png" width="21px" height="5px">';
+													}else if(gameArr[i].ballCount == 2){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_ball2.png" width="21px" height="5px">';
+													}else if(gameArr[i].ballCount == 3){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_ball3.png" width="21px" height="5px">';
+													}
+						baseBall +=			'</div>';
+						baseBall +=			'<div class="countImg">';
+													if(gameArr[i].strikeCount == 0){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_strike0.png" width="12px" height="5px">';
+													}else if(gameArr[i].strikeCount == 1){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_strike1.png" width="12px" height="5px">';
+													}else if(gameArr[i].strikeCount == 2){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_strike2.png" width="12px" height="5px">';
+													}
+						baseBall +=			'</div>';
+						baseBall +=			'<div class="countImg">';
+													if(gameArr[i].outCount == 0){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_out0.png" width="12px" height="5px">';
+													}else if(gameArr[i].outCount == 1){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_out1.png" width="12px" height="5px">';
+													}else if(gameArr[i].outCount == 2){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_out2.png" width="12px" height="5px">';
+													}
+						baseBall +=			'</div>';							
+						baseBall +=		'</div>';//awayCountWrap
+
+						baseBall +=		'<div class="awayBase">';
+													if(gameArr[i].baseState === "000"){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_000.png" width="30px" height="20px">';								
+													}else if(gameArr[i].baseState === "001"){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_001.png" width="30px" height="20px">';
+													}else if(gameArr[i].baseState === "010"){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_010.png" width="30px" height="20px">';
+													}else if(gameArr[i].baseState === "011"){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_011.png" width="30px" height="20px">';
+													}else if(gameArr[i].baseState === "100"){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_100.png" width="30px" height="20px">';
+													}else if(gameArr[i].baseState === "101"){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_101.png" width="30px" height="20px">';
+													}else if(gameArr[i].baseState === "110"){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_110.png" width="30px" height="20px">';
+													}else if(gameArr[i].baseState === "111"){
+						baseBall +=			'<img src="{{STATIC_URL}}mobileWeb_img/relay_111.png" width="30px" height="20px">';
+													}		
+						baseBall +=		'</div>';
+												}//if
+											}//if
+						baseBall +=	'</div>';//aCount
+
+						baseBall +=	'</div>';//wrapProgress
+
+
+
+
+
+
+
+		baseBall +=		'<div class="vsWrapDiv">';
+									if(gameArr[i].progress == "경기전" && (gameArr[i].league == "KBO" || gameArr[i].league == "NPB" || gameArr[i].league=="MLB")){
+										if(gameArr[i].homeFirstPitcher){
+		baseBall +=			'<div class="brHomePitcher">'+gameArr[i].homeFirstPitcher+'</div>';
+										}else{
+		baseBall +=			'<div class="brHomeDiv"></div>';
+										}
+									}else{
+		baseBall +=			'<div class="brHomeDiv">'								
+										if(gameArr[i].homescore - gameArr[i].awayscore > 0){
+		baseBall +=				'<span class="brHomeScore winTeam">'+gameArr[i].homescore+'</span>';
+										}
+										else if(gameArr[i].progress == "취소"){
+		baseBall +=				'<span class="brHomeScore"></span>';
+										}								
+										else{
+		baseBall +=				'<span class="brHomeScore">'+gameArr[i].homescore+'</span>';				
+										}
+		baseBall +=			'</div>'									
+									}
+									
+									if(gameArr[i].progress == "경기전" && (gameArr[i].league == "KBO" || gameArr[i].league == "NPB" || gameArr[i].league=="MLB")){
+		baseBall +=			'<div class="BrBaseBallSBoard"><span class="baseVsWord">vs</span></div>';
+									}else{
+		baseBall +=			'<div class="baseBallSBoard"><span class="vsWord">vs</span></div>';		
+									}															
+
+
+									if(gameArr[i].progress == "경기전" && (gameArr[i].league == "KBO" || gameArr[i].league == "NPB" || gameArr[i].league=="MLB")){
+										if(gameArr[i].awayFirstPitcher){
+		baseBall +=			'<div class="brAwayPitcher">'+gameArr[i].awayFirstPitcher+'</div>';								
+										}else{
+		baseBall +=			'<div class="brAwayDiv"></div>';
+										}
+									}
+									else{
+		baseBall +=			'<div class="brAwayDiv">'								
+										if(gameArr[i].awayscore - gameArr[i].homescore > 0){
+		baseBall +=				'<span class="brAwayScore winTeam">'+gameArr[i].awayscore+'</span>';
+										}
+										else if(gameArr[i].progress == "취소"){
+		baseBall +=				'<span class="brAwayScore"></span>';
+										}		
+										else{
+		baseBall +=				'<span class="brAwayScore">'+gameArr[i].awayscore+'</span>';
+										}
+		baseBall +=			'</div>';										
+									}
+		baseBall +=		'</div>';//vsWrapDiv
+		
+								//경기시간,실시간,타자,투수
+		baseBall +=	'<div class="dateWrapDiv">';
+									if(gameArr[i].progress == "경기전"){
+		baseBall +=		'<div class="brGameDate">'+parseLeagueDate(gameArr[i].date)+'</div>';								
+		baseBall +=		'<div class="leftTime">'+dDayTime(gameArr[i].date)+'</div>';
+									}
+									else if(gameArr[i].progress == "홈승" || gameArr[i].progress == "홈패" || gameArr[i].progress == "무승부"){
+		baseBall +=		'<div class="brGameDate">'+parseLeagueDate(gameArr[i].date)+'</div>';
+									}
+									else{
+										if(gameArr[i].attack == 1){
+		baseBall +=			'<div class="realTimePlayer">타자 '+gameArr[i].homePlayer+' vs '+'투수 '+gameArr[i].awayPlayer+'</div>';
+										}else if(gameArr[i].attack == 0){
+		baseBall +=			'<div class="realTimePlayer">투수 '+gameArr[i].homePlayer+' vs '+'타자 '+gameArr[i].awayPlayer+'</div>';		
+										}		
+									}
+		baseBall +=	'</div>';
+
+		baseBall +=		'</td>'+ 
+									'<td class="gameTeam_away">'+
+										'<span class="awaySpan">'+
+											'<img class="bigImg" src="'+gameArr[i].awayPic+'" alt="" width="40px" height="40px" onError="imgError(this);">'+
+											'<div class="bigAwayTeam">'+gameArr[i].away+'</div>'+														
+										'</span>'+
+									'</td>'+
+									'<td class="bookmark">'+
+										'<img src="{{STATIC_URL}}mobileWeb_img/ic_star_line.png" alt="" width="20px" height="20px">'+							
+									'</td>'+
+								'</tr>'+
+								'<tr class="baseBallVote" sport="'+gameArr[i].sport+'">'+
+									'<td class="vote" colspan="5">'+
+										'<div class="voteStatusBar">'+
+											'<div class="bbwinBar" rate="'+gameArr[i].homeCount+'"></div>'+
+											'<div class="bbdrawBar" rate="'+gameArr[i].drawCount+'"></div>'+
+											'<div class="bbloseBar" rate="'+gameArr[i].awayCount+'"></div>'+
+										'</div>'+
+									'</td>'+
+								'</tr>';								
+	}//end for
+		baseBall += '</table>';
+		$('#baseBallArea').empty();
+		$('#baseBallArea').append(baseBall);
+
+		var winBar = $('.bbwinBar')
+		var drawBar = $('.bbdrawBar')
+		var loseBar = $('.bbloseBar')
+		var voteTr = $('.baseBallVote');
+
+		for(var i=0; i < voteTr.length; i++){
+			var win = Math.floor(Number($(winBar[i]).attr("rate"))/(Number($(winBar[i]).attr("rate"))+Number($(drawBar[i]).attr("rate"))+Number($(loseBar[i]).attr("rate")))*100*10)/10;
+			var draw = Math.floor(Number($(drawBar[i]).attr("rate"))/(Number($(winBar[i]).attr("rate"))+Number($(drawBar[i]).attr("rate"))+Number($(loseBar[i]).attr("rate")))*100*10)/10;
+			var lose = Math.floor(Number($(loseBar[i]).attr("rate"))/(Number($(winBar[i]).attr("rate"))+Number($(drawBar[i]).attr("rate"))+Number($(loseBar[i]).attr("rate")))*100*10)/10;
+
+			if($(winBar[i]).attr("rate") == 0 && $(drawBar[i]).attr("rate") == 0 && $(loseBar[i]).attr("rate") == 0){
+				$(winBar[i]).css({"width": '33%'});
+				$(drawBar[i]).css({"width": '33%'});
+				$(loseBar[i]).css({"width": '33%'});				
+			}
+			else{// if($(winBar[i]).attr("rate") || 0 && $(drawBar[i]).attr("rate") || 0 && $(loseBar[i]).attr("rate") == 0){
+				$(winBar[i]).css({"width": win+'%'});
+				$(drawBar[i]).css({"width": draw+'%'});
+				$(loseBar[i]).css({"width": lose+'%'});	
+				//console.log($(winBar[i]).attr('rate'))
+			}
+		}
+		baseBallLeagueAssort();
+		endGameBackColor2();//게임종료시 흐리게	
+		removeLoading();
+}
+
+
+
+function volleyballArea(){
+	/*var leagueArray3 = [];
+
+	for(var i=0; i < volleyArray.length; i++){
+		if(leagueArray3.indexOf(volleyArray[i].leagueObject.leagueName) == -1){ //해당 문자열이 없으면				
+			leagueArray3.push(volleyArray[i].leagueObject.leagueName);				
+		}
+	}
+	$('ul.ulSelect').empty();
+	$('ul.ulSelect').append('<li onclick="volleyballArea();">전체</li>');
+	for(var k=0; k < leagueArray3.length; k++){
+		$('ul.ulSelect').append('<li class="socSelect" onclick="filterVolleyBall(this)" volleyLeague="'+leagueArray3[k]+'">'+leagueArray3[k]+'</li>');
+	}*/
+
+	var gameArr = volleyArray;
+	gameArr.sort(function(a, b){return b.leagueObject.leagueWeight - a.leagueObject.leagueWeight});//leagueWeight 큰 순서대로 정렬				
+	var volleyBall = "";
+		volleyBall += '<table class="gameBigTable">';
+
+	for(var i=0 in gameArr){													
+		volleyBall +=	'<tr class="volleyBallInfo" sport="'+gameArr[i].sport+'">'+
+									'<td colspan="5">'+
+										'<div class="leagueDivision">'+
+											'<img src="'+gameArr[i].leaguePic+'" alt="" width="50px" height="24px" class="leagueImg" onError="leagueImgError(this);">'+
+											'<img src="{{STATIC_URL}}mobileWeb_img/divisionline_league.png" alt="" width="100%" height="24px">'+
+											'<div class="ballImg">'+															
+												'<span class="volleyBallLeague">'+gameArr[i].league+'</span>';
+												if(gameArr[i].ratioExist){
+		volleyBall +=					'&nbsp;&nbsp;<img src="{{STATIC_URL}}mobileWeb_img/proto.png" width="35px" height="11px">';
+												}													
+		volleyBall +=			'</div>'+	
+											'</div>'+
+											'<span class="leagueDate">'+parseLeagueDate(gameArr[i].date)+'</span>'+
+										'</div>'+
+									'</td>'+
+								'</tr>'+
+
+								'<tr class="volleyBallRow endBack" onclick="gameDetail(this);" volleyLeague="'+gameArr[i].league+'" gameId="'+gameArr[i].gameId+'" sport="'+gameArr[i].sport+'" progress="'+gameArr[i].progress+'">'+
+									'<td class="imgs">';
+									if(gameArr[i].liveLink){
+		volleyBall +=				'<img src="{{STATIC_URL}}mobileWeb_img/liveLink.png" alt="" width="18px" height="18px">';
+									}
+									if(gameArr[i].ratioExist){
+		volleyBall +=				'<img src="{{STATIC_URL}}mobileWeb_img/ratioExist.png" alt="" width="18px" height="18px">';
+									}
+		volleyBall +=			'</td>'+
+
+									'<td class="gameTeam_home">'+											
+										'<span class="homeSpan">'+
+											'<img class="bigImg" src="'+gameArr[i].homePic+'" alt="" width="40px" height="40px" onError="imgError(this);">'+
+											'<div class="bigHomeTeam">'+gameArr[i].home+'</div>'+
+										'</span>'+
+									'</td>'+
+									'<td class="soccerGameScore">';
+		volleyBall +=		'<div class="wrapProgress">';
+		volleyBall +=			'<div class="sCenterDiv">';
+									if(gameArr[i].progress == "홈승"){
+		volleyBall +=				'<span class="brProgress red" progress="'+gameArr[i].progress+'">'+gameArr[i].progress+'</span><br>';					
+									}else if(gameArr[i].progress == "홈패"){
+		volleyBall +=				'<span class="brProgress blue" progress="'+gameArr[i].progress+'">'+gameArr[i].progress+'</span><br>';													
+									}
+									else if(gameArr[i].progress == "무승부"){
+		volleyBall +=				'<span class="brProgress yellow" progress="'+gameArr[i].progress+'">'+gameArr[i].progress+'</span><br>';												
+									}
+									else if(gameArr[i].progress == "경기전"){
+		volleyBall +=				'<span class="brProgress gray" progress="'+gameArr[i].progress+'">'+gameArr[i].progress+'</span><br>';												
+									}else{
+		volleyBall +=				'<span class="brProgress red" progress="'+gameArr[i].progress+'">'+gameArr[i].progress+'</span><br>';
+									}
+		volleyBall +=			'</div>';
+		volleyBall +=		'</div>';
+		
+										if(gameArr[i].progress == "경기전"){
+		volleyBall +=					'<span class="brHomeScore"></span>';
+										}else{
+											if(gameArr[i].homescore - gameArr[i].awayscore > 0){
+		volleyBall +=					'<span class="brHomeScore winTeam" home="'+gameArr[i].homescore+'">'+gameArr[i].homescore+'</span>';										
+											}else{
+		volleyBall +=					'<span class="brHomeScore" home="'+gameArr[i].homescore+'">'+gameArr[i].homescore+'</span>';
+											}
+										}
+															
+		volleyBall +=				'<span class="vsWord">vs</span>';					
+										if(gameArr[i].progress == "경기전"){
+		volleyBall +=					'<span class="brAwayScore" home="'+gameArr[i].awayscore+'"></span>';
+										}else{
+											if(gameArr[i].awayscore - gameArr[i].homescore > 0){
+		volleyBall +=					'<span class="brAwayScore winTeam">'+gameArr[i].awayscore+'</span>';
+											}else{
+		volleyBall +=					'<span class="brAwayScore">'+gameArr[i].awayscore+'</span>';										
+											}
+										}
+
+
+		volleyBall +=		'<div class="brGameDate">'+parseLeagueDate(gameArr[i].date)+'</div>';
+										if(gameArr[i].progress == "경기전"){
+		volleyBall +=					'<div class="leftTime">'+dDayTime(gameArr[i].date)+'</div>';
+										}												
+		volleyBall +=		'</td>'+ 
+									'</td>'+ 
+									'<td class="gameTeam_away">'+
+										'<span class="awaySpan">'+
+											'<img class="bigImg" src="'+gameArr[i].awayPic+'" alt="" width="40px" height="40px" onError="imgError(this);">'+
+											'<div class="bigAwayTeam">'+gameArr[i].away+'</div>'+
+										'</span>'+
+									'</td>'+
+									'<td class="bookmark">'+
+										'<img src="{{STATIC_URL}}mobileWeb_img/ic_star_line.png" alt="" width="20px" height="20px">'+							
+									'</td>'+
+								'</tr>'+
+								'<tr class="volleyBallVote" sport="'+gameArr[i].sport+'">'+
+									'<td class="vote" colspan="5">'+
+										'<div class="voteStatusBar">'+
+											'<div class="vwinBar" rate="'+gameArr[i].homeCount+'"></div>'+
+											'<div class="vdrawBar" rate="'+gameArr[i].drawCount+'"></div>'+
+											'<div class="vloseBar" rate="'+gameArr[i].awayCount+'"></div>'+
+										'</div>'+
+									'</td>'+
+								'</tr>';								
+	}//end for
+		volleyBall += '</table>';
+		$('#volleyBall').empty();
+		$('#volleyBall').append(volleyBall);
+
+		var winBar = $('.vwinBar')
+		var drawBar = $('.vdrawBar')
+		var loseBar = $('.vloseBar')
+		var voteTr = $('.volleyBallVote');
+
+		for(var i=0; i < voteTr.length; i++){
+			var win = Math.floor(Number($(winBar[i]).attr("rate"))/(Number($(winBar[i]).attr("rate"))+Number($(drawBar[i]).attr("rate"))+Number($(loseBar[i]).attr("rate")))*100*10)/10;
+			var draw = Math.floor(Number($(drawBar[i]).attr("rate"))/(Number($(winBar[i]).attr("rate"))+Number($(drawBar[i]).attr("rate"))+Number($(loseBar[i]).attr("rate")))*100*10)/10;
+			var lose = Math.floor(Number($(loseBar[i]).attr("rate"))/(Number($(winBar[i]).attr("rate"))+Number($(drawBar[i]).attr("rate"))+Number($(loseBar[i]).attr("rate")))*100*10)/10;
+
+			if($(winBar[i]).attr("rate") == 0 && $(drawBar[i]).attr("rate") == 0 && $(loseBar[i]).attr("rate") == 0){
+				$(winBar[i]).css({"width": '33%'});
+				$(drawBar[i]).css({"width": '33%'});
+				$(loseBar[i]).css({"width": '33%'});				
+			}
+			else{// if($(winBar[i]).attr("rate") || 0 && $(drawBar[i]).attr("rate") || 0 && $(loseBar[i]).attr("rate") == 0){
+				$(winBar[i]).css({"width": win+'%'});
+				$(drawBar[i]).css({"width": draw+'%'});
+				$(loseBar[i]).css({"width": lose+'%'});	
+				//console.log($(winBar[i]).attr('rate'))
+			}
+		}
+
+		volleyBallLeagueAssort();//배구 리그별로 정렬
+		endGameBackColor3();//게임종료시 배경
+removeLoading();
+}
+function basketballArea(){
+	/*날짜 바뀔때마다 농구 리그 뽑아서 넣기*/
+	/*var leagueArray2 = [];
+
+	for(var i=0; i < baseketArray.length; i++){
+		if(leagueArray2.indexOf(baseketArray[i].leagueObject.leagueName) == -1){ //해당 문자열이 없으면				
+			leagueArray2.push(baseketArray[i].leagueObject.leagueName);				
+		}
+	}		
+
+	$('ul.ulSelect').empty();
+	$('ul.ulSelect').append('<li onclick="basketballArea();">전체</li>');
+	for(var k=0; k < leagueArray2.length; k++){
+		$('ul.ulSelect').append('<li class="socSelect" onclick="filterbaseketBall(this)" basketLeague="'+leagueArray2[k]+'">'+leagueArray2[k]+'</li>');
+	}*/
+
+	var gameArr = baseketArray;
+	gameArr.sort(function(a, b){return b.leagueObject.leagueWeight - a.leagueObject.leagueWeight});//leagueWeight 큰 순서대로 정렬				
+	var basketBall = "";
+		basketBall += '<table class="gameBigTable">';
+
+	for(var i=0 in gameArr){
+
+		if(gameArr[i].homePic=="null"){
+			gameArr[i].homePic = '{{STATIC_URL}}mobileWeb_img/onError.png';
+		}
+		if(gameArr[i].awayPic=="null"){
+			gameArr[i].awayPic = '{{STATIC_URL}}mobileWeb_img/onError.png';					
+		}			
+													
+		basketBall +=	'<tr class="volleyBallInfo" sport="'+gameArr[i].sport+'">'+
+								'<td colspan="5">'+
+									'<div class="leagueDivision">'+
+										'<img src="'+gameArr[i].leaguePic+'" alt="" width="50px" height="24px" class="leagueImg" onError="leagueImgError(this);">'+
+										'<img src="{{STATIC_URL}}mobileWeb_img/divisionline_league.png" alt="" width="100%" height="24px">'+
+										'<div class="ballImg">'+															
+											'<span class="volleyBallLeague">'+gameArr[i].league+'</span>';
+											if(gameArr[i].ratioExist){
+		basketBall +=						'&nbsp;&nbsp;<img src="{{STATIC_URL}}mobileWeb_img/proto.png" width="35px" height="11px">';
+											}													
+		basketBall +=				'</div>'+	
+										'</div>'+
+										'<span class="leagueDate">'+parseLeagueDate(gameArr[i].date)+'</span>'+
+									'</div>'+
+								'</td>'+
+							'</tr>'+
+
+								'<tr class="volleyBallRow endBack" onclick="gameDetail(this);" baseketLeague="'+gameArr[i].league+'" gameId="'+gameArr[i].gameId+'" sport="'+gameArr[i].sport+'" progress="'+gameArr[i].progress+'">'+
+									'<td class="imgs">';
+									if(gameArr[i].liveLink){
+		basketBall +=				'<img src="{{STATIC_URL}}mobileWeb_img/liveLink.png" alt="" width="18px" height="18px">';
+									}
+									if(gameArr[i].ratioExist){
+		basketBall +=				'<img src="{{STATIC_URL}}mobileWeb_img/ratioExist.png" alt="" width="18px" height="18px">';
+									}
+		basketBall +=			'</td>'+
+
+									'<td class="gameTeam_home">'+											
+										'<span class="homeSpan">'+
+											'<img class="bigImg" src="'+gameArr[i].homePic+'" alt="" width="40px" height="40px" onError="imgError(this);">'+
+											'<div class="bigHomeTeam">'+gameArr[i].home+'</div>'+
+										'</span>'+
+									'</td>'+
+									'<td class="soccerGameScore">';
+		basketBall +=				'<div class="wrapProgress">';							
+									if(gameArr[i].progress == "홈승"){
+		basketBall +=				'<span class="brProgress red" progress="'+gameArr[i].progress+'">'+gameArr[i].progress+'</span><br>';					
+									}else if(gameArr[i].progress == "홈패"){
+		basketBall +=				'<span class="brProgress blue" progress="'+gameArr[i].progress+'">'+gameArr[i].progress+'</span><br>';													
+									}
+									else if(gameArr[i].progress == "무승부"){
+		basketBall +=				'<span class="brProgress yellow" progress="'+gameArr[i].progress+'">'+gameArr[i].progress+'</span><br>';												
+									}
+									else if(gameArr[i].progress == "경기전"){
+		basketBall +=				'<span class="brProgress gray" progress="'+gameArr[i].progress+'">'+gameArr[i].progress+'</span><br>';												
+									}else{
+		basketBall +=				'<span class="brProgress red" progress="'+gameArr[i].progress+'">'+gameArr[i].progress+'</span><br>';
+									}
+		basketBall +=				'</div>';
+		
+										if(gameArr[i].progress == "경기전"){
+		basketBall +=					'<span class="brHomeScore"></span>';
+										}else{
+											if(gameArr[i].homescore - gameArr[i].awayscore > 0){
+		basketBall +=					'<span class="brHomeScore winTeam" home="'+gameArr[i].homescore+'">'+gameArr[i].homescore+'</span>';										
+											}else{
+		basketBall +=					'<span class="brHomeScore" home="'+gameArr[i].homescore+'">'+gameArr[i].homescore+'</span>';
+											}
+										}
+															
+		basketBall +=				'<span class="vsWord">vs</span>';					
+										if(gameArr[i].progress == "경기전"){
+		basketBall +=					'<span class="brAwayScore" home="'+gameArr[i].awayscore+'"></span>';
+										}else{
+											if(gameArr[i].awayscore - gameArr[i].homescore > 0){
+		basketBall +=					'<span class="brAwayScore winTeam">'+gameArr[i].awayscore+'</span>';
+											}else{
+		basketBall +=					'<span class="brAwayScore">'+gameArr[i].awayscore+'</span>';										
+											}
+										}
+
+
+		basketBall +=		'<div class="brGameDate">'+parseLeagueDate(gameArr[i].date)+'</div>';
+										if(gameArr[i].progress == "경기전"){
+		basketBall +=					'<div class="leftTime">'+dDayTime(gameArr[i].date)+'</div>';
+										}												
+		basketBall +=		'</td>'+ 
+									'</td>'+ 
+									'<td class="gameTeam_away">'+
+										'<span class="awaySpan">'+
+											'<img class="bigImg" src="'+gameArr[i].awayPic+'" alt="" width="40px" height="40px" onError="imgError(this);">'+
+											'<div class="bigAwayTeam">'+gameArr[i].away+'</div>'+
+										'</span>'+
+									'</td>'+
+									'<td class="bookmark">'+
+										'<img src="{{STATIC_URL}}mobileWeb_img/ic_star_line.png" alt="" width="20px" height="20px">'+							
+									'</td>'+
+								'</tr>'+
+								'<tr class="basketBallVote" sport="'+gameArr[i].sport+'">'+
+									'<td class="vote" colspan="5">'+
+										'<div class="voteStatusBar">'+
+											'<div class="bswinBar" rate="'+gameArr[i].homeCount+'"></div>'+
+											'<div class="bsdrawBar" rate="'+gameArr[i].drawCount+'"></div>'+
+											'<div class="bsloseBar" rate="'+gameArr[i].awayCount+'"></div>'+
+										'</div>'+
+									'</td>'+
+								'</tr>';								
+	}//end for
+		basketBall += '</table>';
+		$('#basketBall').empty();
+		$('#basketBall').append(basketBall);
+
+		var winBar = $('.bswinBar')
+		var drawBar = $('.bsdrawBar')
+		var loseBar = $('.bsloseBar')
+		var voteTr = $('.basketBallVote');
+
+		for(var i=0; i < voteTr.length; i++){
+			var win = Math.floor(Number($(winBar[i]).attr("rate"))/(Number($(winBar[i]).attr("rate"))+Number($(drawBar[i]).attr("rate"))+Number($(loseBar[i]).attr("rate")))*100*10)/10;
+			var draw = Math.floor(Number($(drawBar[i]).attr("rate"))/(Number($(winBar[i]).attr("rate"))+Number($(drawBar[i]).attr("rate"))+Number($(loseBar[i]).attr("rate")))*100*10)/10;
+			var lose = Math.floor(Number($(loseBar[i]).attr("rate"))/(Number($(winBar[i]).attr("rate"))+Number($(drawBar[i]).attr("rate"))+Number($(loseBar[i]).attr("rate")))*100*10)/10;
+
+			if($(winBar[i]).attr("rate") == 0 && $(drawBar[i]).attr("rate") == 0 && $(loseBar[i]).attr("rate") == 0){
+				$(winBar[i]).css({"width": '33%'});
+				$(drawBar[i]).css({"width": '33%'});
+				$(loseBar[i]).css({"width": '33%'});				
+			}
+			else{// if($(winBar[i]).attr("rate") || 0 && $(drawBar[i]).attr("rate") || 0 && $(loseBar[i]).attr("rate") == 0){
+				$(winBar[i]).css({"width": win+'%'});
+				$(drawBar[i]).css({"width": draw+'%'});
+				$(loseBar[i]).css({"width": lose+'%'});	
+				//console.log($(winBar[i]).attr('rate'))
+			}
+		}		
+		removeLoading();
+}
+
+function seungBuToto(){
+	$('#toto').empty();
+	$('.roundList1').css('position', 'relative');
+	//$('div.roundList1').removeClass("hid");
+	//$('div.roundList1').addClass("showed");
+	$('.roundList1').show();
+
+	$('.roundList2').hide();
+
+
+	var games = seungBuArr.games;
+	var seungBu = '';
+		seungBu += 	'<table class="seungBuTable">';
+	for(var i=0 in games){		
+		seungBu += 	'<tr class="seungBuTrInfo">'+
+									'<td colspan="5">'+
+										'<div class="leagueDivision">'+
+											'<img src="'+games[i].leaguePic+'" alt="" width="50px" height="24px" class="leagueImg" onError="leagueImgError(this);">'+
+											'<img src="{{STATIC_URL}}mobileWeb_img/divisionline_league.png" alt="" width="100%" height="24px">'+
+											
+											'<div class="ballImg">'+
+												'<span class="seungBuLeague">'+games[i].league+'</span>'+														
+											'</div>'+
+											'<span class="leagueDate">'+parseLeagueDate(games[i].date)+'</span>'+
+										'</div>'+
+									'</td>'+
+								'</tr>'+
+								'<tr class="seungBuTr" onclick="gameDetail2(this);" realId="'+games[i].realId+'" sport="" progress="">';
+									if(games[i].progress == '취소' || games[i].progress == '홈승' || games[i].progress == '홈패' || games[i].progress == '무승부'){
+		seungBu +=		'<td class="seungHomeTd backgroundGray"  colspan="5">';
+									}else{
+		seungBu +=		'<td class="seungHomeTd" colspan="5">';
+									}	
+		seungBu +=			'<div class="seungHome">'+
+											'<img src="'+games[i].homePic+'" alt="" width="40px" height="40px" onError="imgError(this);">&nbsp;'+
+											'<div class="homeTeam">'+games[i].home+'</div>'+
+										'</div>'+
+										'<div class="seungScore">';
+
+										if(games[i].progress == null || games[i].progress == "취소"){
+		seungBu +=				'<div class="seungHomeScore">-</div>';									
+										}else{
+											if(games[i].homescore - games[i].awayscore > 0){
+		seungBu +=				'<div class="seungHomeScore winTeam">'+games[i].homescore+'</div>';
+											}else{
+		seungBu +=				'<div class="seungHomeScore">'+games[i].homescore+'</div>';										
+											}														
+										}
+
+		seungBu +=				'<div class="seungWrapProgress">';
+												if(games[i].progress == null){
+		seungBu +=						'<span class="seungVs">vs</span>';
+												}else if(games[i].progress == '홈승'){
+		seungBu +=						'<span class="brProgress red">'+games[i].progress+'</span>';
+												}else if(games[i].progress == '홈패'){
+		seungBu +=						'<span class="brProgress blue">'+games[i].progress+'</span>';
+												}else if(games[i].progress == '무승부'){
+		seungBu +=						'<span class="brProgress yellow" progress="">'+games[i].progress+'</span>';
+												}else if(games[i].progress == '취소'){
+		seungBu +=						'<span class="brProgress gray" progress="">'+games[i].progress+'</span>';
+												}
+												else{
+		seungBu +=						'<span class="seungVs">'+games[i].progress+'</span>';
+												}
+		seungBu +=				'</div>';
+
+											if(games[i].progress == null || games[i].progress == "취소"){
+		seungBu +=					'<div class="seungAwayScore">-</div>';
+											}else{
+												if(games[i].awayscore - games[i].homescore > 0){
+		seungBu +=						'<div class="seungAwayScore winTeam">'+games[i].awayscore+'</div>';
+												}else{
+		seungBu +=						'<div class="seungAwayScore">'+games[i].awayscore+'</div>';
+												}		
+											}													
+		
+		seungBu +=			'</div>'+
+										'<div class="seungAway">'+
+											'<div class="awayTeam">'+games[i].away+'</div>&nbsp;'+
+											'<img src="'+games[i].awayPic+'" alt="" width="40px" height="40px" onError="imgError(this);">'+
+										'</div>'+
+									'</td>'+
+								'</tr>'+
+								'<tr class="seungBetTr" onclick="gameDetail2(this);"realId="'+games[i].realId+'">'+
+									'<td>'+games[i].num+'</td>'+											
+									'<td>';
+										if(games[i].gameType == 0){
+		seungBu +=				'승무패';									
+										}else if(games[i].gameType == 1){
+											if(games[i].handiNum > 0){
+		seungBu +=				'H +'+parseDotZero(games[i].handiNum);											
+											}else{
+		seungBu +=				'H '+parseDotZero(games[i].handiNum);										
+											}				
+										}else if(games[i].gameType == 2){
+											if(games[i].handiNum > 0){
+		seungBu +=				'U/O +'+games[i].handiNum;
+											}else{
+		seungBu +=				'U/O'+games[i].handiNum;										
+											}				
+										}
+		seungBu +=		'</td>';
+
+									if(games[i].result == 1){
+		seungBu +=			'<td class="seungWin">';												
+									}else{
+		seungBu +=			'<td>';												
+									}
+										if(games[i].gameType == 2){
+		seungBu +=				'언더 '+parseDotZero(games[i].win);
+										}else{
+		seungBu +=				'승 '+parseDotZero(games[i].win);
+										}
+		seungBu +=		'</td>';
+
+									if(games[i].result == 4){
+		seungBu +=			'<td class="seungWin">';
+									}else{
+		seungBu +=			'<td>';
+									}
+		
+									if(games[i].draw == null){
+		seungBu +=			'-';
+									}else{
+		seungBu +=			parseDotZero(games[i].draw);
+									}
+		seungBu +=		'</td>';
+
+									if(games[i].result == 2){
+		seungBu +=			'<td class="seungWin">';
+									}else{
+		seungBu +=			'<td>';
+									}				
+										if(games[i].gameType == 2){
+		seungBu +=				'오버 '+parseDotZero(games[i].lose);
+										}else{
+		seungBu +=				'패 '+parseDotZero(games[i].lose);
+										}
+		seungBu +=		'</td>'+									
+								'</tr>';
+	}
+		seungBu +=	'</table>';
+	$('#toto').empty();
+	$('#toto').append(seungBu);
+	seungBuAssort();
+	removeLoading();
+}
+
+
+function seungMuPeToto(){
+	$('#toto').empty();
+	
+	$('div.roundList1').removeClass("showed");
+	$('div.roundList1').addClass("hid");
+	$('.roundList2').show();
+	$('.roundList1').hide();
+
+	var games = seungMuPeArr.games;
+	var infos = seungMuPeArr.info;
+	console.log(games.length);
+	//console.log(infos);
+	var seungMuPe = '';
+		seungMuPe += '<div class="infoArea">'
+		seungMuPe += '<img src="{{STATIC_URL}}mobileWeb_img/img_sidemenu_top.png" width="100%" height="150px">'
+		seungMuPe += '<div class="totoInfo">'
+		seungMuPe += '<b>'+parseRound(infos.roundNum)+'회차 승무패 실시간 발매현황</b><br>';
+		seungMuPe += '<b>총 발매금액 </b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="winTeam">'+numberWithCommas(infos.totalMoney)+'원</span><br>';
+		seungMuPe += '<span class="silver">전체 투표수</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span >'+numberWithCommas(infos.totalVote)+'표</span><br>';
+		seungMuPe += '<span class="silver">1등 적중 예상금</span> &nbsp;&nbsp;<span>'+numberWithCommas(infos.firstPrize)+'원</span><br>';
+		seungMuPe += '<span class="silver">발매기간</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="infoNum">'+infos.period+'</span>';
+		seungMuPe += '</div>'
+		seungMuPe += '</div>';
+
+	
+	for(var i=0 in games){
+		seungMuPe += 	'<table class="seungMuPeTable">';
+									if(games[i].progress == '취소' || games[i].progress == '홈승' || games[i].progress == '홈패' || games[i].progress == '무승부'){
+		seungMuPe +=		'<tr class="seungMuPeTr backgroundGray"  onclick="gameDetail2(this);" realId="'+games[i].realId+'">';
+									}else{
+		seungMuPe +=		'<tr class="seungMuPeTr"  onclick="gameDetail2(this);" realId="'+games[i].realId+'">';
+									}												
+		seungMuPe +=			'<td>'+
+												'<b>'+games[i].num+'경기</b>'+
+											'</td>'+
+											'<td>'+
+												'<div class="smpHome">'+
+													'<img src="'+games[i].homePic+'" alt="" width="25px" height="25px" onError="imgError(this);">&nbsp;'+
+													'<span class="smpHomeTeam">'+games[i].home+'</span>'+
+												'</div>'+
+											'</td>'+
+											'<td>';
+
+													if(games[i].progress == null || games[i].progress == "취소"){											
+									
+		seungMuPe +=						'<div class="seungHomeScore">-</div>';									
+													}else{
+														if(games[i].homescore - games[i].awayscore > 0){
+		seungMuPe +=							'<div class="seungHomeScore winTeam">'+games[i].homescore+'</div>';
+														}else{
+		seungMuPe +=							'<div class="seungHomeScore">'+games[i].homescore+'</div>';										
+														}														
+													}
+
+		seungMuPe +=					'<div class="smpScoreArea">';
+													if(games[i].progress == null){
+		seungMuPe +=						'<span class="seungVs">vs</span>';
+													}else if(games[i].progress == '홈승'){
+		seungMuPe +=						'<span class="brProgress red">'+games[i].progress+'</span>';
+													}else if(games[i].progress == '홈패'){
+		seungMuPe +=						'<span class="brProgress blue">'+games[i].progress+'</span>';
+													}else if(games[i].progress == '무승부'){
+		seungMuPe +=						'<span class="brProgress yellow" progress="">'+games[i].progress+'</span>';
+													}else if(games[i].progress == '취소'){
+		seungMuPe +=						'<span class="brProgress gray" progress="">'+games[i].progress+'</span>';
+													}
+													else{
+		seungMuPe +=						'<span class="seungVs">'+games[i].progress+'</span>';
+													}
+		seungMuPe +=					'</div>';
+
+
+													if(games[i].progress == null || games[i].progress == "취소"){
+		seungMuPe +=							'<div class="seungAwayScore">-</div>';
+													}else{
+														if(games[i].awayscore - games[i].homescore > 0){
+		seungMuPe +=							'<div class="seungAwayScore winTeam">'+games[i].awayscore+'</div>';
+														}else{
+		seungMuPe +=							'<div class="seungAwayScore">'+games[i].awayscore+'</div>';
+														}		
+													}				
+		
+		seungMuPe +=			'</td>'+
+
+											'<td>'+
+												'<div class="smpAway">'+
+													'<span class="smpAwayTeam">'+games[i].away+'</span>'+
+													'<img src="'+games[i].awayPic+'" alt="" width="25px" height="25px" onError="imgError(this);">&nbsp;'+
+												'</div>'+
+											'</td>'+
+										'</tr>'+
+
+										'<tr class="seungMuPeVote"  onclick="gameDetail2(this);" realId="'+games[i].realId+'">'+
+											'<td colspan="4">'+
+
+												'<div class="voteDiv">'+
+													'<span class="winDiv homeWin">승</span>'+
+													'<div class="rateDiv">'+
+														'<span class="rateWin">'+Math.round(Number(games[i].winNum)/(Number(games[i].winNum)+Number(games[i].drawNum)+Number(games[i].loseNum))*100*10)/10+'</span>%<br>'+
+														'<span class="voteWin">'+games[i].winNum+'</span>표'+
+													'</div>'+
+												'</div>'+
+
+												'<div class="voteDiv">'+
+													'<span class="drawDiv draw">무</span>'+
+													'<div class="rateDiv">'+
+														'<span class="rateDraw">'+Math.round(Number(games[i].drawNum)/(Number(games[i].winNum)+Number(games[i].drawNum)+Number(games[i].loseNum))*100*10)/10+'</span>%<br>'+
+														'<span class="voteDraw">'+games[i].drawNum+'</span>표'+
+													'</div>'+
+												'</div>'+
+
+												'<div class="voteDiv">'+
+													'<span class="loseDiv lose">패</span>'+
+													'<div class="rateDiv">'+
+														'<span class="rateLose">'+Math.round(Number(games[i].loseNum)/(Number(games[i].winNum)+Number(games[i].drawNum)+Number(games[i].loseNum))*100*10)/10+'</span>%<br>'+
+														'<span class="voteLose">'+games[i].loseNum+'</span>표'+
+													'</div>'+
+												'</div>'+
+
+											'</td>'+
+										'</tr>'+
+										'<tr class="seungMuVoteBar">'+
+											'<td class="voteBarTd" colspan="4">'+
+												'<div class="winBar" rate="'+Math.floor(Number(games[i].winNum)/(Number(games[i].winNum)+Number(games[i].drawNum)+Number(games[i].loseNum))*100*10)/10+'"></div>'+
+												'<div class="drawBar" rate="'+Math.floor(Number(games[i].drawNum)/(Number(games[i].winNum)+Number(games[i].drawNum)+Number(games[i].loseNum))*100*10)/10+'"></div>'+
+												'<div class="loseBar" rate="'+Math.floor(Number(games[i].loseNum)/(Number(games[i].winNum)+Number(games[i].drawNum)+Number(games[i].loseNum))*100*10)/10+'"></div>'+
+											'</td>'+
+										'</tr>';
+									'</table>';
+	}//for
+	$('#toto').empty();
+	$('#toto').append(seungMuPe);
+
+	//퍼센트대로 막대표시하기
+	$(document).ready(function(){
+		
+		var winBar = $('.winBar')
+		var drawBar = $('.drawBar')
+		var loseBar = $('.loseBar')
+		
+		for(var i=0; i < winBar.length; i++){
+			$(winBar[i]).css({"width": $(winBar[i]).attr('rate')+'%'});
+		}
+		for(var i=0; i < drawBar.length; i++){
+			$(drawBar[i]).css({"width": $(drawBar[i]).attr('rate')+'%'});
+		}
+		for(var i=0; i < loseBar.length; i++){
+			$(loseBar[i]).css({"width": $(loseBar[i]).attr('rate')+'%'});
+		}
+	})
+	removeLoading();
+}
+
+
+
+
+
+
+//긴 숫자 3자리마다 콤마
+function numberWithCommas(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+//배당 소수점 만들기
+	function parseDotZero(num){		
+		var str = num.toString()		
+		var dot = str.indexOf(".")		
+		if(dot==-1){			
+			return str+'.0';
+		}
+		else{
+			return num;
+		}
+	}
+//승무패 회차 파싱
+	function parseRound(round){
+		var r = round.toString();
+		r = r.substring(4,6);
+		return Number(r);
+	}
+
+//게임 상세페이지로 이동
+	function gameDetail(param){
+		console.log($(param).attr('gameId'));
+		$.get('/mobile/gameDetail/', {gameId: $(param).attr('gameId')},
+			function(data){
+				window.location.href = '/mobile/gameDetail/?gameId='+$(param).attr('gameId');				
+			}
+		)		
+	}
+//토토게임 상세페이지로 이동
+	function gameDetail2(param){
+		console.log($(param).attr('realId'));
+		$.get('/mobile/gameDetail/', {gameId: $(param).attr('realId')},
+			function(data){
+				window.location.href = '/mobile/gameDetail/?gameId='+$(param).attr('realId');				
+			}
+		)		
+	}
+</script>
+
+<script>
+//각탭에서 리그별로 분류
+	/*function favLeagueAssort(){
+		$("tr.favRowGameInfo").each(function(i){//게임 리그로 분류
+			if($(".favGameLeague").eq(i).text() == $(".favGameLeague").eq(i+1).text()){
+				$("tr.favRowGameInfo").eq(i+1).hide();
+			}
+		});
+	}*/
+	function allLeagueAssort(){
+		$("tr.allRowGameInfo").each(function(i){//게임 리그로 분류
+			if($(".allGameLeague").eq(i).text() == $(".allGameLeague").eq(i+1).text()){
+				$("tr.allRowGameInfo").eq(i+1).hide();
+			}
+		});
+	}
+	function soccerLeagueAssort(){
+		$("tr.soccerInfo").each(function(i){//게임 리그로 분류
+			if($(".soccerLeague").eq(i).text() == $(".soccerLeague").eq(i+1).text()){
+				$("tr.soccerInfo").eq(i+1).hide();
+			}
+		});
+	}
+	function baseBallLeagueAssort(){
+		$("tr.baseBallInfo").each(function(i){//게임 리그로 분류
+			if($(".baseBallLeague").eq(i).text() == $(".baseBallLeague").eq(i+1).text()){
+				$("tr.baseBallInfo").eq(i+1).hide();
+			}
+		});
+	}
+	function volleyBallLeagueAssort(){
+		$("tr.volleyBallInfo").each(function(i){//게임 리그로 분류
+			if($(".volleyBallLeague").eq(i).text() == $(".volleyBallLeague").eq(i+1).text()){
+				$("tr.volleyBallInfo").eq(i+1).hide();
+			}
+		});
+	}
+	function seungBuAssort(){
+		$("tr.seungBuTrInfo").each(function(i){//게임 리그로 분류
+			if($(".seungBuLeague").eq(i).text() == $(".seungBuLeague").eq(i+1).text()){
+				$("tr.seungBuTrInfo").eq(i+1).hide();
+			}
+		});
+		var real = $('tr.seungBuTr')
+		for(var i=0; i < real.length; i++){
+			if($(real[i]).attr('realId') == $(real[i+1]).attr('realId')){
+				$(real[i+1]).hide();
+			}
+		}
+	}
+	
+		
+
+//all탭 scoreBoard 색깔
+	function colorProgress(){
+		var progress = $('span.inBoard');		
+		var rowGame = $('tr.rowGame');		
+		//var bProgress= $('div.baseBallSBoard');
+
+
+		for(var j=0; j < rowGame.length; j++){
+			if($(rowGame[j]).attr('progress') == '홈승' || $(rowGame[j]).attr('progress') == '홈패' || $(rowGame[j]).attr('progress') == '무승부'){
+				$(progress[j]).text('종료');
+				$(progress[j]).css('color','#7b7b7b');
+				$(rowGame[j]).css('backgroundColor','#efefef');
+			}
+			else if($(rowGame[j]).attr('progress') == '취소'){
+				$(progress[j]).css('color','#7b7b7b');
+				$(rowGame[j]).css('backgroundColor','#efefef');
+			}
+		}
+	}
+
+//종료게임 회색으로
+	function endGameBackColor(){
+		var soccerProgress = $('tr.soccerRow');
+		var soccerVProgress = $('tr.soccerVote');
+		for(var j=0; j < soccerProgress.length; j++){
+			if($(soccerProgress[j]).attr('progress') == '취소' || $(soccerProgress[j]).attr('progress') == '홈승' || $(soccerProgress[j]).attr('progress') === '홈패' || $(soccerProgress[j]).attr('progress') === '무승부'){
+				$(soccerProgress[j]).css('backgroundColor','#efefef');
+				$(soccerVProgress[j]).css('backgroundColor','#efefef');
+			}
+		}
+	}
+	function endGameBackColor2(){
+		var baseBallProgress = $('tr.baseBallRow');
+		var baseBallVProgress = $('tr.baseBallVote');
+		for(var j=0; j < baseBallProgress.length; j++){
+			if($(baseBallProgress[j]).attr('progress') == '취소' || $(baseBallProgress[j]).attr('progress') == '홈승' || $(baseBallProgress[j]).attr('progress') === '홈패' || $(baseBallProgress[j]).attr('progress') === '무승부'){
+				$(baseBallProgress[j]).css('backgroundColor','#efefef');
+				$(baseBallVProgress[j]).css('backgroundColor','#efefef');
+			}
+		}
+	}
+	function endGameBackColor3(){
+		var volleyBallProgress = $('tr.volleyBallRow');
+		var volleyBallVProgress = $('tr.volleyBallVote');
+		for(var j=0; j < volleyBallProgress.length; j++){
+			if($(volleyBallProgress[j]).attr('progress') == '취소' || $(volleyBallProgress[j]).attr('progress') == '홈승' || $(volleyBallProgress[j]).attr('progress') == '홈패' || $(volleyBallProgress[j]).attr('progress') == '무승부'){
+				$(volleyBallProgress[j]).css('backgroundColor','#efefef');
+				$(volleyBallVProgress[j]).css('backgroundColor','#efefef');
+			}
+		}
+	}
+	
+	
+//몇 시간 남았는지 알려줌
+	function dDayTime(date){
+		var year = date.substring(0,4);
+		var month = date.substring(5,7);
+		var day = date.substring(8,10);
+		var hour = date.substring(11,13);
+		var minute = date.substring(14,16);
+		
+		var gameDate = new Date(year+'-'+month+'-'+day+'T'+hour+':'+minute); //경기날짜
+		
+		var nowDate = new Date();		//현재날짜
+		
+		days = (gameDate - nowDate)/1000/60/60/24;		
+		var daysRound = Math.floor(days);
+
+		hours = (gameDate - nowDate)/1000/60/60-(24*daysRound);
+		var hoursRound = Math.floor(hours);
+
+		var leftHour = (gameDate - nowDate)/1000/60/60-(24*daysRound);
+		var leftMinute = (gameDate - nowDate)/1000/60-(24*60*daysRound) - (60*hoursRound);
+		
+		if(daysRound < 1){			
+			if(leftHour < 1){
+				return Math.floor(leftMinute)+'분 후 시작';
+			}else{
+				return Math.floor(leftHour)+'시간 '+Math.floor(leftMinute)+'분 후 시작';
+			}
+		}
+		else{
+			return '';
+		}		
+	}
+//서버날짜 파싱
+	function parseLeagueDate(date){
+		var year = date.substring(0,4);
+		var month = date.substring(5,7);
+		var day = date.substring(8,10);
+		var hour = date.substring(11,13);
+		var minute = date.substring(14,16);
+
+		var realDate = new Date(year+'-'+month+'-'+day+'T'+hour+':'+minute);
+		
+		var myyear = realDate.getFullYear();		
+		var mymonth = realDate.getMonth();
+		mymonth = mymonth+1;
+		var myweekday = realDate.getDate();
+		var myhour = realDate.getHours();
+		var myminute = realDate.getMinutes();
+
+		return myyear + "-" + ((mymonth < 10) ? "0" : "") + mymonth+"-"+ (myweekday <10 ? "0" : "") + myweekday +" "+((myhour < 10) ? "0" : "")+ myhour+":"+((myminute < 10) ? "0" : "") + myminute;			
+	}
+//all tab 게임리그 날짜 파싱
+	function parseGameDate(date){
+		var year = date.substring(0,4);
+		var month = date.substring(5,7);
+		var day = date.substring(8,10);
+		var hour = date.substring(11,13);
+		var minute = date.substring(14,16);
+
+		var realDate = new Date(year+'-'+month+'-'+day+'T'+hour+':'+minute);		
+		var mymonth = realDate.getMonth();
+		mymonth = mymonth+1;
+		var myweekday = realDate.getDate();
+		var myhour = realDate.getHours();
+		var myminute = realDate.getMinutes();
+		return ((mymonth < 10) ? "0" : "") + mymonth+"/"+ (myweekday <10 ? "0" : "") + myweekday+'<br>'+((myhour < 10) ? "0" : "")+ myhour+":"+((myminute < 10) ? "0" : "") + myminute;		
+	}
+
+
+//로딩 이미지
+	function removeLoading(){
+		var element = document.getElementById('loading');
+		if(element==null){
+			return;
+		}
+		element.parentNode.removeChild(element);
+	}
+
+//날짜선택해서 경기가져오기
+	$(function() {
+		$("#datepicker").datepicker({
+			showOn:"button",
+			buttonImage: "{{STATIC_URL}}mobileWeb_img/ic_calendar.png",			
+			buttonImageOnly:true,
+			dateFormat: "yy-mm-dd",
+			changeMonth: true,
+			changeYear:true,    	
+			nextText: '다음 달',
+			prevText: '이전 달',
+			dayNames: ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'],
+			dayNamesMin: ['일','월', '화', '수', '목','금', '토'],    	
+			monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']  	
+		});
+		$("#datepicker1").datepicker({
+			showOn:"button",
+			buttonImage: "{{STATIC_URL}}mobileWeb_img/ic_calendar.png",
+//			buttonSize: "width:px",
+			buttonImageOnly:true,
+			dateFormat: "yy-mm-dd",
+			changeMonth: true,
+			changeYear:true,    	
+			nextText: '다음 달',
+			prevText: '이전 달',
+			dayNames: ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'],
+			dayNamesMin: ['일','월', '화', '수', '목','금', '토'],    	
+			monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']  	
+		});
+		$("#datepicker2").datepicker({
+			showOn:"button",
+			buttonImage: "{{STATIC_URL}}mobileWeb_img/ic_calendar.png",
+	//		buttonSize: "width:px",
+			buttonImageOnly:true,
+			dateFormat: "yy-mm-dd",
+			changeMonth: true,
+			changeYear:true,    	
+			nextText: '다음 달',
+			prevText: '이전 달',
+			dayNames: ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'],
+			dayNamesMin: ['일','월', '화', '수', '목','금', '토'],    	
+			monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']  	
+		});
+	});
+	$(".ui-datepicker-trigger").css("width", "20px");
+
+//어제,내일 날짜 파싱
+	function getDay(date, num){
+		strArray = date.split("-");		
+		if(strArray[2].substring(0,1)=="0"){
+			var myDate = new Date(strArray[0], parseInt(strArray[1])-1,	parseInt(strArray[2])+parseInt(num, 10));
+		}else{
+			var myDate = new Date(strArray[0], parseInt(strArray[1])-1, parseInt(strArray[2])+parseInt(num, 10));
+		}		
+			var result = formDate(myDate);
+			return result;
+	}
+	function formDate(date){
+		var mymonth = date.getMonth()+1;
+		var myweekday = date.getDate();
+			return (date.getFullYear() +"-"+ ((mymonth < 10) ? "0" : "") + 
+				mymonth +"-"+ (myweekday <10 ? "0" : "") + myweekday);
+	}
+// 슬래쉬 날짜로 파싱
+	function formSlashDay(date){
+		strArray = date.split('-');		
+			if(strArray[1].substring(0,1)=="0"){
+				var month = strArray[1].substring(1,2);			
+			}else{
+				var month = strArray[1].substring(0,2);
+			}
+			if(strArray[2].substring(0,1)=="0"){
+				var day = strArray[2].substring(1,2);			
+			}else{
+				var day = strArray[2].substring(0,2);
+			}
+			return (month+'/'+day);
+	}
+
+	$('.reset').on('click', function(){
+		window.location.reload();
+	});
+
+/*
+	new $.nd2Search({
+			placeholder : "Input Placeholder",   // Placeholder in the search field</i>
+			defaultIcon : "globe-alt", // optional: icon | null</i>
+			source : [
+			{ label : 'Displayed Value', value : 'real-value', icon : 'custom-icon'}],   // <a href='http://api.jqueryui.com/autocomplete/#option-source'>autocomplete : option-source</a></i>
+			fn : function(result) { // this function will be executed when a valid result item is selected</i>
+				console.log('--- Your custom handling ---');
+				console.log('you picked: ');
+				console.log(result);
+			}
+		});
+
+
+	
+
+		*/
+</script>
+
+{% endblock %}
+{% endblock %}

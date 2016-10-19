@@ -1,0 +1,442 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>아이템스토어</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta name="mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css" />
+		<link rel="stylesheet" href="{{STATIC_URL}}mobileWeb_vendor/waves/waves.min.css" />
+		<link rel="stylesheet" href="{{STATIC_URL}}mobileWeb_vendor/wow/animate.css" />
+		<link rel="stylesheet" href="{{STATIC_URL}}mobileWeb_css/nativedroid2.css" />		
+
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    
+    <style>
+    	*{
+				-webkit-box-sizing: border-box;
+		    -moz-box-sizing: border-box;
+		    -o-box-sizing: border-box;
+				box-sizing: border-box;
+				-webkit-transition: .25s ease-in-out;
+				-moz-transition: .25s ease-in-out;
+				-o-transition: .25s ease-in-out;
+				transition: .25s ease-in-out;					
+			}
+    	#backImg{
+				margin: 13px 0px 0px 5px;}
+			.buyLemon, .buyItem{
+				font-size: 15px;
+				color: #333333;
+				background-color: #fafafa;
+				line-height: 40px;
+				vertical-align: middle;
+				font-weight: bold;
+				padding-left: 10px;
+			}
+
+
+
+			div.imgArea1{
+				position: relative;
+				text-align: center;
+				margin-top: 6px;
+			}
+			span.lemonCount1{
+				position: absolute;
+				top: 5%;
+				left: 10%;
+				font-size: 17px;
+				color: #333333;
+			}
+
+			img.item01{
+				position: absolute;
+				bottom:30%;
+				left: 10%;
+			}
+			img.coin1{
+				position: absolute;
+				bottom: 3%;
+				left: 5%;
+			}
+			span.price1{
+				position: absolute;
+				border-radius: 20px;
+				background-color: #ffffff;
+				opacity: 0.7;
+				bottom: 5%;
+				left: 8%;
+				color: #333333;
+				font-size: 17px;
+				padding: 0px 6% 0px 6%;
+			}
+			span.lemonCount2{
+				position: absolute;
+				top: 5%;
+				left: 0;
+				width: 100%;
+				text-align: center;
+				font-size: 17px;
+				color: #333333;	
+			}			
+	
+			img.item02{
+				position: absolute;
+				bottom:30%;
+				left: 41%;
+			}
+			img.coin2{
+				position: absolute;
+				bottom: 3%;
+				left: 37%;
+			}
+			span.price2{
+				position: absolute;
+				border-radius: 20px;
+				background-color: #ffffff;
+				opacity: 0.7;
+				bottom: 5%;
+				left: 40%;
+				color: #333333;
+				font-size: 17px;
+				padding: 0px 6% 0px 6%;
+			}
+			span.lemonCount3{
+				position: absolute;
+				top: 5%;
+				left: 74%;				
+				font-size: 17px;
+				color: #333333;	
+			}
+			img.item03{
+				position: absolute;
+				bottom:27%;
+				left: 74%;
+			}
+			img.coin3{
+				position: absolute;
+				bottom: 3%;
+				left: 69%;
+			}
+			span.price3{
+				position: absolute;
+				border-radius: 20px;
+				background-color: #ffffff;
+				opacity: 0.7;
+				bottom: 5%;
+				left: 72%;
+				color: #333333;
+				font-size: 17px;
+				padding: 0px 6% 0px 6%;
+			}
+
+			.imgArea2{
+				position: relative;
+				text-align: center;
+				margin: 6px 0px 27px 0px;
+			}
+			.lemonCount4{
+				position: absolute;
+				top: 5%;
+				left: 8%;
+				font-size: 17px;
+				color: #333333;	
+			}
+			img.item04{
+				position: absolute;
+				bottom:30%;
+				left: 12%;
+			}
+			.lemonCount6{
+				position: absolute;
+				top: 5%;
+				left: 72%;
+				font-size: 17px;
+				color: #333333;		
+			}
+	/*아이템구입 1줄*/
+			div.itemArea3{
+				position: relative;
+				text-align: center;
+				margin: 6px 0px 6px 0px;
+			}
+			span.lemonCount7{
+				position: absolute;
+				top: 5%;
+				left: 6%;
+				font-size: 17px;
+				color: #333333;
+			}
+			img.item07{
+				position: absolute;
+				bottom:30%;
+				left: 10%;
+			}
+			img.coin7{
+				position: absolute;
+				bottom: 3%;
+				left: 5%;
+			}
+			span.price7{
+				position: absolute;
+				border-radius: 20px;
+				background-color: #ffffff;
+				opacity: 0.7;
+				bottom: 5%;
+				left: 8%;
+				color: #333333;
+				font-size: 17px;
+				padding: 0px 6% 0px 6%;
+			}
+			span.lemonCount9{
+				position: absolute;
+				top: 5%;
+				left: 72%;
+				font-size: 15px;
+				color: #333333;
+				line-height: 18px;
+			}
+	/*아이템구입 2줄*/
+			.itemArea4{
+				position: relative;
+				text-align: center;
+				margin-bottom: 6px;
+			}
+			.lemonCount10{
+				position: absolute;
+				top: 5%;
+				left: 11%;
+				font-size: 15px;
+				color: #333333;
+				line-height: 18px;	
+			}
+			.lemonCount12{
+				position: absolute;
+				top: 5%;
+				left: 70%;
+				font-size: 17px;
+				color: #333333;				
+			}
+			.item11{
+				position: absolute;
+				bottom:35%;
+				left: 41%;
+			}
+			.item12{
+				position: absolute;
+				bottom:35%;
+				left: 70%;
+			}
+			.item13{
+				position: absolute;
+				bottom:30%;
+				left: 7%;	
+			}
+
+			
+			.itemArea5{
+				text-align: center;
+				position: relative;
+				margin-bottom: 27px;
+			}
+			.lemoncount{
+				position: absolute;
+				top: 5%;
+				left: 40%;
+				font-size: 17px;
+				color: #333333;
+			}
+			.itemArea6{
+				text-align: center;
+				position: relative;				
+				margin: 6px 0px 30px 0px;
+			}
+			.item14{
+				position: absolute;
+				bottom:30%;
+				left: 8%;		
+			}
+			.lemonCount15{
+				position: absolute;
+				top: 5%;
+				left: 39%;
+				font-size: 15px;
+				color: #333333;
+				line-height: 18px;	
+			}
+			.item15{
+				position: absolute;
+				bottom:25%;
+				left: 42%;		
+			}
+
+
+
+		
+    </style>
+	</head>
+	<body>
+		<div data-role="page" >
+
+			<!--header-->
+			<div data-role="header" data-position="fixed" class="wow fadeInDown" data-wow-delay="0.2s">					
+				<a href="#" class="ui-btn ui-btn-left wow fadeIn" data-wow-delay='0.8s' data-rel="back">
+					<img id="backImg" src="{{STATIC_URL}}mobileWeb_img/ic_arrow_back.png" alt="" width="25px" height="20px">
+				</a>
+				<h5 class="wow fadeIn" data-wow-delay='0.4s'>아이템스토어</h5>
+			</div>
+			
+			
+			
+			<!--main-->
+			<div role="main" id="faq" data-inset="false" data-wow-delay="0.2s">
+				<div class="buyLemon">레몬구입</div>
+					
+				<div class="imgArea1">						
+					<img src="{{STATIC_URL}}mobileWeb_img/ic_store_item_bg1.png" alt="" width="31%" height="">
+					<span class="lemonCount1">레몬x10</span>
+					<img class="item01" src="{{STATIC_URL}}mobileWeb_img/ic_store_item01.png" alt="" width="15%" height="" itemId="1">						
+					<span class="price1">1.000</span>
+					<img class="coin1" src="{{STATIC_URL}}mobileWeb_img/ic_store_item_coin.png" alt="" width="7%" height="">
+				
+					<img src="{{STATIC_URL}}mobileWeb_img/ic_store_item_bg1.png" alt="" width="31%">
+					<span class="lemonCount2">레몬x20</span>
+					<img class="item02" src="{{STATIC_URL}}mobileWeb_img/ic_store_item02.png" alt="" width="20%" height="40%" itemId="2">						
+					<span class="price2">2.000</span>
+					<img class="coin2" src="{{STATIC_URL}}mobileWeb_img/ic_store_item_coin.png" alt="" width="7%" height="">						
+				
+					<img src="{{STATIC_URL}}mobileWeb_img/ic_store_item_bg2.png" alt="" width="31%">
+					<span class="lemonCount3">레몬x50</span>
+					<img class="item03" src="{{STATIC_URL}}mobileWeb_img/ic_store_item03.png" alt="" width="20%" height="40%" itemId="3">						
+					<span class="price3">5.000</span>
+					<img class="coin3" src="{{STATIC_URL}}mobileWeb_img/ic_store_item_coin.png" alt="" width="7%" height="">
+				</div>	
+				
+				<div class="imgArea2">
+					<img src="{{STATIC_URL}}mobileWeb_img/ic_store_item_bg1.png" alt="" width="31%">
+					<span class="lemonCount4">레몬씨x10</span>
+					<img class="item04" src="{{STATIC_URL}}mobileWeb_img/ic_store_item04.png" alt="" width="13%" height="" itemId="4">					
+					<span class="price1">1.000</span>
+					<img class="coin1" src="{{STATIC_URL}}mobileWeb_img/ic_store_item_coin.png" alt="" width="7%" height="">
+				
+					<img src="{{STATIC_URL}}mobileWeb_img/ic_store_item_bg1.png" alt="" width="31%">
+					<span class="lemonCount2">레몬씨x20</span>
+					<img class="item02" src="{{STATIC_URL}}mobileWeb_img/ic_store_item05.png" alt="" width="20%" height="40%" itemId="5">						
+					<span class="price2">2.000</span>
+					<img class="coin2" src="{{STATIC_URL}}mobileWeb_img/ic_store_item_coin.png" alt="" width="7%" height="">
+				
+					<img src="{{STATIC_URL}}mobileWeb_img/ic_store_item_bg2.png" alt="" width="31%">
+					<span class="lemonCount6">레몬씨x50</span>
+					<img class="item03" src="{{STATIC_URL}}mobileWeb_img/ic_store_item06.png" alt="" width="20%" height="40%" itemId="6">						
+					<span class="price3">5.000</span>
+					<img class="coin3" src="{{STATIC_URL}}mobileWeb_img/ic_store_item_coin.png" alt="" width="7%" height="">
+				</div>
+					
+
+				<div class="buyItem">아이템 구입</div>
+				<div class="itemArea3">						
+					<img src="{{STATIC_URL}}mobileWeb_img/ic_store_item_bg3.png" alt="" width="31%">
+					<span class="lemonCount7">닉네임변경권</span>
+					<img class="item07" src="{{STATIC_URL}}mobileWeb_img/ic_store_item07.png" alt="" width="20%" height="" itemId="7">
+					<span class="price7">1.000</span>
+					<img class="coin7" src="{{STATIC_URL}}mobileWeb_img/ic_store_item_lemon.png" alt="" width="7%" height="">
+
+					<img src="{{STATIC_URL}}mobileWeb_img/ic_store_item_bg3.png" alt="" width="31%">
+					<span class="lemonCount2">형광펜닉네임</span>
+					<img class="item02" src="{{STATIC_URL}}mobileWeb_img/ic_store_item08.png" alt="" width="22%" height="" itemId="8>
+					<span class="price2">2.000</span>
+					<img class="coin2" src="{{STATIC_URL}}mobileWeb_img/ic_store_item_lemon.png" alt="" width="7%" height="">
+
+					<img src="{{STATIC_URL}}mobileWeb_img/ic_store_item_bg3.png" alt="" width="31%">
+					<span class="lemonCount9">레모니즈리그<br>초기화권</span>
+					<img class="item03" src="{{STATIC_URL}}mobileWeb_img/ic_store_item09.png" alt="" width="15%" height="" itemId="9">
+					<span class="price3">5.000</span>
+					<img class="coin3" src="{{STATIC_URL}}mobileWeb_img/ic_store_item_lemon.png" alt="" width="7%" height="">
+				</div>
+
+				<div class="itemArea4">
+					<img src="{{STATIC_URL}}mobileWeb_img/ic_store_item_bg3.png" alt="" width="31%">
+					<span class="lemonCount10">가계부<br>초기화권</span>
+					<img class="item07" src="{{STATIC_URL}}mobileWeb_img/ic_store_item10.png" alt="" width="15%" height="" itemId="10">
+					<span class="price7">5.000</span>
+					<img class="coin7" src="{{STATIC_URL}}mobileWeb_img/ic_store_item_lemon.png" alt="" width="7%" height="">
+
+
+					<img src="{{STATIC_URL}}mobileWeb_img/ic_store_item_bg3.png" alt="" width="31%">
+					<span class="lemonCount2">게시물홍보권</span>
+					<img class="item11" src="{{STATIC_URL}}mobileWeb_img/ic_store_item11.png" alt="" width="20%" height="" itemId="11">
+					<span class="price2">5.000</span>
+					<img class="coin2" src="{{STATIC_URL}}mobileWeb_img/ic_store_item_lemon.png" alt="" width="7%" height="">
+
+					<img src="{{STATIC_URL}}mobileWeb_img/ic_store_item_bg3.png" alt="" width="31%">
+					<span class="lemonCount12">채팅방홍보권</span>
+					<img class="item12" src="{{STATIC_URL}}mobileWeb_img/ic_store_item12.png" alt="" width="22%" height="" itemId="12">
+					<span class="price3">5.000</span>
+					<img class="coin3" src="{{STATIC_URL}}mobileWeb_img/ic_store_item_lemon.png" alt="" width="7%" height="">
+				</div>
+
+				<div class="itemArea5">
+					<img src="{{STATIC_URL}}mobileWeb_img/ic_store_item_bg3.png" alt="" width="31%">
+					<span class="lemonCount10">전문패널<br>자격권</span>
+					<img class="item13" src="{{STATIC_URL}}mobileWeb_img/ic_store_item13.png" alt="" width="23%" height="" itemId="13">
+					<span class="price7">1.000</span>
+					<img class="coin7" src="{{STATIC_URL}}mobileWeb_img/ic_store_item_lemon.png" alt="" width="7%" height="">
+					<img src="{{STATIC_URL}}mobileWeb_img/ic_store_item_bg3.png" alt="" width="31%">
+					<img src="{{STATIC_URL}}mobileWeb_img/ic_store_item_bg3.png" alt="" width="31%">
+				</div>
+
+				<div class="buyItem">채팅방 아이템</div>
+				<div class="itemArea6">
+					<img src="{{STATIC_URL}}mobileWeb_img/ic_store_item_bg4.png" alt="" width="31%">
+					<span class="lemonCount10">프리미엄<br>이용권</span>
+					<img class="item14" src="{{STATIC_URL}}mobileWeb_img/ic_store_item14.png" alt="" width="20%" height="" itemId="14">
+					<span class="price7">1.000</span>
+					<img class="coin7" src="{{STATIC_URL}}mobileWeb_img/ic_store_item_lemon.png" alt="" width="7%" height="">
+
+					<img src="{{STATIC_URL}}mobileWeb_img/ic_store_item_bg4.png" alt="" width="31%">
+					<span class="lemonCount15">100명에게<br>랜덤 고백하기</span>
+					<img class="item15" src="{{STATIC_URL}}mobileWeb_img/ic_store_item15.png" alt="" width="17%" height="" itemId="15">
+					<span class="price2">2.000</span>
+					<img class="coin2" src="{{STATIC_URL}}mobileWeb_img/ic_store_item_lemon.png" alt="" width="7%" height="">
+
+					<img src="{{STATIC_URL}}mobileWeb_img/ic_store_item_bg4.png" alt="" width="31%">
+				</div>
+				
+			</div>
+			<!-- end main-->	
+		</div>
+		<!-- end page-->
+
+
+			<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>		
+			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+			<script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+			<script src="//ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
+			<script src="{{STATIC_URL}}mobileWeb_vendor/waves/waves.min.js"></script>
+			<script src="{{STATIC_URL}}mobileWeb_vendor/wow/wow.min.js"></script>
+			<script src="{{STATIC_URL}}mobileWeb_js/nativedroid2.js"></script>
+			<script src="{{STATIC_URL}}mobileWeb_js/nd2settings.js"></script>
+		
+	</body>
+</html>
+
+<script>
+	$(document).ready(function(){
+		$('div img').on('click', function(){
+			var itemId = $(this).attr("itemId");
+			console.log(itemId);
+			$.post('web/lemon_method.php', {itemId:itemId}, function(){
+				window.location.href = 'web/lemon_method.php';
+			})
+		})
+	})
+	
+</script>
+
+<script>
+	$()
+</script>

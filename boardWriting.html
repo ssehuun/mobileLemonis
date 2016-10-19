@@ -1,0 +1,427 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>게시판 상세페이지</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta name="mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css" />
+		<link rel="stylesheet" href="{{STATIC_URL}}mobileWeb_vendor/waves/waves.min.css" />
+		<link rel="stylesheet" href="{{STATIC_URL}}mobileWeb_vendor/wow/animate.css" />
+		<link rel="stylesheet" href="{{STATIC_URL}}mobileWeb_css/nativedroid2.css" />		
+
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	
+		<style>
+			*{
+				-webkit-box-sizing: border-box;
+		    -moz-box-sizing: border-box;
+		    -o-box-sizing: border-box;
+				box-sizing: border-box;
+				-webkit-transition: .25s ease-in-out;
+				-moz-transition: .25s ease-in-out;
+				-o-transition: .25s ease-in-out;
+				transition: .25s ease-in-out;	
+			}			
+			
+			.detailArea{
+				background-color: #fafafa;
+				padding: 13px 13px 20px 13px;
+				padding-top: 13px;
+				border-bottom: 1px solid #cccccc;
+			}
+			.detailTheme{
+				margin-bottom: 16px;
+				width: 100%;
+				height: 78px;
+			}
+			.listBottom{
+				font-size: 11px;
+			}
+			.listTop{
+				font-size: 11px;	
+				color:#f10000;}			
+			.nickname{
+				color: #666666;}
+			.listDetail{
+				color: #999999;}
+			.detailContent{
+				margin-bottom: 26px;
+				font-size: 13px;
+				color: #333333;
+			}
+			.likeBtnArea{
+				text-align: center;				
+			}
+			#recoCount{
+				font-size: 11px;
+				margin-top: 5px;
+				color: #666666;}
+			.writerNickname{				
+				font-size: 13px;
+				color: #333333;
+				font-weight: bold;
+			}
+			.writerSubArea{
+				margin-left:6px;
+				display: inline;
+			}
+			#addFriendBtn, #writerHomeBtn{
+				width: 20%;
+				padding:3px 0px 3px 0px;
+				margin: 8px 0px 0px 6px;
+				border: 1px solid #666666!important;
+				border-radius: 25px;
+				font-size: 12px;
+				color: #666666!important;
+				display: inline;
+				float: right;
+			}
+
+			.writerArea{
+				background-color: #fafafa;				
+				padding: 13px;
+				height: 66px;
+				width: 100%;
+			}
+			
+
+			.cmtCountArea{
+				border-top: 1px solid #cccccc;
+				border-bottom: 1px solid #cccccc;
+				line-height: 33px;
+				vertical-align: middle;
+				padding: 0px 13px 0px 13px;
+				font-size: 13px;}
+			.cmtCount{
+				color: #f10000;
+			}
+			
+			.cmtList{				
+				padding: 10px 13px 10px 13px;
+				border-bottom: 1px solid #cccccc;
+			}
+			.cmtImg{
+				width: 15%;
+				display: inline-block;
+				text-align: center;
+				vertical-align: top;
+			}
+			.cmtSubArea{
+				width: 80%;
+				margin-left: 10px;
+				display: inline-block;
+			}
+			.cmtContent{
+				margin-top: 5px;
+				width: 90%;
+				color: #666666;
+				font-size: 13px;
+			}
+			.cmtDate{
+				color: #999999;
+				font-size: 12px;
+			}
+			
+			.reportBtn{
+				float: right;						
+				font-size: 13px;
+				color:#cccccc;}
+			.subCmtBtn{
+				float: right;
+				border: 1px solid #999999;
+				border-radius: 2px;
+				color: #999999;				
+				font-size: 13px;
+				padding:3px;				
+			}
+
+
+		/* The Modal (background) */
+			
+
+			
+			/* Modal Content/Box */
+			.modal-content {
+				background-color: #fefefe;
+				margin: 40% auto; /* 15% from the top and centered */				
+				border: 1px solid #888;
+				width: 82%; /* Could be more or less, depending on screen size */
+			}
+			.modal-header{				
+				color: #999999;
+				height: 59px;
+				text-align: center;
+				font-size: 16px;
+			}
+			.modal-body{				
+				line-height: 70px;
+				text-align: center;
+			}
+			.modal-footer {
+				line-height: 50px;				
+			}
+			.modal-footer button{
+				display: inline;
+				font-weight: bold;
+			}
+
+		/* The Close Button */
+			.close {
+				color: #aaa;
+				float: right;
+				font-size: 28px;
+				font-weight: bold;
+			}
+			.close:hover,
+			.close:focus {
+				color: black;
+				text-decoration: none;
+				cursor: pointer;
+			}
+			.reason{
+				font-size: 10px;
+				color:#333333;
+			}
+			.radioOn{
+				display: none;
+			}
+			.reportArea{
+				margin-top: 30px;
+			}
+			
+			
+
+			.cancelBtn{
+				padding: 1em;
+				width:48%!important; 
+				background-color: #f10000!important; 
+				color:#ffffff!important;
+			}
+			.reportModalBtn{
+				padding: 1em;
+				border: 1px solid #f10000!important;
+				width:48%!important; 
+				background-color: #ffffff!important; 
+				color:#f10000!important;
+			}
+			#backImg{
+				margin: 13px 0px 0px 5px;}
+
+			
+		</style>
+</head>
+
+<body>
+		<div data-role="page">
+
+			<!--header-->
+			<div data-role="header" data-position="fixed" class="wow fadeInDown" data-wow-delay="0.2s">					
+				<a href="#" class="ui-btn ui-btn-left wow fadeIn" data-wow-delay='0.8s' data-rel="back">
+					<img id="backImg" src="{{STATIC_URL}}mobileWeb_img/ic_arrow_back.png" alt="" width="25px" height="20px">
+				</a>				
+				<h5 class="wow fadeIn" data-wow-delay='0.4s'>우리 연정이 넘나 이쁜것</h5>
+			</div>
+			
+							
+
+<!--class="ui-content wow fadeIn"-->
+			<div role="main" data-inset="false" data-wow-delay="0.2s">
+				<div>
+					<img src="{{STATIC_URL}}mobileWeb_img/cheerLeader2.jpg" alt="" width="100%" height="186px">
+				</div>
+
+				<div class="detailArea">
+					<div class="detailTheme"> 						
+						<span class="listTop">[쉼터 - 유머]</span>
+						<h5>우리 연정이 넘나 이쁜것 헤해헤헤</h5>
+						<p class="listBottom">
+							<span class="nickname">아이언맨이요</span>
+							<span class="listDetail">
+								&nbsp;16.05.05 10.22&nbsp;&nbsp;조회수 102&nbsp;&nbsp;
+								<img src="{{STATIC_URL}}mobileWeb_img/ic_like.png" width="10px" height="10px"> 5&nbsp;&nbsp;
+								<img src="{{STATIC_URL}}mobileWeb_img/ic_chatbubble.png" width="10px" height="10px"> 22
+							</span>
+						</p>					
+					</div>
+					<div class="detailContent">
+						우리집 연정이 너무 이쁘죠ㅠㅠㅠㅠㅠㅠㅠ
+						다들 눈 정화하세용♥♥♥♥♥♥♥ 울 연정이 사랑행>.<~~~~
+						다들 추천 ㄱㄱㄱㄱ! 홈 방문해주세용~
+					</div>
+					<div class="likeBtnArea">
+						<img class="likeBtn" id="bt_like" src="{{STATIC_URL}}mobileWeb_img/bt_like.png" alt="" width="50px" height="50px"><br>
+						<img class="likeBtn" id="bt_like_on" src="{{STATIC_URL}}mobileWeb_img/bt_like_on.png" alt="" width="50px" height="50px" style="display:none;"><br>
+						<span id="recoCount">추천 5</span>
+					</div>
+				</div>
+
+				<div class="writerArea">
+					<img src="{{STATIC_URL}}mobileWeb_img/cheerLeader2.jpg" alt="" width="40px" height="40px" class="img-circle">
+					<div class="writerSubArea">
+						<span class="writerNickname">연정이머해</span>						
+						<button id="writerHomeBtn">
+							<img src="{{STATIC_URL}}mobileWeb_img/ic_home_small.png" alt="" width="10px" height="10px">
+							작성자홈
+						</button>
+						<button id="addFriendBtn">
+							<img src="{{STATIC_URL}}mobileWeb_img/ic_plus_small.png" alt="" width="10px" height="10px">
+							친구추가
+						</button>						
+					</div>
+				</div>
+				
+				<div class="cmtCountArea">
+					<span>댓글 <span class="cmtCount">5</span></span>
+				</div>
+				
+				<div class="cmtListArea">
+					<div class="cmtList">
+						<div class="cmtImg">
+							<img src="{{STATIC_URL}}mobileWeb_img/cheerLeader2.jpg" alt="" width="50px" height="50px" class="img-circle">
+						</div>
+						<div class="cmtSubArea">						
+							<span class="writerNickname">연정이머해</span><span class="reportBtn" singo="zz">신고</span>
+							<div class="cmtContent">우아 넘나 귀우고 싶다앙~~우아 넘나 귀우고우아 넘나 귀우고우아 넘나 귀우고 싶다앙~~우아 넘나 귀우고우아 넘나 귀우고우아 넘나 귀우고 싶다앙~~우아 넘나 귀우고우아 넘나 귀우고</div>
+							<span class="cmtDate">06/20 13:23<span class="subCmtBtn" onclick="subComment();">댓글 2</span></span>						
+						</div>						
+					</div>
+
+					<div class="cmtList">
+						<div class="cmtImg">
+							<img src="{{STATIC_URL}}mobileWeb_img/cheerLeader2.jpg" alt="" width="50px" height="50px" class="img-circle">
+						</div>
+						<div class="cmtSubArea">						
+							<span class="writerNickname">연정이머해</span><span class="reportBtn">신고</span>
+							<div class="cmtContent">우아 넘나 귀우고 싶다앙~~우아 넘나 귀우고우아 넘나 귀우고우아 넘나 귀우고 싶다앙~~우아 넘나 귀우고우아 넘나 귀우고우아 넘나 귀우고 싶다앙~~우아 넘나 귀우고우아 넘나 귀우고</div>
+							<span class="cmtDate">06/20 13:23<span class="subCmtBtn">댓글 2</span></span>						
+						</div>
+					</div>					
+				</div>
+
+			<!--댓글신고 모달-->	
+				<div id="reportModal" class="modal">					
+					<!-- Modal content -->
+					<div class="modal-content">
+						<span class="close">x</span>
+						<div class="modal-header">
+							댓글신고
+						</div>
+						<div class="modal-body">
+							<p>연정이머해님의 댓글을 신고합니다.<br>
+									신고사유를 선택해주세요.
+							</p>
+							<p class="reportArea">
+								<span class="reportReason">
+									<img class="radioOn" src="{{STATIC_URL}}mobileWeb_img/bt_radiobt_on.png" alt="" width="20px" height="20px">
+									<img src="{{STATIC_URL}}mobileWeb_img/bt_radiobt_off.png" alt="" width="20px" height="20px">
+									<span class="reason">욕설/비방</span>
+								</span>
+								<span class="reportReason">
+									<img class="radioOn" src="{{STATIC_URL}}mobileWeb_img/bt_radiobt_on.png" alt="" width="20px" height="20px">
+									<img src="{{STATIC_URL}}mobileWeb_img/bt_radiobt_off.png" alt="" width="20px" height="20px">
+									<span class="reason">도배/광고</span>
+								</span>
+								<span class="reportReason">
+									<img class="radioOn" src="{{STATIC_URL}}mobileWeb_img/bt_radiobt_on.png" alt="" width="20px" height="20px">
+									<img src="{{STATIC_URL}}mobileWeb_img/bt_radiobt_off.png" alt="" width="20px" height="20px">
+									<span class="reason">연락처교환</span>
+								</span>
+								<span class="reportReason">
+									<img class="radioOn" src="{{STATIC_URL}}mobileWeb_img/bt_radiobt_on.png" alt="" width="20px" height="20px">
+									<img src="{{STATIC_URL}}mobileWeb_img/bt_radiobt_off.png" alt="" width="20px" height="20px">
+									<span class="reason">기타</span>
+								</span>
+							</p>
+
+						</div>
+						<div class="modal-footer">
+							<button class="cancelBtn">취소</button>
+							<button class="reportModalBtn">신고</button>
+						</div>						
+					</div>
+				</div>
+
+
+			
+			</div><!--main-->		
+
+		</div><!--page-->
+
+			<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>		
+			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+			<script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+			<script src="//ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
+			<script src="{{STATIC_URL}}mobileWeb_vendor/waves/waves.min.js"></script>
+			<script src="{{STATIC_URL}}mobileWeb_vendor/wow/wow.min.js"></script>
+			<script src="{{STATIC_URL}}mobileWeb_js/nativedroid2.js"></script>
+			<script src="{{STATIC_URL}}mobileWeb_js/nd2settings.js"></script>
+
+	<script>
+
+	$('.close').on('click', function(){
+		$('.modal').css('display', 'none');
+	})
+	$('.reportBtn').on('click', function(){
+		var receive = $(this).attr('singo');
+		$('#reportModal').modal('show', function(){
+			$('.modal-body').text(receive);
+		})
+	})
+
+
+	/*
+		// Get the modal
+		var modal = document.getElementById('reportModal');
+
+		// Get the button that opens the modal
+		var btn = document.getElementsByClassName("reportBtn")[0];
+
+		// Get the <span> element that closes the modal
+		var span = document.getElementsByClassName("close")[0];
+		var cancelBtn = document.getElementsByClassName("cancelBtn")[0];
+
+		// When the user clicks on the button, open the modal 
+		btn.onclick = function() {
+				modal.style.display = "block";
+		}
+
+		// When the user clicks on <span> (x), close the modal
+		span.onclick = function() {
+				modal.style.display = "none";
+		}
+		cancelBtn.onclick = function() {
+				modal.style.display = "none";
+		}
+		// When the user clicks anywhere outside of the modal, close it
+		window.onclick = function(event) {
+				if (event.target == modal) {
+						modal.style.display = "none";
+				}
+		}
+	*/
+	</script>
+
+	</body>
+</html>
+
+<script>
+//댓댓글로 이동
+	function subComment(){
+		window.location.href = '/mobile/subComment'
+	}
+</script>
+<script>
+	$('.likeBtnArea').on('click', function(){			
+		$('img:visible', this).hide().siblings().show();
+	});
+</script>	
+<script>
+//신고 버튼
+	$('span.reportReason').on('click', function(){			
+		$('img:visible', this).hide().siblings().show();
+	});			
+</script>

@@ -1,0 +1,176 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>댓댓글</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta name="mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css" />
+		<link rel="stylesheet" href="{{STATIC_URL}}mobileWeb_vendor/waves/waves.min.css" />
+		<link rel="stylesheet" href="{{STATIC_URL}}mobileWeb_vendor/wow/animate.css" />
+		<link rel="stylesheet" href="{{STATIC_URL}}mobileWeb_css/nativedroid2.css" />		
+
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	
+		<style>
+			*{
+				-webkit-box-sizing: border-box;
+		    -moz-box-sizing: border-box;
+		    -o-box-sizing: border-box;
+				box-sizing: border-box;
+				-webkit-transition: .25s ease-in-out;
+				-moz-transition: .25s ease-in-out;
+				-o-transition: .25s ease-in-out;
+				transition: .25s ease-in-out;		
+			}			
+			.zmdi-arrow-back{
+				color:#333333;				
+			}
+		/*댓댓글의 주인*/
+			.cmtList{				
+				padding: 10px 13px 10px 13px;
+				/*border-bottom: 1px solid #cccccc;*/
+			}
+			.cmtImg{
+				width: 15%;
+				display: inline-block;
+				text-align: center;
+				vertical-align: top;
+			}
+			.cmtSubArea{
+				width: 80%;
+				margin-left: 10px;
+				display: inline-block;
+			}
+			.cmtContent{
+				margin-top: 5px;
+				width: 90%;
+				color: #666666;
+				font-size: 13px;
+			}
+			.cmtDate{
+				border-left: 1px solid #999999;
+				color: #999999;
+				font-size: 12px;
+				padding-left: 7px;
+			}
+			
+			.reportBtn{
+				float: right;						
+				font-size: 13px;
+				color:#cccccc;}			
+			.delCmtBtn{
+				float: right;						
+				font-size: 13px;
+			}
+		/*댓댓글 숫자*/
+			.subCmtCountArea{
+				border-top: 1px solid #cccccc;
+				border-bottom: 1px solid #cccccc;
+				line-height: 33px;
+				vertical-align: middle;
+				padding: 0px 13px 0px 13px;
+				font-size: 13px;}
+			.subCmtCount{
+				color: #f10000;
+			}
+		/*댓댓글*/
+			.subCmtListArea{
+				background-color: #fafafa;
+			}
+			.subCmtList{				
+				padding: 10px 13px 10px 13px;
+				border-bottom: 1px solid #eaeaea;
+			}
+			#backImg{
+				margin: 13px 0px 0px 5px;}
+		</style>
+	</head>
+
+	<body>
+		<div data-role="page">
+
+			<!--header-->
+			<div data-role="header" data-position="fixed" class="wow fadeInDown" data-wow-delay="0.2s">									
+				<a href="#" class="ui-btn ui-btn-left wow fadeIn" data-wow-delay='0.8s' data-rel="back">
+					<img id="backImg" src="{{STATIC_URL}}mobileWeb_img/ic_arrow_back.png" alt="" width="25px" height="20px">
+				</a>
+				<h5 class="wow fadeIn" data-wow-delay='0.4s'>댓글</h5>
+			</div>
+			
+							
+
+<!--class="ui-content wow fadeIn"-->
+			<div role="main" data-inset="false" data-wow-delay="0.2s">
+				
+				<div class="cmtList">
+					<div class="cmtImg">
+						<img src="{{STATIC_URL}}mobileWeb_img/cheerLeader2.jpg" alt="" width="50px" height="50px" class="img-circle">
+					</div>
+					<div class="cmtSubArea">						
+						<span class="writerNickname">연정이머해&nbsp;</span>
+						<span class="cmtDate"> 06/20 13:23</span>
+						<span class="reportBtn">신고</span>
+						<div class="cmtContent">우아 넘나 귀우고 싶다앙~~우아 넘나 귀우고우아 넘나 귀우고우아 넘나 귀우고 싶다앙~~우아 넘나 귀우고우아 넘나 귀우고우아 넘나 귀우고 싶다앙~~우아 넘나 귀우고우아 넘나 귀우고</div>						
+					</div>						
+				</div>
+
+				<div class="subCmtCountArea">
+					<span>댓글 <span class="subCmtCount">2</span></span>
+				</div>
+				
+				<div class="subCmtListArea">
+					<div class="subCmtList">
+						<div class="cmtImg">
+							<img src="{{STATIC_URL}}mobileWeb_img/cheerLeader2.jpg" alt="" width="50px" height="50px" class="img-circle">
+						</div>
+						<div class="cmtSubArea">						
+							<span class="writerNickname">니가먼데&nbsp;</span>
+							<span class="cmtDate"> 06/20 13:23</span>
+							<span class="reportBtn">신고</span>
+							<div class="cmtContent">오늘 연경이보다 이쁜애 봄 코필흘릴뻔,,,,</div>						
+						</div>						
+					</div>
+					<div class="subCmtList">
+						<div class="cmtImg">
+							<img src="{{STATIC_URL}}mobileWeb_img/cheerLeader2.jpg" alt="" width="50px" height="50px" class="img-circle">
+						</div>
+						<div class="cmtSubArea">						
+							<span class="writerNickname">니가먼데&nbsp;</span>
+							<span class="cmtDate"> 06/20 13:23</span>
+							<span class="delCmtBtn"><img src="{{STATIC_URL}}mobileWeb_img/ic_delete.png" alt="" width="12px;" height="12px"></span>
+							<div class="cmtContent">오늘 지하철에서 연경이보다 이쁜애 봄 코필흘릴뻔,,,,진심 그런애들을 보고 엘프라 하는구나 했음.... 와 나 여기에 일기씀?</div>						
+						</div>						
+					</div>
+				</div>
+
+			</div><!--main-->		
+			
+
+		</div><!--page-->
+
+
+
+
+			<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>		
+			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+			<script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+			<script src="//ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
+			<script src="{{STATIC_URL}}mobileWeb_vendor/waves/waves.min.js"></script>
+			<script src="{{STATIC_URL}}mobileWeb_vendor/wow/wow.min.js"></script>
+			<script src="{{STATIC_URL}}mobileWeb_js/nativedroid2.js"></script>
+			<script src="{{STATIC_URL}}mobileWeb_js/nd2settings.js"></script>
+
+		</body>
+</html>
+
+
+<script>
+//댓댓글 삭제버튼
+	$('.delCmtBtn').on('click', function() {
+		$(this).parent().parent().remove();
+	})
+</script>

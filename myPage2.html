@@ -1,0 +1,260 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>마이페이지</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta name="mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css" />
+		<link rel="stylesheet" href="{{STATIC_URL}}mobileWeb_vendor/waves/waves.min.css" />
+		<link rel="stylesheet" href="{{STATIC_URL}}mobileWeb_vendor/wow/animate.css" />
+		<link rel="stylesheet" href="{{STATIC_URL}}mobileWeb_css/nativedroid2.css" />		
+
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	
+		<style>
+			*{
+				-webkit-box-sizing: border-box;
+		    -moz-box-sizing: border-box;
+		    -o-box-sizing: border-box;
+				box-sizing: border-box;
+				-webkit-transition: .25s ease-in-out;
+				-moz-transition: .25s ease-in-out;
+				-o-transition: .25s ease-in-out;
+				transition: .25s ease-in-out;	
+			}
+			#backImg{
+				margin: 13px 0px 0px 5px;}
+			.profileArea{
+				text-align: center;
+			}
+			.profileThumbnail{				
+				border-radius: 50%;
+				margin: 25px 0px 10px 0px;
+			}
+			.profileNickname{
+				margin: 14px 0px 9px 0px;
+				font-size: 16px;
+				color: #333333;
+			}
+			.profileEmail{
+				margin-bottom: 14px;
+				font-size: 11px;
+				color: #666666;	
+			}
+			#myHomeBtn{
+				padding: 3px 0px;
+				width: 33%;
+				text-align: center;
+				border: 1px solid #f10000;
+				border-radius: 25px;
+				margin: 0 auto;
+				margin-bottom: 25px;
+			}
+			#goHome{
+				font-size: 13px;
+				color: #f10000;
+			}
+			.myPageMenuArea{
+				margin: 0px 10% 23px 10%;
+			}
+			.myPageMenu{
+				line-height: 40px;				
+				vertical-align: middle;
+				border-bottom: 1px solid #eaeaea;
+			}
+			.myPageMenuArea div:nth-child(1){
+				border-top: 1px solid #eaeaea;
+			}
+			.myPageMenu img{
+				margin: 0px 7px 0px 10px;
+			}
+			.myPageWord{
+				color: #666666;
+				font-size: 13px;
+			}
+			.myPageNum{
+				float: right;
+				font-size: 13px;				
+			}
+			.red{
+				color: #f10000;
+			}
+			.settingTheme{
+				color: #999999;
+				background-color: #fafafa;
+				color: 13px;
+				padding-top: 7px;
+			}
+			
+			.myPageSetting div{
+				line-height: 40px;
+				padding-left: 14px;
+				padding-right: 14px;
+				border-bottom: 1px solid #eaeaea;
+			}
+			.myPageSetting div:nth-child(1){
+				border-top: 1px solid #cccccc;
+			}
+			.privateInfo{
+				font-size: 13px;
+				color: #333333;
+			}
+			.settingMenu{
+				font-size: 13px;
+				color: #333333;
+			}
+			.accoutSetting{
+				color: #999999;
+			}
+			.idSetting, .nickSetting,.cmtSetting,.introSetting{
+				color: #666666;
+				float: right;
+			}
+			.imgRight{				
+				float: right;
+			}
+		</style>
+
+	</head>
+
+	<body>
+				<!--header-->
+			<div data-role="header" data-position="fixed" class="wow fadeInDown" data-wow-delay="0.2s">					
+				<a href="#" class="ui-btn ui-btn-left wow fadeIn" data-wow-delay='0.8s' data-rel="back">
+					<img id="backImg" src="{{STATIC_URL}}mobileWeb_img/ic_arrow_back.png" alt="" width="25px" height="20px">
+				</a>				
+				<h5 class="wow fadeIn" data-wow-delay='0.4s'>마이페이지</h5>
+			</div>							
+
+			<!--class="ui-content wow fadeIn"-->
+			<div role="main" data-inset="false" data-wow-delay="0.2s">
+				<div class="profileArea">						
+					<img class="profileThumbnail" src="{{STATIC_URL}}mobileWeb_img/cheerLeader2.jpg" width="70px" height="70px" />
+					<div class="profileNickname">독고다이다</div>
+					<div class="profileEmail">hongildont7@lemonis.com</div>
+					<div id="myHomeBtn">
+						<span id="goHome">내 홈으로 가기&nbsp;</span>
+						<img src="{{STATIC_URL}}mobileWeb_img/ic_chevron_light2.png" alt="" width="8px" height="12px">
+					</div>
+				</div>
+
+				<div class="myPageMenuArea">
+					<div class="myPageMenu">
+						<img src="{{STATIC_URL}}mobileWeb_img/ic_mypage_proto.png" alt="" width="15px" height="15px">
+						<span class="myPageWord">가계부(프로토)</span>
+						<span class="myPageNum">
+							<span class="red">11</span>개
+							<img src="{{STATIC_URL}}mobileWeb_img/ic_chevron_light_g.png" alt="" width="6px" height="13px">
+						</span>
+					</div>
+					<div class="myPageMenu">
+						<img src="{{STATIC_URL}}mobileWeb_img/ic_mypage_person.png" alt="" width="15px" height="15px">
+						<span class="myPageWord">나를 추가한 사람</span>
+						<span class="myPageNum">
+							<span class="red">26</span>명
+							<img src="{{STATIC_URL}}mobileWeb_img/ic_chevron_light_g.png" alt="" width="6px" height="13px">
+						</span>
+					</div>
+					<div class="myPageMenu">
+						<img src="{{STATIC_URL}}mobileWeb_img/ic_mypage_pick1.png" alt="" width="15px" height="15px">
+						<span class="myPageWord">내가 판매한 픽</span>1
+						<span class="myPageNum">
+							<span class="red">15</span>개
+							<img src="{{STATIC_URL}}mobileWeb_img/ic_chevron_light_g.png" alt="" width="6px" height="13px">
+						</span>
+					</div>
+					<div class="myPageMenu">
+						<img src="{{STATIC_URL}}mobileWeb_img/ic_mypage_pick2.png" alt="" width="15px" height="15px">
+						<span class="myPageWord">내가 구매한 픽 보관함</span>
+						<span class="myPageNum">
+							<span class="red">9</span>개
+							<img src="{{STATIC_URL}}mobileWeb_img/ic_chevron_light_g.png" alt="" width="6px" height="13px">
+						</span>
+					</div>
+				</div>
+
+
+				<div class="myPageSetting">
+
+					<div class="settingTheme">계정설정</div>
+					<div class="privateInfo">
+						<span class="settingMenu">아이디</span>
+						<span class="idSetting">
+							hongildong@lemonis.com
+							<img src="{{STATIC_URL}}mobileWeb_img/ic_chevron_right_g2.png" alt="" width="8px" height="12px">		
+						</span>
+					</div>
+					<div class="privateInfo">
+						<span class="settingMenu">닉네임</span>
+						<span class="nickSetting">
+							독고다이다
+							<img src="{{STATIC_URL}}mobileWeb_img/ic_chevron_right_g2.png" alt="" width="8px" height="12px">		
+						</span>						
+					</div>
+					<div class="privateInfo">
+						<span class="settingMenu">비밀번호 재설정</span>
+						<span class="imgRight">
+							<img src="{{STATIC_URL}}mobileWeb_img/ic_chevron_right_g2.png" alt="" width="8px" height="12px">		
+						</span>
+					</div>
+				
+				
+					<div class="settingTheme">레몬톡 설정</div>
+					<div>
+						<span class="settingMenu">대화명</span>
+						<span class="cmtSetting">
+							친구추가 환영~**						
+							<img src="{{STATIC_URL}}mobileWeb_img/ic_chevron_right_g2.png" alt="" width="8px" height="12px">						
+					</div>
+					<div>
+						<span class="settingMenu">간단소개</span>
+						<span class="introSetting">
+							안녕하세요!! 찍신 독고다이다입니다~						
+							<img src="{{STATIC_URL}}mobileWeb_img/ic_chevron_right_g2.png" alt="" width="8px" height="12px">		
+						</span>
+					</div>
+					<div>
+						<span class="settingMenu">배경사진(커버)설정</span>
+						<span class="imgRight">
+							<img src="{{STATIC_URL}}mobileWeb_img/ic_chevron_right_g2.png" alt="" width="8px" height="12px">		
+						</span>
+					</div>
+				
+				
+					<div class="settingTheme">이용약관</div>
+					<div>
+						<span class="settingMenu">서비스 이용약관</span>						
+						<span class="imgRight">
+							<img src="{{STATIC_URL}}mobileWeb_img/ic_chevron_right_g2.png" alt="" width="8px" height="12px">		
+						</span>	
+					</div>
+					<div>
+						<span class="settingMenu">개인정보 취급방침</span>
+						<span class="imgRight">
+							<img src="{{STATIC_URL}}mobileWeb_img/ic_chevron_right_g2.png" alt="" width="8px" height="12px">		
+						</span>
+					</div>
+				</div>
+				<div style="height:100px; background-color:#fafafa"></div>
+
+		
+	
+			</div><!--main-->		
+
+		</div><!--page-->
+
+			<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>		
+			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+			<script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+			<script src="//ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
+			<script src="{{STATIC_URL}}mobileWeb_vendor/waves/waves.min.js"></script>
+			<script src="{{STATIC_URL}}mobileWeb_vendor/wow/wow.min.js"></script>
+			<script src="{{STATIC_URL}}mobileWeb_js/nativedroid2.js"></script>
+			<script src="{{STATIC_URL}}mobileWeb_js/nd2settings.js"></script>
+
+	</body>
+</html>

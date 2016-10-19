@@ -1,0 +1,162 @@
+{% extends 'mobileWeb/blocks/base.html' %}
+
+
+{% block content %}
+
+{% block css %}
+<style>
+	.myRoomList{
+		border: 1px solid black;
+		width: 100%;
+		height: 800px;
+		overflow: auto;
+	}
+	.room{			
+		height: 100px;
+		border-bottom: 1px solid black;				
+	}
+	.imgArea, .roomInfo{
+		display: inline-block;} 
+	.imgArea{
+		height: 100%;
+		width: 20%;
+		text-align: center;
+		border-right: 1px solid black;
+	}
+	.imgArea img{
+		margin-top: 8%;
+		vertical-align: middle;
+		text-align: center;
+	}
+	.roomInfo{
+		padding:10px;
+		vertical-align: bottom;
+		width: 80%;
+		height: 100%;}
+	.roomInfo .roomTitle{
+		font-size: 18px;
+		white-space: nowrap;
+		width: 70%;
+		overflow: hidden;
+		text-overflow: ellipsis;				
+		word-wrap:normal !important;
+	}
+	.ppNum{
+		font-size: 15px;
+		color: blue;
+		float: right;}
+	.roomSubtitle{
+		font-size: 17px;
+		white-space: nowrap;
+		width: 95%;
+		overflow: hidden;
+		text-overflow: ellipsis;				
+		word-wrap:normal !important;
+	}
+	.captain{
+		color: #2994eb;}
+</style>
+{% endblock %}
+{% block main %}
+
+		<!--main-->
+		<div role="main" class="ui-content wow fadeIn" data-inset="false" data-wow-delay="0.2s">				
+			<!--header-->
+			<div data-role="header" data-position="fixed" class="wow fadeInDown" data-wow-delay="0.2s">				
+				<a href="#leftpanel" class="ui-btn ui-btn-left wow fadeIn" data-wow-delay='0.8s'>
+					<img id="naviconImg" src="{{STATIC_URL}}mobileWeb_img/ic_navicon.png" alt="" width="20px" height="15px">
+				</a>
+				<h1 class="wow fadeIn" data-wow-delay='0.4s'>
+					<img src="{{STATIC_URL}}mobileWeb_img/ic_logo.png" alt="logo" width="82px" height="28px">
+				</h1>
+			</div>
+
+			<!--인기방 리스트-->
+			<div class="myRoomList"></div>
+			
+		</div>
+
+<script>
+	//인기방 리스트 가져오기
+		var page = 0;
+		$.post('/alba/openRoomList/',{page:0}, function(data){
+
+			page = data.page;
+			var data = data.openRoomList;		
+			console.log(data);						
+			for(var i=0; i < data.length; i++){				
+				var myRoom = '';
+				myRoom += '<div class="room" pNum="'+data[i].nowNum+'/'+data[i].maxNum+'" name="'+data[i].title+'" id="'+data[i].roomId+'" onclick="enterRoom(this)">';
+				myRoom += '<div class="imgArea">';
+
+				if(data[i].user.picKey==""){
+					data[i].user.picKey = '{{STATIC_URL}}mobileWeb_img/onError.png'
+				}
+				myRoom +=	'<img src="'+data[i].user.picKey+'" alt="" width="50px" height="50px" class="img-circle"><br>';
+				myRoom += '<h5 class="captain"><b>'+data[i].user.nickname+'</b></h5>';
+				myRoom +=	'</div><div class="roomInfo">'+
+										'<div class=""><p>'+
+										'<span class="roomTitle"><b>'+data[i].title+'</b></span>';
+				if(data[i].enterFee){
+					myRoom += '<span><img src="{{STATIC_URL}}mobileWeb_img/ic_badge_pay.png" width="20px" height="20px"></span>'
+				}						
+				myRoom +=		'<span class="ppNum">'+data[i].nowNum+'/'+data[i].maxNum+'명</span></p>'+
+									'</div>'+
+									'<div class="roomSubtitle">'+
+										'<h5>'+data[i].subTitle+'</h5>'+
+									'</div>'+
+									'</div>'+
+									'</div>';
+				$('.myRoomList').append(myRoom);
+			}//for
+
+			//인기방 리스트 페이징	
+			console.log(page);
+			var nextPage = page
+
+			$('.myRoomList').scroll(function(){		
+				if( $('.myRoomList').scrollTop() + $('.myRoomList').height() == $('.myRoomList')[0].scrollHeight ) {					
+					$.post('/alba/openRoomList/', {page:nextPage}, function(data){
+						page = data.page
+						console.log(page)
+						var data = data.openRoomList;
+						console.log(data);
+						
+						for(var i=0; i < data.length; i++){				
+							var myRoom = '';
+							myRoom += '<div class="room" pNum="'+data[i].nowNum+'/'+data[i].maxNum+'" name="'+data[i].title+'" id="'+data[i].roomId+'" onclick="enterRoom(this)">';
+							myRoom += '<div class="imgArea">';
+							if(data[i].user.picKey==""){
+								data[i].user.picKey = '{{STATIC_URL}}mobileWeb_img/onError.png'
+							}
+							myRoom +=	'<img src="'+data[i].user.picKey+'" alt="" width="50px" height="50px" class="img-circle"><br>';
+							myRoom += '<h5 class="captain"><b>'+data[i].user.nickname+'</b></h5>';
+							myRoom +=	'</div><div class="roomInfo">'+
+													'<div class=""><p>'+
+													'<span class="roomTitle"><b>'+data[i].title+'</b></span>';
+							if(data[i].enterFee){
+								myRoom += '<span><img src="{{STATIC_URL}}mobileWeb_img/ic_badge_pay.png" width="20px" height="20px"></span>'
+							}	
+							myRoom +=	'<span class="ppNum">'+data[i].nowNum+'/'+data[i].maxNum+'명</span></p>'+
+												'</div>'+
+												'<div class="roomSubtitle">'+
+													'<h5>'+data[i].subTitle+'</h5>'+
+												'</div>'+
+												'</div>'+
+												'</div>';
+							$('.myRoomList').append(myRoom);
+						}						
+					})//post								
+				} // end if	
+				nextPage = page
+				console.log(nextPage);
+			});//scroll
+		});
+
+	
+</script>
+
+
+
+{% endblock %}
+{% endblock %}

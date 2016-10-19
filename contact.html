@@ -1,0 +1,558 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>고객센터</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta name="mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css" />
+		<link rel="stylesheet" href="{{STATIC_URL}}mobileWeb_vendor/waves/waves.min.css" />
+		<link rel="stylesheet" href="{{STATIC_URL}}mobileWeb_vendor/wow/animate.css" />
+		<link rel="stylesheet" href="{{STATIC_URL}}mobileWeb_css/nativedroid2.css" />		
+
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    
+    <style>
+    	*{
+				-webkit-box-sizing: border-box;
+		    -moz-box-sizing: border-box;
+		    -o-box-sizing: border-box;
+				box-sizing: border-box;
+				-webkit-transition: .25s ease-in-out;
+				-moz-transition: .25s ease-in-out;
+				-o-transition: .25s ease-in-out;
+				transition: .25s ease-in-out;					
+			}
+    	#backImg{
+				margin: 13px 0px 0px 5px;}
+
+			div.menuArea{
+				border-bottom: 1px solid #cccccc;
+				padding: 13px 14px 13px 14px;}
+			.menuArea div:nth-child(1),.menuArea div:nth-child(2),.menuArea div:nth-child(4),.menuArea div:nth-child(5){
+				margin-right: 2%;
+			}
+			.menuArea div:nth-child(1),.menuArea div:nth-child(2),.menuArea div:nth-child(3){
+				margin-bottom: 7px;
+			}
+			div.faqMenu{
+				padding: 10px 0px 10px 0px;
+				display: inline-block;
+				width: 32%;
+				font-size: 14px;
+				border: 1px solid #cccccc;
+				border-radius: 3px;
+				text-align: center;
+				background-color: #fafafa;
+				color: #cccccc;
+			}
+			div.guitar{
+				border-bottom: 1px solid #eaeaea;
+				padding: 7px 0px 0px 14px;
+				height: 50px;
+			}
+			div.menuTheme{
+				font-size: 12px;
+				color: #f10000;
+				padding-bottom: 5px;
+			}
+			div.ask{
+				color: #333333;
+				font-size: 14px;
+			}
+			.selected{
+				border: 1px solid #f10000 !important;
+				color: #f10000 !important;
+			}
+			.cancel{
+				border: 1px solid #cccccc;
+				color: #cccccc;
+			}
+			.se_textView, .se_viewArea{
+				margin-top: 20px;
+				text-align: center;
+			}
+			a[data-toggle="collapse"]{
+				text-decoration: none;
+			}
+    </style>
+	</head>
+	<body>
+		<div data-role="page" >
+
+			<!--header-->
+			<div data-role="header" data-position="fixed" class="wow fadeInDown" data-wow-delay="0.2s">					
+				<a href="#" class="ui-btn ui-btn-left wow fadeIn" data-wow-delay='0.8s' data-rel="back">
+					<img id="backImg" src="{{STATIC_URL}}mobileWeb_img/ic_arrow_back.png" alt="" width="25px" height="20px">
+				</a>
+				<h5 class="wow fadeIn" data-wow-delay='0.4s'>자주 묻는 질문</h5>
+			</div>			
+			
+			<!--main-->
+			<div role="main" id="faq" data-inset="false" data-wow-delay="0.2s">
+				<div class="menuArea">
+					<div class="faqMenu selected" menuNum="0">전체</div><div class="faqMenu" menuNum="1">일반</div><div class="faqMenu" menuNum="2">결제</div>
+					<div class="faqMenu" menuNum="3">프로토(가계부)</div><div class="faqMenu" menuNum="4">레몬톡</div><div class="faqMenu" menuNum="5">기타</div>
+				</div>
+
+				
+				<div class="panel-group" id="accordion">
+
+				  <div class="panel memberService">
+				    <div class="panel-heading">
+				      <h4 class="panel-title">
+				        <a data-toggle="collapse" data-parent="#accordion" href="#normal1">
+				        	<div class="menuTheme">[일반]</div>
+									<div class="ask">레모니즈는 어떤 서비스인가요?</div>
+				        </a>
+				      </h4>
+				    </div>
+				    <div id="normal1" class="panel-collapse collapse">
+				      <div class="panel-body">                
+                <img src="http://mblogthumb4.phinf.naver.net/20160802_283/jinhan0305_14701207246529WeUd_JPEG/KakaoTalk_20160802_155140363.jpg?type=w800" width="100%" height="200" data-attachment-id="IrqtJ_0fG4FfyVzxMtFfuZfmyagU" alt="" class="se_mediaImage __se_img_el" id="SEDOC-1470200417019-775378741_image_0_img">                
+            
+				      	<div class="se_textView">
+                  <p class="se_textarea"><!-- SE3-TEXT { --><span><br></span><span><span class="se_fs_T2" style="color: rgb(0, 0, 0);"><b>레모니즈는 스포츠를 즐기는 </b><br></span><span class="se_fs_T2" style="color: rgb(0, 0, 0);"><b>모든 유저가 </b></span><span class="se_fs_T2" style="color: rgb(0, 0, 0);"><b>함께 사용할 수 있는</b><br></span><span class="se_fs_T2" style="color: rgb(0, 0, 0);"><b>스포츠 SNS 입니다.&nbsp;</b></span><br><br><span style="color: rgb(153, 153, 153);">경기정보와 스코어,&nbsp;</span></span><span><span style="color: rgb(153, 153, 153);">해외분석, 유저분석을</span><br></span><span><span style="color: rgb(153, 153, 153);"> 통해&nbsp;</span></span><span><span style="color: rgb(153, 153, 153);">누구보다 빠르게 스포츠 정보를 </span><br></span><span><span style="color: rgb(153, 153, 153);">이용할 수&nbsp;</span></span><span><span style="color: rgb(153, 153, 153);">있습니다.</span><br></span><span><span style="color: rgb(153, 153, 153);"></span><br></span><span><span style="color: rgb(153, 153, 153);"><br></span></span><span><span style="color: rgb(153, 153, 153);">수많은 회원들과 예측을 공유하고&nbsp;</span><br></span><span><span style="color: rgb(153, 153, 153);">공정한 경쟁을 통해 </span><br></span><span><span style="color: rgb(153, 153, 153);"> 스포츠 그 이상의 재미를 즐기고</span><br></span><span><span><span style="color: rgb(153, 153, 153);">실력에 따라 수익을 얻을 수도 있습니다.</span><br></span><span><span style="color: rgb(153, 153, 153);"></span><br></span><span><span style="color: rgb(153, 153, 153);">새롭게 오픈한 </span></span></span><span style="color: rgb(0, 0, 0);"><span><span style="color: rgb(0, 0, 0);"><b>레몬</b></span></span></span><span style="color: rgb(0, 0, 0);"><span><span style="color: rgb(244, 212, 0);"><b>톡</b></span></span></span><span><span><span style="color: rgb(244, 212, 0);"> </span></span></span><span><span><span style="color: rgb(153, 153, 153);">에서는&nbsp;</span><br></span><span><span style="color: rgb(153, 153, 153);">더 쉬워진 친구관리를 통해</span><br></span><span><span style="color: rgb(153, 153, 153);"></span><br></span><span><span style="color: rgb(153, 153, 153);">그룹채팅 및 1:1채팅을 즐기실 수 있으며,</span><br></span><span><span style="color: rgb(153, 153, 153);">사진, 동영상, 예측정보 등 멀티미디어를</span><br></span><span><span style="color: rgb(153, 153, 153);">첨부할 수 있습니다. </span><br></span><span><span style="color: rgb(153, 153, 153);"></span><br></span><span><span style="color: rgb(153, 153, 153);">현재 안드로이드폰에서 지원 가능하며, </span><br></span><span><span style="color: rgb(153, 153, 153);">레모니즈웹사이트, 아이폰용 앱을 개발중에 </span><br></span><span><span style="color: rgb(153, 153, 153);">있습니다. </span><br></span><span><span style="color: rgb(153, 153, 153);"></span><br></span><span><span style="color: rgb(153, 153, 153);"></span><br></span><span><span style="color: rgb(153, 153, 153);"></span></span><span><span style="color: rgb(153, 153, 153);"></span></span></span><span></span><!-- } SE3-TEXT --></p>
+           
+			            <div class="se_viewArea" style="max-width:170px">                
+			              <img src="http://mblogthumb3.phinf.naver.net/20160802_110/jinhan0305_14701227672151DAoe_JPEG/%B0%F8%BD%C4.jpg?type=w800" width="170" height="30" data-attachment-id="I9MALj37tK0KxxC40ao0D7SGZ-wo" alt="" class="se_mediaImage __se_img_el" id="SEDOC-1470200417019-775378741_image_1_img">                
+			            </div>
+  
+                    </div>
+				      </div>
+				    </div>
+				  </div>
+				  <div class="panel memberService">
+				    <div class="panel-heading">
+				      <h4 class="panel-title">
+				        <a data-toggle="collapse" data-parent="#accordion" href="#normal2">
+				        	<div class="menuTheme">[일반]</div>
+									<div class="ask">레모니즈의 '레몬', 그것이 궁금하다!</div>
+				        </a>
+				      </h4>
+				    </div>
+				    <div id="normal2" class="panel-collapse collapse">
+				      <div class="panel-body">
+				      									
+               	<div class="se_viewArea">
+               		<img src="{{STATIC_URL}}mobileWeb_img/whatlemon1.jpg" alt="" width="100%" height="200px">
+               	</div>
+
+                <div class="se_textView">
+                  <p class="se_textarea"><!-- SE3-TEXT { --><span><b><br></b></span><span class="se_fs_T2"><b>레몬이 도대체 뭐지?</b></span><br><br><span style="color: rgb(153, 153, 153);">레모니즈에서는 다른 회원의 정보를<br></span><span style="color: rgb(153, 153, 153);">'레몬' 을 이용해 구매할 수 있습니다.<br></span><span style="color: rgb(153, 153, 153);"><br></span><span style="color: rgb(153, 153, 153);">나의 정보도 판매할 수 있으며,<br></span><span style="color: rgb(153, 153, 153);">랭킹에 진입하거나 분석을 공유해<br></span><span style="color: rgb(153, 153, 153);"></span><span style="color: rgb(153, 153, 153);">정보를 많이 팔수록,<br></span><span style="color: rgb(153, 153, 153);"> 더 많은 </span><span style="color: rgb(244, 212, 0);">레몬</span><span style="color: rgb(153, 153, 153);">을 얻게됩니다.<br></span><span style="color: rgb(153, 153, 153);"><br></span><span style="color: rgb(153, 153, 153);"><br></span><span style="color: rgb(153, 153, 153);"></span><!-- } SE3-TEXT --></p>
+                </div>
+
+                <div class="se_viewArea" >
+	                <img src="http://mblogthumb2.phinf.naver.net/20160729_53/jinhan0305_1469762353725TxJzW_JPEG/KakaoTalk_20160729_121124586.jpg?type=w800" width="100%" height="200px" data-attachment-id="IyxhuFf2BX3a5SX8eICUJeIx6z0U" alt="" class="se_mediaImage __se_img_el" id="SEDOC-1470200514989-1995811833_image_1_img">       
+	          		</div>
+
+                <div class="se_viewArea">
+               		<img src="{{STATIC_URL}}mobileWeb_img/whatlemon2.jpg" alt="" width="100%" height="200px">
+               	</div>
+               	<div class="se_textView">
+                  <p class="se_textarea"><!-- SE3-TEXT { --><span class="se_fs_T2"><br></span><span class="se_fs_T2"><b>레몬을 활용하는 방법은?</b></span><!-- } SE3-TEXT --></p>
+	              </div>
+               	<div class="se_viewArea">
+               		<img src="{{STATIC_URL}}mobileWeb_img/whatlemon3.jpg" alt="" width="100%" height="200px">
+               	</div>
+               	<div class="se_viewArea">
+               		<img src="{{STATIC_URL}}mobileWeb_img/whatlemon4.jpg" alt="" width="100%" height="200px">
+               	</div>
+               	<div class="se_viewArea">
+               		<img src="{{STATIC_URL}}mobileWeb_img/whatlemon5.jpg" alt="" width="100%" height="200px">
+               	</div>            
+
+				      </div>
+				    </div>
+				  </div>
+				  <div class="panel memberService">
+				    <div class="panel-heading">
+				      <h4 class="panel-title">
+				        <a data-toggle="collapse" data-parent="#accordion" href="#normal3">
+				        	<div class="menuTheme">[일반]</div>
+									<div class="ask">회원정보 수정 또는 회원탈퇴는 어떻게 하나요?</div>
+				        </a>
+				      </h4>
+				    </div>
+				    <div id="normal3" class="panel-collapse collapse">
+				      <div class="panel-body">
+				      		
+								<div class="se_viewArea" >
+               		<img src="{{STATIC_URL}}mobileWeb_img/profile1.jpg" alt="" width="100%" height="200px">
+            		</div>
+
+				      	<div class="se_textView">
+                  <p class="se_textarea"><!-- SE3-TEXT { -->
+                  	<span><b>프로필페이지에서 나를 표현하세요!</b></span><br><br><span>
+                  	<span style="color: rgb(153, 153, 153);">레몬톡에서 상대방에게 보여질 </span><br></span><span><span style="color: rgb(153, 153, 153);">정</span></span><span><span style="color: rgb(153, 153, 153);">보 뿐 아니라,&nbsp;</span><br></span><span><span style="color: rgb(153, 153, 153);"></span><br></span><span><span style="color: rgb(153, 153, 153);">아이디확인, 비밀번호 설정 등&nbsp;</span><br></span><span><span style="color: rgb(153, 153, 153);">회원정보 관리도</span><br></span><span><span style="color: rgb(153, 153, 153);">편리하게 해결하세요!</span></span><br><span></span><!-- } SE3-TEXT --></p>
+                </div>
+
+                <div class="se_viewArea" >
+               		<img src="{{STATIC_URL}}mobileWeb_img/profile6.jpg" alt="" width="100%" height="200px">
+            		</div>
+
+                <div class="se_viewArea" >
+               		<img src="{{STATIC_URL}}mobileWeb_img/profile2.jpg" alt="" width="100%" height="200px">
+            		</div>
+            		<div class="se_viewArea" >
+               		<img src="{{STATIC_URL}}mobileWeb_img/profile3.jpg" alt="" width="100%" height="200px">
+            		</div>
+            		<div class="se_viewArea" >
+               		<img src="{{STATIC_URL}}mobileWeb_img/profile4.jpg" alt="" width="100%" height="200px">
+            		</div>
+            		<div class="se_viewArea" >
+               		<img src="{{STATIC_URL}}mobileWeb_img/profile5.jpg" alt="" width="100%" height="200px">
+            		</div>
+
+				      </div>
+				    </div>
+				  </div>
+				  <div class="panel memberService">
+				    <div class="panel-heading">
+				      <h4 class="panel-title">
+				        <a data-toggle="collapse" data-parent="#accordion" href="#normal4">
+				        	<div class="menuTheme">[일반]</div>
+									<div class="ask">레몬니즈 안하면 손해인 이유?(환급시스템)</div>
+				        </a>
+				      </h4>
+				    </div>
+				    <div id="normal4" class="panel-collapse collapse">
+				      <div class="panel-body">
+				      		
+								<div class="se_viewArea" >
+               		<img src="{{STATIC_URL}}mobileWeb_img/hwan1.jpg" alt="" width="100%" height="200px">
+            		</div>
+
+            		<div class="se_textView">
+                  <p class="se_textarea"><!-- SE3-TEXT { --><b style=" color: rgb(0, 0, 0)">레몬니즈 안하면 손해인 이유?</b><br><span style="color: rgb(153, 153, 153);"><br></span><span style="color: rgb(153, 153, 153);">레모니즈에서는 공정한 실력을 바탕으로<br></span><span style="color: rgb(153, 153, 153);">예측정보를 구매, 판매할 수 있습니다.<br></span><span style="color: rgb(153, 153, 153);"><br></span><span style="color: rgb(153, 153, 153);"></span><!-- } SE3-TEXT --></p>
+                </div>
+
+                <div class="se_viewArea" >
+               		<img src="{{STATIC_URL}}mobileWeb_img/hwan2.jpg" alt="" width="100%" height="200px">
+            		</div>
+            		<div class="se_viewArea" >
+               		<img src="{{STATIC_URL}}mobileWeb_img/hwan3.jpg" alt="" width="100%" height="200px">
+            		</div>
+            		<div class="se_viewArea" >
+               		<img src="{{STATIC_URL}}mobileWeb_img/hwan4.jpg" alt="" width="100%" height="200px">
+            		</div>				      	
+
+				      </div>
+				    </div>
+				  </div>
+				   <div class="panel memberService">
+				    <div class="panel-heading">
+				      <h4 class="panel-title">
+				        <a data-toggle="collapse" data-parent="#accordion" href="#normal5">
+				        	<div class="menuTheme">[일반]</div>
+									<div class="ask">예측내역과 사진을 게시하고 싶어요!</div>
+				        </a>
+				      </h4>
+				    </div>
+				    <div id="normal5" class="panel-collapse collapse">
+				      <div class="panel-body">
+				      	
+				      	<div class="se_viewArea" >                
+                  <img src="http://mblogthumb2.phinf.naver.net/20160803_17/jinhan0305_1470228895176VjiO3_JPEG/1.jpg?type=w800" width="100%" height="200px" data-attachment-id="IVd227kM-c5F1YyaCDCPKpQI-uRs" alt="" class="se_mediaImage __se_img_el" id="SEDOC-1470229133734-1201677735_image_0_img">                
+            		</div>	
+							  <div class="se_textView">
+                  <p class="se_textarea"><!-- SE3-TEXT { --><span><b>게시판 활동을 통해 친목을 쌓아보세요!</b></span><br><br><span style="color: rgb(153, 153, 153);">레모니즈에서는 레몬톡 외에도,&nbsp;<br></span><span style="color: rgb(153, 153, 153);">자신의 분석과 예측을 공유할 수 있는<br></span><span style="color: rgb(153, 153, 153);">게시판을 제공합니다.<br></span><span style="color: rgb(153, 153, 153);"><br></span><span style="color: rgb(153, 153, 153);">대기중인 예측정보는 물론, <br></span><span style="color: rgb(153, 153, 153);">적중된 예측정보와 프로토내역을 자랑할 수 있습니다.<br></span><span style="color: rgb(153, 153, 153);"><br></span><span style="color: rgb(153, 153, 153);">&nbsp;재미있는 글도 공유하며<br></span><span style="color: rgb(153, 153, 153);">소통할 수 있습니다.<br></span><span style="color: rgb(153, 153, 153);"></span><span style="color: rgb(153, 153, 153);">&nbsp;</span><!-- } SE3-TEXT --></p>
+                </div>
+
+                <div class="se_viewArea" >                
+                  <img src="http://mblogthumb2.phinf.naver.net/20160803_197/jinhan0305_1470228895185QnIn2_JPEG/2.jpg?type=w800" width="100%" height="200px" data-attachment-id="IY_-8E3VQyg5BfHla_UgXfFhePJ0" alt="" class="se_mediaImage __se_img_el" id="SEDOC-1470229133734-1201677735_image_1_img">                
+            		</div>
+            		<div class="se_viewArea" >                
+                  <img src="http://mblogthumb2.phinf.naver.net/20160803_5/jinhan0305_1470228895181ijmVX_JPEG/3.jpg?type=w800" width="100%" height="200px" data-attachment-id="Ic82bhOG1wvCwr74mlhBD1O0OU7A" alt="" class="se_mediaImage __se_img_el" id="SEDOC-1470229133734-1201677735_image_2_img">                
+            		</div>
+            		<div class="se_viewArea" >                
+                  <img src="http://mblogthumb2.phinf.naver.net/20160803_9/jinhan0305_1470228895184iJJzx_JPEG/4.jpg?type=w800" width="100%" height="200px" data-attachment-id="I4oLD25vP5MN5oiMSUS5F_CBH1s0" alt="" class="se_mediaImage __se_img_el" id="SEDOC-1470229133734-1201677735_image_3_img">                
+            		</div>
+            		<div class="se_viewArea" >                
+                  <img src="http://mblogthumb3.phinf.naver.net/20160803_34/jinhan0305_1470228895169KhhFL_JPEG/5.jpg?type=w800" width="100%" height="200px" data-attachment-id="IClB7NBD92RBU-tmFh4in5PkuNNA" alt="" class="se_mediaImage __se_img_el" id="SEDOC-1470229133734-1201677735_image_4_img">                
+            		</div>
+
+				      </div>
+				    </div>
+				  </div>
+				  <div class="panel pay">
+				    <div class="panel-heading">
+				      <h4 class="panel-title">
+				        <a data-toggle="collapse" data-parent="#accordion" href="#pay">
+				        	<div class="menuTheme">[결제]</div>
+									<div class="ask">결제 취소는 어떻게 하나요?</div>
+				        </a>
+				      </h4>
+				    </div>
+				    <div id="pay" class="panel-collapse collapse">
+				      <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,  
+				      commodo consequat.</div>
+				    </div>
+				  </div>
+				  <div class="panel proto">
+				    <div class="panel-heading">
+				      <h4 class="panel-title">
+				        <a data-toggle="collapse" data-parent="#accordion" href="#proto1">
+				        	<div class="menuTheme">[프로토(가계부)]</div>
+									<div class="ask">프로토(가계부)는 어떻게 하나요?</div>
+				        </a>
+				      </h4>
+				    </div>
+				    <div id="proto1" class="panel-collapse collapse">
+				      <div class="panel-body">
+				      	
+				      	<img src="http://mblogthumb1.phinf.naver.net/20160729_208/jinhan0305_14697622207007odic_JPEG/%B0%A1%B0%E8%BA%CE.jpg?type=w800" width="100%" height="200" data-attachment-id="IFA6ehavcl3xwm2iUAYR33Q9EVdw" alt="" class="se_mediaImage __se_img_el" id="SEDOC-1470200514989-1995811833_image_0_img">
+
+				      	<div class="se_textView">
+                  <p class="se_textarea"><!-- SE3-TEXT { --><span><b><span>아직도 손으로 적고 계시나요?</span></b></span><br><span style="color: rgb(153, 153, 153);"><br></span><span style="color: rgb(153, 153, 153);">나의 스포츠 예측 내역을 알아서&nbsp;</span><br><span style="color: rgb(153, 153, 153);">기록해주는 레모니즈!</span><br><span style="color: rgb(153, 153, 153);">정보판매를 위한 설정기능도 가능합니다.</span><br><!-- } SE3-TEXT --></p>
+                </div>
+
+                <div class="se_viewArea" >
+	                <img src="http://mblogthumb2.phinf.naver.net/20160729_53/jinhan0305_1469762353725TxJzW_JPEG/KakaoTalk_20160729_121124586.jpg?type=w800" width="100%" height="200px" data-attachment-id="IyxhuFf2BX3a5SX8eICUJeIx6z0U" alt="" class="se_mediaImage __se_img_el" id="SEDOC-1470200514989-1995811833_image_1_img">       
+	          		</div>
+
+	          		<div class="se_viewArea" >                
+                  <img src="http://mblogthumb2.phinf.naver.net/20160729_185/jinhan0305_1469772601959JNnSf_JPEG/%B0%A1%B0%E8%BA%CE3.jpg?type=w800" width="100%" height="200px" data-attachment-id="IetS5yp8xaq5Dm60ocKBepulC0tA" alt="" class="se_mediaImage __se_img_el" id="SEDOC-1470200514989-1995811833_image_2_img">         
+            		</div>
+
+            		 <div class="se_viewArea" >                
+                  <img src="http://mblogthumb2.phinf.naver.net/20160729_53/jinhan0305_146976241193404sKJ_JPEG/%B0%A1%B0%E8%BA%CE4.jpg?type=w800" width="100%" height="200px" data-attachment-id="IXoFtUdjLDxGA9U2gZMT6bYbzC24" alt="" class="se_mediaImage __se_img_el" id="SEDOC-1470200514989-1995811833_image_3_img">         
+            		</div>
+
+            		<div class="se_viewArea" >                
+                  <img src="http://mblogthumb4.phinf.naver.net/20160729_91/jinhan0305_1469762411883Yu1M3_JPEG/KakaoTalk_20160729_114724691.jpg?type=w800" width="100%" height="200px" data-attachment-id="IaPVFaTb_IN5gPvmbjt3EKt6yeaI" alt="" class="se_mediaImage __se_img_el" id="SEDOC-1470200514989-1995811833_image_4_img">  
+            		</div>
+
+            		<div class="se_textView">
+                  <p class="se_textarea"><!-- SE3-TEXT { --><span><br></span><span><span style="color: rgb(153, 153, 153);">예측내역에서 분석결과도 확인하고,</span><br></span><span><span style="color: rgb(153, 153, 153);">피드백도 받아보세요.</span><br></span><span><span style="color: rgb(153, 153, 153);"></span><br></span><span><span style="color: rgb(153, 153, 153);">더 즐겁고 편리한 스포츠 라이프를</span><br></span><span><span style="color: rgb(153, 153, 153);">레모니즈가 책임집니다.</span><br><br></span><span><br></span><span></span><!-- } SE3-TEXT --></p>
+                </div>
+
+
+
+
+
+
+				      </div>
+				    </div>
+				  </div>
+				  <div class="panel proto">
+				    <div class="panel-heading">
+				      <h4 class="panel-title">
+				        <a data-toggle="collapse" data-parent="#accordion" href="#proto2">
+				        	<div class="menuTheme">[프로토(가계부)]</div>
+									<div class="ask">내 예측내역과 피드백은 어디서 확인하나요?</div>
+				        </a>
+				      </h4>
+				    </div>
+				    <div id="proto2" class="panel-collapse collapse">
+				      <div class="panel-body">
+
+				      	<div class="se_viewArea" >                
+                  <img src="{{STATIC_URL}}mobileWeb_img/feedback1.jpg" alt="" width="100%" height="200px">
+            		</div>
+				      	
+								<div class="se_textView">
+                  <p class="se_textarea"><!-- SE3-TEXT { --><span><span style="color: rgb(60, 63, 69);"><b><span>나의 예측내역을 확인하고 싶다면?</span></b></span><br><span style="color: rgb(153, 153, 153);"></span><br></span><span><span style="color: rgb(153, 153, 153);"></span><br></span><span><span style="color: rgb(153, 153, 153);">완료한<br></span><span style="color: rgb(153, 153, 153);">레모니즈 리그예측과&nbsp;</span><br><span style="color: rgb(153, 153, 153);">가계부 예측내역은 </span><br></span><span><span style="color: rgb(153, 153, 153);">내 예측내역(마이홈)에서 확인하세요.</span><br></span><span><span style="color: rgb(153, 153, 153);">&nbsp;</span><br><span style="color: rgb(153, 153, 153);">개인의 예측 습관에 따라&nbsp;</span><br></span><span><span style="color: rgb(153, 153, 153);">레모니즈가 제공하는 피드백도&nbsp;</span><br></span><span><span style="color: rgb(153, 153, 153);">함께 이용해보세요!</span></span><span><br></span><span></span><!-- } SE3-TEXT --></p>
+                </div>
+
+                <div class="se_viewArea">
+									<img src="{{STATIC_URL}}mobileWeb_img/feedback2.jpg" alt="" width="100%" height="200px">
+                </div>
+
+                <div class="se_viewArea">
+									<img src="{{STATIC_URL}}mobileWeb_img/feedback3.jpg" alt="" width="100%" height="200px">
+                </div>
+
+				      </div>
+				    </div>
+				  </div>
+				  <div class="panel proto">
+				    <div class="panel-heading">
+				      <h4 class="panel-title">
+				        <a data-toggle="collapse" data-parent="#accordion" href="#proto3">
+				        	<div class="menuTheme">[프로토(가계부)]</div>
+									<div class="ask">레모니즈리그에는 어떻게 참여하나요?</div>
+				        </a>
+				      </h4>
+				    </div>
+				    <div id="proto3" class="panel-collapse collapse">
+				      <div class="panel-body">
+								<div class="se_viewArea">
+									<img src="{{STATIC_URL}}mobileWeb_img/lemonLeague1.jpg" alt="" width="100%" height="200px">
+								</div>
+
+								<div class="se_textView">
+                  <p class="se_textarea"><!-- SE3-TEXT { --><span><b>매달 8회 진행되는 레모니즈 리그!!</b></span><br><br><span style="color: rgb(153, 153, 153);">레모니즈에서는 프로토 경기를 대상으로&nbsp;<br></span><span style="color: rgb(153, 153, 153);">매달 대략 8회의 리그가 진행됩니다.<br></span><span style="color: rgb(153, 153, 153);"><br></span><span style="color: rgb(153, 153, 153);">각 한 경기마다 포인트가 반영되어<br></span><span style="color: rgb(153, 153, 153);">최고의 실력자를 가리는 레모니즈리그!<br></span><span style="color: rgb(153, 153, 153);"><br></span><span style="color: rgb(153, 153, 153);">상위랭커를 잘 판별하면,<br></span><span style="color: rgb(153, 153, 153);">예측정보를 구매할 때 도움이 될 수 있습니다.</span><span style="color: rgb(153, 153, 153);"></span><span style="color: rgb(153, 153, 153);"><br></span><span style="color: rgb(153, 153, 153);"></span><span><br><br></span><!-- } SE3-TEXT --></p>
+                </div>
+
+                <div class="se_viewArea">
+									<img src="{{STATIC_URL}}mobileWeb_img/lemonLeague2.jpg" alt="" width="100%" height="200px">
+								</div>
+								<div class="se_viewArea">
+									<img src="{{STATIC_URL}}mobileWeb_img/lemonLeague3.jpg" alt="" width="100%" height="200px">
+								</div>
+								<div class="se_viewArea">
+									<img src="{{STATIC_URL}}mobileWeb_img/lemonLeague4.jpg" alt="" width="100%" height="200px">
+								</div>
+				      	
+				      </div>
+				    </div>
+				  </div>				  				  
+				  <div class="panel lemonTalk">
+				    <div class="panel-heading">
+				      <h4 class="panel-title">
+				        <a data-toggle="collapse" data-parent="#accordion" href="#lemonTalk1">
+				        	<div class="menuTheme">[레몬톡]</div>
+									<div class="ask">레몬특은 무엇인가요?</div>
+				        </a>
+				      </h4>
+				    </div>
+				    <div id="lemonTalk1" class="panel-collapse collapse">
+				      <div class="panel-body">
+
+				      	<div class="se_viewArea" >                
+                  <img src="http://mblogthumb4.phinf.naver.net/20160803_131/jinhan0305_1470203743921fS2gh_JPEG/1.jpg?type=w800" width="100%" height="200px" data-attachment-id="IotgQfdlrnO9TZemwuxyLDQ48K1E" alt="" class="se_mediaImage __se_img_el" id="SEDOC-1470204481464-1716881725_image_0_img">                
+            		</div>
+				      	
+								<div class="se_textView">
+                  <p class="se_textarea"><!-- SE3-TEXT { --><span style="color: rgb(60, 63, 69);"><b><span>스포츠를 즐기는 유저를 위한 맞춤형 SNS!</span></b></span><br><span style="color: rgb(153, 153, 153);"><br></span><span style="color: rgb(153, 153, 153);">레몬톡에서는 레모니즈의 모든 유저들과<br></span><span style="color: rgb(153, 153, 153);">채팅을 즐기실 수 있습니다.&nbsp;<br></span><span style="color: rgb(153, 153, 153);"><br></span><span style="color: rgb(153, 153, 153);">경기정보는 물론, 예측내역, 동영상 등 <br></span><span style="color: rgb(153, 153, 153);">모든 콘텐츠를 공유할 수 있습니다.<br></span><span style="color: rgb(153, 153, 153);"><br></span><span style="color: rgb(153, 153, 153);">실시간으로 레몬톡에서 &nbsp;중계도 하고,&nbsp;<br></span><span style="color: rgb(153, 153, 153);">분석과 예측에 관해 이야기해보세요!</span><br><!-- } SE3-TEXT --></p>
+                </div>
+
+                <div class="se_viewArea">                
+                  <img src="http://mblogthumb4.phinf.naver.net/20160803_115/jinhan0305_1470203755376CSplz_JPEG/2.jpg?type=w800" width="100%" height="200px" data-attachment-id="IynwZYnVwX9bEtTKjTleoN_St9iE" alt="" class="se_mediaImage __se_img_el" id="SEDOC-1470204481464-1716881725_image_1_img">                
+            		</div>
+
+                <div class="se_viewArea" >                
+                  <img src="http://mblogthumb3.phinf.naver.net/20160803_142/jinhan0305_14702044430197I66K_JPEG/1.jpg?type=w800" width="100%" height="200px" data-attachment-id="IiPV9odhkdPh3GPmzWIgb21M7kts" alt="" class="se_mediaImage __se_img_el" id="SEDOC-1470204481464-1716881725_image_2_img">                
+            		</div>
+
+            		<div class="se_viewArea" >                
+                  <img src="http://mblogthumb3.phinf.naver.net/20160803_234/jinhan0305_1470204447691wkjcr_JPEG/2.jpg?type=w800" width="100%" height="200px" data-attachment-id="IYc2eqUEfWiNs09ftO9qaJGAoDd4" alt="" class="se_mediaImage __se_img_el" id="SEDOC-1470204481464-1716881725_image_3_img">                
+            		</div>
+
+            		<div class="se_viewArea" >                
+                  <img src="http://mblogthumb1.phinf.naver.net/20160803_168/jinhan0305_1470204452175lr5Qm_JPEG/3.jpg?type=w800" width="100%" height="200px" data-attachment-id="I0sbnBkTa_0cwQo0zruLlWQLNO8I" alt="" class="se_mediaImage __se_img_el" id="SEDOC-1470204481464-1716881725_image_4_img">                
+            		</div>
+
+            		<div class="se_viewArea" >                
+                  <img src="http://mblogthumb3.phinf.naver.net/20160803_50/jinhan0305_1470204458215eFCjv_JPEG/4.jpg?type=w800" width="100%" height="200px" data-attachment-id="Iw-oXIDKZj_ETt7Kb66mkClgXrHU" alt="" class="se_mediaImage __se_img_el" id="SEDOC-1470204481464-1716881725_image_5_img">                
+            		</div>
+				      </div>
+				    </div>
+				  </div>
+				   <div class="panel lemonTalk">
+				    <div class="panel-heading">
+				      <h4 class="panel-title">
+				        <a data-toggle="collapse" data-parent="#accordion" href="#lemonTalk2">
+				        	<div class="menuTheme">[레몬톡]</div>
+									<div class="ask">프리미엄 이용권이란?</div>
+				        </a>
+				      </h4>
+				    </div>
+				    <div id="lemonTalk2" class="panel-collapse collapse">
+				      <div class="panel-body">
+								
+								<div class="se_viewArea" >                
+                  <img src="{{STATIC_URL}}mobileWeb_img/premium1.jpg" alt="" width="100%" height="200px">
+            		</div>
+
+								<div class="se_textView">
+                  <p class="se_textarea"><!-- SE3-TEXT { --><span class="se_fs_T2" style="color: rgb(0, 0, 0);"><b>프리미엄이용권으로 </b><br></span><span class="se_fs_T2" style="color: rgb(0, 0, 0);"><b>레몬톡 유료채팅방을 개설해보세요.</b></span><br><br><span style="color: rgb(153, 153, 153);">프리미엄이용권을 이용하면,&nbsp;<br></span><span style="color: rgb(153, 153, 153);">여러 유저에게 손쉽게&nbsp;<br></span><span style="color: rgb(153, 153, 153);">예측내역, 사진, 동영상, 스코어 등을&nbsp;<br></span><span style="color: rgb(153, 153, 153);">공유할 수 있습니다.<br></span><span style="color: rgb(153, 153, 153);"><br></span><span style="color: rgb(153, 153, 153);">레몬톡 친구를 추가하고,&nbsp;<br></span><span style="color: rgb(153, 153, 153);">여러 유저들과 편리하게 소통해보세요.<br></span><span style="color: rgb(153, 153, 153);"><br></span><span style="color: rgb(153, 153, 153);"><u>* 무료채팅방은 프리미엄 이용권 없이 이용하실 수 있습니다.</u></span><!-- } SE3-TEXT --></p>
+                </div>
+                <div class="se_viewArea" >                
+                  <img src="{{STATIC_URL}}mobileWeb_img/premium2.jpg" alt="" width="100%" height="200px">
+            		</div>
+            		<div class="se_viewArea" >                
+                  <img src="{{STATIC_URL}}mobileWeb_img/premium3.jpg" alt="" width="100%" height="200px">
+            		</div>
+
+            		<div class="se_viewArea" >                
+                  <img src="{{STATIC_URL}}mobileWeb_img/premium4.jpg" alt="" width="100%" height="200px">
+            		</div>
+            		<div class="se_viewArea" >                
+                  <img src="{{STATIC_URL}}mobileWeb_img/premium5.jpg" alt="" width="100%" height="200px">
+            		</div>
+				      </div>
+				    </div>
+				  </div>
+				  <div class="panel guitar">
+				    <div class="panel-heading">
+				      <h4 class="panel-title">
+				        <a data-toggle="collapse" data-parent="#accordion" href="#guitar">
+				        	<div class="menuTheme">기타</div>
+				        </a>
+				      </h4>
+				    </div>
+				    <div id="guitar" class="panel-collapse collapse">
+				      <div class="panel-body">
+				      	<textarea name="question" id="question" cols="10" rows="1" placeholder="내용을 입력하세요."></textarea>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+
+			
+		</div><!-- end main-->	
+		<!-- end page-->
+
+
+			<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>		
+			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+			<script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+			<script src="//ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
+			<script src="{{STATIC_URL}}mobileWeb_vendor/waves/waves.min.js"></script>
+			<script src="{{STATIC_URL}}mobileWeb_vendor/wow/wow.min.js"></script>
+			<script src="{{STATIC_URL}}mobileWeb_js/nativedroid2.js"></script>
+			<script src="{{STATIC_URL}}mobileWeb_js/nd2settings.js"></script>
+		
+	</body>
+</html>
+
+<script>
+	$(document).ready(function(){
+		$('.faqMenu').on('click', function(){						
+
+			if($(this).attr("menuNum") == 0){
+				$(this).addClass('selected');
+				$('.faqMenu').not(this).removeClass('selected');
+				$('div.panel').show();
+			}
+			else if($(this).attr("menuNum") == 1){
+				$('.faqMenu').not(this).removeClass('selected');
+				$(this).addClass('selected');
+				$('div.panel').show();
+				$('div.panel').not('.memberService').hide();
+			}
+			else if($(this).attr("menuNum") == 2){
+				$('.faqMenu').not(this).removeClass('selected');
+				$(this).addClass('selected');
+				$('div.panel').show();
+				$('div.panel').not('.pay').hide();	
+			}
+			else if($(this).attr("menuNum") == 3){
+				$('.faqMenu').not(this).removeClass('selected');
+				$(this).addClass('selected');
+				$('div.panel').show();
+				$('div.panel').not('.proto').hide();
+			}
+			else if($(this).attr("menuNum") == 4){
+				$('.faqMenu').not(this).removeClass('selected');
+				$(this).addClass('selected');
+				$('div.panel').show();
+				$('div.panel').not('.lemonTalk').hide();
+			}
+			else if($(this).attr("menuNum") == 5){
+				$('.faqMenu').not(this).removeClass('selected');
+				$(this).addClass('selected');
+				$('div.panel').show();
+				$('div.panel').not('.guitar').hide();
+			}
+			
+			
+		});
+	})
+	
+</script>

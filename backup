@@ -1,0 +1,92 @@
+<!-- 로그인후 panel left -->
+			<div data-role="panel" id="leftpanel" data-display="overlay" data-position-fixed="true" >
+
+				<div class='nd2-sidepanel-profile wow fadeInDown'>
+					<span class="logoutArea">
+						<img src="{{STATIC_URL}}mobileWeb_img/ic_sidemenu_logout.png" alt="" width="10px" height="10px">
+						<span class="logoutBtn">로그아웃</span>
+					</span>
+					<div class="profileArea">						
+						<img class="profileThumbnail" src="{{STATIC_URL}}mobileWeb_img/cheerLeader2.jpg" width="50px" height="50px" />
+						<div class="profileNickname">독고다이다</div>
+						<div class="profileEmail">hongildont7@lemonis.com</div>						
+					</div>					
+				</div>
+
+				<div class="lemonArea">
+					<div class="lemonCount">
+						<span class="lemonMenu">구매한 레몬</span><br>
+						<img src="{{STATIC_URL}}mobileWeb_img/ic_sidemenu_lemon1.png" alt="" width="20px" height="20px">
+						<span class="lemonNumber"><b>20</b>개</span>
+					</div>
+					<div class="lemonCount">
+						<span class="lemonMenu">받은 레몬</span><br>
+						<img src="{{STATIC_URL}}mobileWeb_img/ic_sidemenu_lemon2.png" alt="" width="20px" height="20px">
+						<span class="lemonNumber"><b>45</b>개</span>
+					</div>
+					<div class="lemonCount">
+						<span class="lemonMenu">레몬씨</span><br>
+						<img src="{{STATIC_URL}}mobileWeb_img/ic_sidemenu_lemonseed.png" alt="" width="13px" height="18px">
+						<span class="lemonNumber"><b>5</b>개</span>
+					</div>
+				</div>
+
+				<div class="myPageBtnArea">					
+					<a href="/mobile/myPage">
+						<span class="myPageBtn">마이페이지</span>
+						<img src="{{STATIC_URL}}mobileWeb_img/ic_chevron_right_g2.png" alt="" width="10px" height="15px">						
+					</a>
+				</div>				
+
+				<div class="itemArea">
+					<div class="itemContent">
+						<span class="itemTheme">보유 아이템</span><br>
+						<span class="lemonNumber"><b>20</b>개</span>
+					</div>					
+					<div class="itemContent">
+						<a href="/mobile/itemStore">
+							<span class="itemTheme itemStore">아이템스토어</span><br>
+							<img src="{{STATIC_URL}}mobileWeb_img/ic_sidemenu_itemcart.png" alt="" width="15px" height="15px">
+						</a>			
+					</div>					
+				</div>
+
+
+				<div class="panelList">
+					<a href="#">
+						<img src="{{STATIC_URL}}mobileWeb_img/ic_sidemenu_talk.png" alt="" width="15px" height="15px">
+						<span class="guestMenu">레몬톡</span>
+						<img class="chevron" src="{{STATIC_URL}}mobileWeb_img/ic_chevron_light_g.png" alt="" width="10px" height="15px">
+					</a>
+				</div>
+				<div class="panelList">
+					<a href="#">
+						<img src="{{STATIC_URL}}mobileWeb_img/ic_sidemenu_event.png" alt="" width="15px" height="15px">
+						<span class="guestMenu">이벤트</span>
+						<img class="chevron" src="{{STATIC_URL}}mobileWeb_img/ic_chevron_light_g.png" alt="" width="10px" height="15px">
+					</a>
+				</div>
+				<div class="panelList">
+					<a href="#">
+						<img src="{{STATIC_URL}}mobileWeb_img/ic_sidemenu_usersearch.png" alt="" width="15px" height="15px">
+						<span class="guestMenu">유저검색</span>
+						<img class="chevron" src="{{STATIC_URL}}mobileWeb_img/ic_chevron_light_g.png" alt="" width="10px" height="15px">
+					</a>	
+				</div>
+				<div class="panelList">
+					<a href="/mobile/ranking">
+						<img src="{{STATIC_URL}}mobileWeb_img/ic_sidemenu_ranking.png" alt="" width="15px" height="15px">
+						<span class="guestMenu">레몬이즈 랭킹</span>
+						<img class="chevron" src="{{STATIC_URL}}mobileWeb_img/ic_chevron_light_g.png" alt="" width="10px" height="15px">
+					</a>
+				</div>
+				<div class="panelList">
+					<a href="/mobile/contact">
+						<img src="{{STATIC_URL}}mobileWeb_img/ic_sidemenu_customercenter.png" alt="" width="15px" height="15px">
+						<span class="guestMenu">고객센터</span>
+						<img class="chevron" src="{{STATIC_URL}}mobileWeb_img/ic_chevron_light_g.png" alt="" width="10px" height="15px">
+					</a>
+				</div>
+				<div style="height:100px;"></div>
+			</div>		
+			<!-- /panel left -->

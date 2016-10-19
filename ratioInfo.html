@@ -1,0 +1,1307 @@
+{% extends 'mobileWeb/blocks/base.html' %}
+
+{% block content %}
+		
+{% block css %}	
+<style>
+
+	[data-role="header"]{
+		position: fixed;
+		top:0;
+		left: 0;
+		width: 100%;
+		background-color: #ffffff;
+	}
+	#backImg{
+		margin-top: 12px;
+		margin-left: 10px;
+	}			
+	.protoDivision{
+		font-weight: bold;
+		line-height: 35px;
+		vertical-align: middle;
+		padding-left: 10px;
+		background-color: #F2CD20;
+	}
+	.explainBtn{
+		float: right;
+		margin-right: 10px;
+	}
+	/*프로토 배당 테이블*/
+	div.tableWrap{
+		margin-bottom: 10px;
+		margin-top: 10px;
+	}
+	table.protoTable{		
+		width: 100%;
+		text-align: center;
+	}
+	.protoTable tr:nth-child(1){
+		font-weight: bold;
+		color: #6e6e6e;
+	}
+	.protoTable td:nth-child(1){
+		width: 40%;
+		font-weight: bold;
+		color: #6e6e6e;
+	}
+	.protoTable td:nth-child(2){
+		width: 20%;
+	}
+	.protoTable td:nth-child(3){
+		width: 20%;
+	}
+	.protoTable td:nth-child(4){
+		width: 20%;
+	}
+	.leagueDivision{
+		font-weight: bold;
+		line-height: 35px;
+		vertical-align: middle;
+		padding-left: 10px;
+    background: #9a9a9a; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(left, #bbbbbb , #eaeaea); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(right, #bbbbbb, #eaeaea); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(right, #bbbbbb, #eaeaea); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to right, #bbbbbb, #eaeaea); /* Standard syntax (must be last) */				
+	}
+	div#allBetArea, #secondBetArea{		
+		min-height: 400px;
+		background-color: #f5f5f5;
+	}
+	
+	/*동일 배당 전적리그테이블*/
+	div.chatLeague{
+		width: 95%;
+		margin: 0 auto;
+		margin-top: 5px;
+		margin-bottom: 8px;
+	}
+	table.leagueTable{		
+		border-collapse: collapse;
+		width: 100%;		
+		background-color: white;
+		border: 1px solid #acacac;
+		box-shadow: 3px 3px 5px #e0e0e0;
+	}
+	.leagueTable tr td{
+		line-height: 35px;
+		font-size: 15px;			
+		border: 1px solid #e2e2e2;
+	}
+	.leagueTable tr:nth-child(1) td{
+		font-weight: bold;
+		line-height: 30px;
+	}
+	.tdInfo{
+		width: 75%;
+	}
+	
+	.leagueChoiceHome,.leagueChoiceAway{
+		width: 30%;
+	}
+	.leagueChoiceDraw{
+		width: :15%;
+		text-align: center;
+	}
+	.choiceHome, .choiceAway, .choiceDraw{
+		background-color: #ffff84;
+	}
+	.gameResult{
+		clear: both;
+		text-align: center;
+	}
+	.drawTd{
+		text-align: center;}
+	.leagueDate{
+		float: right;
+		margin-right: 5px;
+	}
+	.win, .awayTeam{
+		float: right;
+		margin-right: 10px;
+	}
+	.homeTeam, .lose{
+		margin-left: 10px;
+	}
+	.leagueInfo{
+		width: 80px;
+		margin-left: 5px;
+		margin-right: 30px;
+	}
+
+	.under{color: blue;}
+	.over{color: orange;}
+	.parseHandi{
+		color: #0000A0;
+	}
+
+	div.betDiv{
+		margin-bottom: 5px;
+		margin-top: 5px;		
+	}
+	.dateArea, .type0, .type1, .type2{
+		width: 26%;
+		display: inline-block;
+		text-align: center;
+		/*line-height: 15px;
+		vertical-align: middle;*/
+	}
+	.type0, .type1, .type2{
+		font-weight: bold;
+	}
+	.winBet, .drawBet, .loseBet{
+		width: 16%;
+		display: inline-block;
+		text-align: center;
+		vertical-align: middle;
+		line-height: 20px;
+	}
+	.betDiv div{
+		
+	}
+	
+
+	.numCount{
+		color: #0000A0;
+	}
+
+	/* Modal Content/Box */
+	.modal-content {
+		background-color: #ffffff;
+		margin: 40% auto; /* 15% from the top and centered */				
+		border: 1px solid #888;
+		width: 85%; /* Could be more or less, depending on screen size */
+	}		
+	.modalMent{
+		margin-top: 20px;
+		margin-bottom: 20px;				
+		text-align: center;
+		font-size: 20px;
+		font-weight: bold;
+	}
+	.modalBody{
+		color: #8C8C8C;
+		font-size: 16px;
+		padding-left: 15px;
+		padding-right: 15px;
+	}
+	.selectBtn{
+		margin-top: 20px;
+		margin-bottom: 20px;
+		margin-right: 10px;
+		text-align: right;
+	}
+	.cancel{								
+		font-size: 15px;
+		color: #f10000;
+		margin: 10px;				
+	}
+	.background-backdrop{
+		/*background-color: #ffffff;*/
+	}
+	.orange{
+		color: orange;
+	}
+	.btnWrap{
+		/*top: 50;
+	  position: fixed;
+	  z-index: 500;
+	  width: 100%;*/
+	  border-bottom: 1px solid #cccccc;
+	}
+	.btnState_0, .btnState_1{
+		background-color: #f5f5f5;
+		display: inline-block;
+		font-size: 14px;
+		text-align: center;
+		width: 50%;
+		line-height: 35px;
+		vertical-align: middle;
+	}
+	.btnState_0{
+		border-right: 1px solid #cccccc;
+	}
+	.red{
+		color: red;
+	}
+	
+
+	#loading {
+		width: 100%;   
+		height: 100%;   
+		top: 0px;
+		left: 0px;
+		position: fixed;   
+		display: block;   
+		opacity: 0.7;   
+		background-color: #fff;   
+		z-index: 99;   
+		text-align: center; 
+	}		 
+	#loading-image {   
+	 position: absolute;   
+	 top: 45%;  
+	 left: 45%; 
+	 z-index: 100; } 
+
+</style>
+{% endblock %}
+
+
+	
+
+
+{% block main %}
+<div data-role="header" data-position="fixed" class="wow" data-wow-delay="0.2s">
+	<a href="#" class="ui-btn ui-btn-left wow fadeIn" data-wow-delay="0.8s" data-rel="back">
+		<img id="backImg" src="{{STATIC_URL}}mobileWeb_img/ic_arrow_back.png" alt="" width="25px" height="20px">
+	</a>
+	<h5 class="wow fadeIn matchGame" data-wow-delay="0.4s"></h5>
+	<div class="btnWrap"></div>
+</div>
+
+<div id="allBetArea"></div>
+<div id="secondBetArea"></div>
+
+
+
+<!--용어설명 모달-->	
+<div id="explainModal" class="modal">					
+	<!-- Modal content -->
+	<div class="modal-content">						
+		<h1 class="modalMent">프로토/해외 배당분석 용어설명</h1>
+		<div class="modalBody">
+			<span>해외배당 : 현재 해외의 승무패 배당입니다.</span><br>
+			<span>적정배당 : 해외배당을 프로토 배당으로 환산한 배당입니다.</span><br>
+			<span>프로토배당 : 현재 프로토의 승무패 배당입니다.</span><br>
+			<span>절삭률 : 프로토배당이 적정배당에 비해서 얼마나 조정되었는지를 알려줍니다.</span><br>
+		</div>
+		<p class="selectBtn">
+			<span class="cancel" data-dismiss="modal">확인</span>
+		</p>
+	</div>
+</div>
+
+
+<script>
+	//전체, 종목 찍기
+	$(function(){
+		var div = "";
+		div += '<div class="btnState_0 red" onclick="allFunc(this)" state="0">전체</div><div class="btnState_1" onclick="otherFunc(this)" state="1">';
+
+	  search=location.search;
+	  if(!search){
+	    //파라미터가 하나도 없을때
+	    document.write("에러 출력 텍스트");
+	    return false;
+	  }
+
+	  search=search.split("?");  
+	  data = search[1].split("&"); //엠퍼센트로 자름.
+	  //console.log(data);
+	  for(i=0; i <= data.length-1; i++){
+	    l_data = data[i].split("=");
+	    if(l_data[0] == "sport"){
+	    		if(l_data[1] == 1){
+	    			div +=	'야구';
+	    		}else if(l_data[1] == 2){
+	    			div +=	'축구';
+	    		}else if(l_data[1] == 3){
+	    			div +=	'배구';
+	    		}else if(l_data[1] == 4){
+	    			div +=	'농구';
+	    		}
+	    		div += '</div>';	
+					$('.btnWrap').append(div);	
+	        //return l_data[1];
+	        break;
+	    }else continue;
+	  }		
+	});
+
+//용어설명 모달
+	$('.explainBtn').on('click', function(){
+		$('#explainModal').modal('show');
+	});
+
+	function allFunc(param){		
+		$(param).addClass('red');
+		$('.btnState_1').removeClass('red');
+		viewAll($(param).attr("state"));		
+	}
+	
+	function otherFunc(param){
+		$(param).addClass('red');
+		$('.btnState_0').removeClass('red');
+		viewAll($(param).attr("state"));
+	}
+
+
+
+$(document).ready(function(){
+	var load = '<div id="loading"><img id="loading-image" src="{{STATIC_URL}}mobileWeb_img/loadingGif.gif" alt="Loading..." /></div>';
+	$('#secondBetArea').html(load);
+
+	var page = 0;
+	
+	//전체(state=0) 뿌림
+	$.post('/main/ratioInfo/', {gameId:getParameter("gameId"), page:page, state:0}, function(data){
+		console.log(data);
+		//console.log(data.gameList);
+		page = data.lastFolderId;
+		
+		var changePerHour= data.ratioChange;		
+		var abroadPerHour= data.abroadRatioChange;
+		console.log(abroadPerHour);
+		 
+		if(abroadPerHour.length > 0){
+			protoReturnRate = 1/(parseFloat(1/changePerHour[changePerHour.length-1].win) + (changePerHour[changePerHour.length-1].draw != 'NULL' ? parseFloat(1/changePerHour[changePerHour.length-1].draw) : 0) + parseFloat(1/changePerHour[changePerHour.length-1].lose));
+			abroadReturnRate = 1/(parseFloat(1/abroadPerHour[abroadPerHour.length-1].win) + (abroadPerHour[abroadPerHour.length-1].draw != 0 ? parseFloat(1/abroadPerHour[abroadPerHour.length-1].draw) : 0) + parseFloat(1/abroadPerHour[abroadPerHour.length-1].lose));
+
+			rwin = Math.round(abroadPerHour[abroadPerHour.length-1].win * protoReturnRate / abroadReturnRate * 100)/100;
+			rdraw = Math.round(abroadPerHour[abroadPerHour.length-1].draw * protoReturnRate / abroadReturnRate * 100)/100;
+			rlose = Math.round(abroadPerHour[abroadPerHour.length-1].lose * protoReturnRate / abroadReturnRate * 100)/100;
+	 		console.log(rdraw);
+
+			//적정배당
+			rwin = rwin <= 1 ? 1.01 : rwin;
+			rdraw = rdraw <= 0 ? '' : rdraw;
+			rlose = rlose <= 1 ? 1.01 : rlose;
+
+			console.log(rwin, rdraw, rlose);
+			//절삭률
+			cwin = Math.round(-(rwin-changePerHour[changePerHour.length-1].win) / (rwin-1) * 1000) / 10;
+			if(rdraw == ''){
+				cdraw = '';
+			}else{
+				cdraw = Math.round(-(rdraw-changePerHour[changePerHour.length-1].draw) / (rdraw-1) * 1000) / 10;	
+			}			
+			close = Math.round(-(rlose-changePerHour[changePerHour.length-1].lose) / (rlose-1) * 1000) / 10;	
+			console.log(cdraw);
+		}
+		
+
+		var matchGame = '';
+			matchGame	+=	data.gameList[0].home;
+										if(getParameter("gameType") == '1'){
+			matchGame	+=		'<span class="parseHandi"> H'+parseDotZero(data.gameList[0].handiNum);
+										}
+										else if(getParameter("gameType") == '2'){
+			matchGame	+=		'<span class="parseHandi"> U'+parseDotZero(data.gameList[0].handiNum);								
+										}else{
+			matchGame	+=		' vs '+data.gameList[0].away+' 배당분석';
+										}
+			matchGame	+=	'</span>';
+		$('.matchGame').append(matchGame);
+
+		var leagueTable = "";
+
+		//프로토 배당
+		if(abroadPerHour.length > 0){
+			leagueTable += '<div class="protoDivision">프로토/해외 배당분석<span id="explainId" class="numCount explainBtn">용어설명</span></div>';
+
+			leagueTable +=	'<div class="tableWrap">'+
+												'<table class="protoTable">'+
+													'<tr>'+
+														'<td></td>'+
+														'<td>승</td>'+
+														'<td>무</td>'+
+														'<td>패</td>'+
+													'</tr>'+
+													'<tr>'+
+														'<td>해외배당</td>'+
+														'<td>'+parseDotZero(abroadPerHour[abroadPerHour.length-1].win)+'</td>'+
+														'<td>';
+														if(abroadPerHour[abroadPerHour.length-1].draw == 0){
+			leagueTable +=					'';												
+														}else{
+			leagueTable +=					parseDotZero(abroadPerHour[abroadPerHour.length-1].draw);
+														}
+			leagueTable +=				'</td>'+
+														'<td>'+parseDotZero(abroadPerHour[abroadPerHour.length-1].lose)+'</td>'+
+													'</tr>'+
+													'<tr>'+
+														'<td>적정배당</td>'+
+														'<td>'+rwin+'</td>'+
+														'<td>'+rdraw+'</td>'+
+														'<td>'+rlose+'</td>'+
+													'</tr>'+
+													'<tr>'+
+														'<td>프로토배당</td>'+
+														'<td>'+parseDotZero(changePerHour[changePerHour.length-1].win)+'</td>'+
+														'<td>';
+														if(changePerHour[changePerHour.length-1].draw == "NULL"){
+			leagueTable +=					'';
+														}else{
+			leagueTable +=					parseDotZero(changePerHour[changePerHour.length-1].draw);
+														}
+			leagueTable +=				'</td>'+
+														'<td>'+parseDotZero(changePerHour[changePerHour.length-1].lose)+'</td>'+
+													'</tr>'+
+													'<tr>'+
+														'<td>절삭률</td>'+
+														'<td>'+parseDotZero(cwin)+'%</td>'+
+														'<td>';
+														if(cdraw <= 0){
+			leagueTable +=					'';												
+														}else{
+			leagueTable +=					parseDotZero(cdraw)+'%</td>';
+														}															
+			leagueTable +=				'<td>'+parseDotZero(close)+'%</td>'+
+													'</tr>'+
+												'</table>'+
+										'</div>';
+		}								
+
+
+		//시간별 배당 변화
+		if(changePerHour.length > 0){
+			leagueTable += '<div class="leagueDivision">시간별 배당 변화&nbsp;&nbsp;';
+			leagueTable += '<span class="numCount">'+changePerHour.length+'번</span></div>';
+		
+			for(var j=0; j < changePerHour.length; j++){
+				leagueTable += '<div class="betDiv">';
+				leagueTable +=  	'<div class="dateArea">'+monthNDay(changePerHour[j].date)+'</div>';
+												if(changePerHour[j].gameType == 0){
+				leagueTable +=		'<div class="type0 numCount">일반 승무패';
+												}
+												else if(changePerHour[j].gameType == 1){
+				leagueTable +=  	'<div class="type1 numCount">홈 핸디 '+changePerHour[j].handiNum;
+												}
+												else if(changePerHour[j].gameType == 2){
+				leagueTable +=  	'<div class="type2 numCount">언더/오버 '+changePerHour[j].handiNum;
+												}
+				leagueTable +=		'</div>';
+				leagueTable +=  	'<div class="winBet">';
+													if(changePerHour[j].gameType == 2){
+				leagueTable +=			'언더<br>';
+													}else{
+				leagueTable +=			'승<br>';
+													}
+				leagueTable +=    parseDotZero(changePerHour[j].win)+'</div>';
+				leagueTable +=  	'<div class="drawBet">';
+														if(changePerHour[j].draw != 'NULL'){
+				leagueTable += 				'무<br>'+parseDotZero(changePerHour[j].draw);
+														}
+														else {
+				leagueTable += 				'';
+														}
+				leagueTable +=		'</div>';
+				leagueTable += 		'<div class="loseBet">';
+													if(changePerHour[j].gameType == 2){
+				leagueTable +=			'오버<br>';
+													}else{
+				leagueTable +=			'패<br>';
+													}
+				leagueTable +=		parseDotZero(changePerHour[j].lose)+'</div>';
+				leagueTable += '</div>';
+			}
+		}
+		
+
+		//시간별 해외배당 변화
+		if(abroadPerHour.length > 0){
+			leagueTable += '<div class="leagueDivision">시간별 해외 배당 변화&nbsp;&nbsp;';
+			leagueTable += '<span class="numCount">'+abroadPerHour.length+'번</span></div>';
+
+			for(var k=0; k < abroadPerHour.length; k++){
+				leagueTable += '<div class="betDiv">';
+				leagueTable +=  	'<div class="dateArea">'+monthNDay(abroadPerHour[k].date)+'</div>';
+												if(abroadPerHour[k].gameType == 0){
+				leagueTable +=		'<div class="type0 numCount">일반 승무패';
+												}
+												else if(abroadPerHour[k].gameType == 1){
+				leagueTable +=  	'<div class="type1 numCount">홈 핸디'+abroadPerHour[k].handiNum;
+												}
+												else if(abroadPerHour[k].gameType == 2){
+				leagueTable +=  	'<div class="type2 numCount">언 오버'+abroadPerHour[k].handiNum;
+												}
+				leagueTable +=		'</div>';
+				leagueTable +=  	'<div class="winBet">';
+													if(abroadPerHour[k].gameType == 2){
+				leagueTable +=			'언더<br>';
+													}else{
+				leagueTable +=			'승<br>';
+													}
+				leagueTable +=    parseDotZero(abroadPerHour[k].win)+'</div>';
+				
+				leagueTable +=  	'<div class="drawBet">';
+														if(abroadPerHour[k].draw){
+				leagueTable += 				'무<br>'+parseDotZero(abroadPerHour[k].draw);
+														}
+														else{
+				leagueTable += 				'';
+														}
+				leagueTable +=		'</div>';
+				leagueTable += 		'<div class="loseBet">';
+														if(abroadPerHour[k].gameType == 2){
+				leagueTable +=			'오버<br>';
+														}else{
+				leagueTable +=				'패<br>';
+														}
+				leagueTable +=			parseDotZero(abroadPerHour[k].lose)+'</div>';				
+				leagueTable += '</div>';
+			}
+		}
+
+
+
+
+		//동일 배당 전적
+		var league = data.gameList;
+		console.log(league);
+			leagueTable += '<div class="leagueDivision">동일 배당 전적&nbsp;&nbsp;';
+			leagueTable += '<span class="numCount">승 '+data.winCount+'개, '+'무 '+data.drawCount+'개, '+'패 '+data.loseCount+'개</span></div>';
+
+		for(var i=0; i < league.length; i++){
+			leagueTable += '<div class="chatLeague">';
+			leagueTable += '<table class="leagueTable" realId="'+league[i].realId+'" onclick="moveGame(this)">';
+			leagueTable += '<tr>';
+			leagueTable += '<td class="tdInfo" colspan="3">';
+			leagueTable += '<span class="leagueInfo">&nbsp;'+justYear(league[i].date)+'년&nbsp;'+parseRound(league[i].round)+'회차&nbsp;</span>'+league[i].league;
+			leagueTable += '<span class="leagueDate">'+betChangeDate(league[i].date)+'&nbsp;</span></td>';
+			leagueTable += '</tr>';
+			
+			leagueTable += '<tr>';
+											if(league[i].result == 1){
+			leagueTable += '<td class="leagueChoiceHome choiceHome homeTeam">'	
+											}else{
+			leagueTable += 	'<td class="leagueChoiceHome homeTeam">';								
+											}
+			leagueTable += '<span>&nbsp;'+league[i].home;
+											if(league[i].gameType == 1){
+			leagueTable +=		'<span class="parseHandi"> H';
+												if(league[i].handiNum > 0){
+			leagueTable +=			'+'+parseDotZero(league[i].handiNum);
+												}else{
+			leagueTable +=			parseDotZero(league[i].handiNum)+'</span>';
+												}
+			leagueTable +=		'</span>';				
+											}else{
+			leagueTable +=		'';
+											}
+			leagueTable +=	'</span>';									
+			leagueTable += '<span class="win">'+parseDotZero(league[i].win);
+											if(league[i].gameType == 2){
+			leagueTable +=		'<span class="under">&nbsp↓</span>';
+											}else{
+			leagueTable +=  	'';
+											}
+			leagueTable += '</span></td>';
+
+
+											if(league[i].draw){
+												if(league[i].result==4){
+			leagueTable +=		'<td class="leagueChoiceDraw choiceDraw">'+parseDotZero(league[i].draw)+'</td>';
+												}else{
+			leagueTable +=		'<td class="leagueChoiceDraw drawTd">'+parseDotZero(league[i].draw)+'</td>';
+												}
+											}else{
+												if(league[i].gameType == 2){
+			leagueTable +=	 '<td class="leagueChoiceDraw drawTd under">U ';
+												if(league[i].handiNum > 0){
+			leagueTable +=			'+'+league[i].handiNum;
+												}else{
+			leagueTable +=			'-'+league[i].handiNum;
+												}
+			leagueTable +=		'</td>';
+												}
+												else{
+			leagueTable += 		'<td class="leagueChoiceDraw drawTd"></td>';
+												}					
+											}
+
+
+											if(league[i].result == 2){
+			leagueTable += 		'<td class="leagueChoiceAway choiceAway">';
+											}else{
+			leagueTable += 		'<td class="leagueChoiceAway">';
+											}			
+			leagueTable += '&nbsp;<span class="lose">'+parseDotZero(league[i].lose)+'</span>&nbsp;';
+			leagueTable += (league[i].gameType == 2) ? '<span class="over">↑</span>' : '';
+			leagueTable += '<span class="awayTeam">'+league[i].away+'&nbsp;</span></td>';
+			leagueTable += '</tr>';
+
+			leagueTable += '<tr>';
+			leagueTable += '<td class="gameResult" colspan="3">';
+											if(league[i].homescore == null && league[i].awayscore == null){
+			leagueTable += 		'<span>0</span>';									
+											}else{
+
+												if(league[i].homescore - league[i].awayscore > 0){
+			leagueTable += 		'<span class="orange">'+league[i].homescore;						
+												}else{
+			leagueTable += 		'<span>'+league[i].homescore;										
+												}
+			leagueTable += 		'</span>&nbsp;&nbsp;&nbsp;vs&nbsp;&nbsp;&nbsp;';
+												if(league[i].homescore - league[i].awayscore < 0){
+			leagueTable += 		'<span class="orange">'+league[i].awayscore;						
+												}else{
+			leagueTable += 		'<span>'+league[i].awayscore;			
+												}
+			leagueTable +=		'</span></td>';									
+											}
+			
+			leagueTable += '</tr>';
+			leagueTable += '</table></div>';
+		}
+		removeLoading();
+		$("#allBetArea").append(leagueTable);	
+			
+
+		var nextPage = page;
+		console.log(nextPage);
+
+		$(document).scroll(function(){
+				
+				var scrollHeight = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight); //현재문서의 높이			  
+			  var scrollTop = Math.max(document.documentElement.scrollTop, document.body.scrollTop);//현재 스크롤탑의 값			  
+			  var clientHeight = document.documentElement.clientHeight;//현재 화면 높이 값
+
+			  if((scrollTop+clientHeight) == scrollHeight){ //스크롤이 마지막일때 
+			  	var load = '<div id="loading"><img id="loading-image" src="{{STATIC_URL}}mobileWeb_img/loadingGif.gif" alt="Loading..." /></div>';
+			  	$('#secondBetArea').html(load);
+
+			  	$.post('/main/ratioInfo/', {gameId:getParameter("gameId"), page:nextPage, state:0}, function(data){
+			  		
+			  		nextPage = data.lastFolderId;
+			  		console.log(nextPage);
+
+			  		var league = data.gameList;	
+			  		console.log(league);
+			  		var leagueTable = '';
+			  		for(var i=0; i < league.length; i++){
+							leagueTable += '<div class="chatLeague">';
+							leagueTable += '<table class="leagueTable" realId="'+league[i].realId+'" onclick="moveGame(this)">';
+							leagueTable += '<tr>';
+							leagueTable += '<td class="tdInfo" colspan="3">';
+							leagueTable += '<span class="leagueInfo">&nbsp;'+justYear(league[i].date)+'년&nbsp;'+parseRound(league[i].round)+'회차&nbsp;</span>'+league[i].league;
+							leagueTable += '<span class="leagueDate">'+betChangeDate(league[i].date)+'&nbsp;</span></td>';
+							leagueTable += '</tr>';
+							
+							leagueTable += '<tr>';
+															if(league[i].result == 1){
+							leagueTable += '<td class="leagueChoiceHome choiceHome homeTeam">'	
+															}else{
+							leagueTable += 	'<td class="leagueChoiceHome homeTeam">';								
+															}
+							leagueTable += '<span>&nbsp;'+league[i].home+'</span><span class="win">'+parseDotZero(league[i].win);
+															if(league[i].gameType == 2){
+							leagueTable +=		'<span class="under">&nbsp↓</span>';
+															}else{
+							leagueTable +=  	'';
+															}
+							leagueTable += '</span></td>';
+
+
+															if(league[i].draw){
+																if(league[i].result==4){
+							leagueTable +=		'<td class="leagueChoiceDraw choiceDraw">'+parseDotZero(league[i].draw)+'</td>';
+																}else{
+							leagueTable +=		'<td class="leagueChoiceDraw drawTd">'+parseDotZero(league[i].draw)+'</td>';
+																}
+															}else{
+																if(league[i].gameType == 2){
+							leagueTable +=	 '<td class="leagueChoiceDraw drawTd under">U '+league[i].handiNum+'</td>';
+																}
+																else{
+							leagueTable += 		'<td class="leagueChoiceDraw drawTd"></td>';
+																}					
+															}
+
+
+															if(league[i].result == 2){
+							leagueTable += 		'<td class="leagueChoiceAway choiceAway">';
+															}else{
+							leagueTable += 		'<td class="leagueChoiceAway">';
+															}			
+							leagueTable += '&nbsp;<span class="lose">'+parseDotZero(league[i].lose)+'</span>&nbsp;';
+							leagueTable += (league[i].gameType == 2) ? '<span class="over">↑</span>' : '';
+							leagueTable += '<span class="awayTeam">'+league[i].away+'&nbsp;</span></td>';
+							leagueTable += '</tr>';
+
+							leagueTable += '<tr>';
+							leagueTable += '<td class="gameResult" colspan="3">';
+															if(league[i].homescore == null && league[i].awayscore == null){
+							leagueTable += 		'<span>0</span>';									
+															}else{
+
+																if(league[i].homescore - league[i].awayscore > 0){
+							leagueTable += 		'<span class="orange">'+league[i].homescore;						
+																}else{
+							leagueTable += 		'<span>'+league[i].homescore;										
+																}
+							leagueTable += 		'</span>&nbsp;&nbsp;&nbsp;vs&nbsp;&nbsp;&nbsp;';
+																if(league[i].homescore - league[i].awayscore < 0){
+							leagueTable += 		'<span class="orange">'+league[i].awayscore;						
+																}else{
+							leagueTable += 		'<span>'+league[i].awayscore;			
+																}
+							leagueTable +=		'</span></td>';									
+															}
+							
+							leagueTable += '</tr>';
+							leagueTable += '</table></div>';
+						}
+						removeLoading();
+						$("#allBetArea").append(leagueTable);
+			  	})//post
+			  }//if
+		})//scroll document
+	})//post
+
+
+	//})//.done(function(){
+
+		
+})//document
+
+
+function moveGame(param){
+	var realId = $(param).attr("realId");
+	window.location.href = 'http://52.193.174.43/mobile/gameDetail/?gameId='+realId;
+}
+
+
+function viewAll(param){
+	
+	
+	$('#allBetArea').empty();	
+	//$('#secondBetArea').empty();
+	var funcPage = 0;
+
+	
+
+	$.post('/main/ratioInfo/', {gameId:getParameter("gameId"), page:funcPage, state:param}, function(data){
+		console.log(data);
+		//console.log(data.gameList);
+		funcPage = data.lastFolderId;
+		
+		var changePerHour= data.ratioChange;		
+		var abroadPerHour= data.abroadRatioChange;
+
+		if(abroadPerHour.length > 0){
+			protoReturnRate = 1/(parseFloat(1/changePerHour[changePerHour.length-1].win) + (changePerHour[changePerHour.length-1].draw != 'NULL' ? parseFloat(1/changePerHour[changePerHour.length-1].draw) : 0) + parseFloat(1/changePerHour[changePerHour.length-1].lose));
+			abroadReturnRate = 1/(parseFloat(1/abroadPerHour[abroadPerHour.length-1].win) + (abroadPerHour[abroadPerHour.length-1].draw != 0 ? parseFloat(1/abroadPerHour[abroadPerHour.length-1].draw) : 0) + parseFloat(1/abroadPerHour[abroadPerHour.length-1].lose));
+
+			rwin = Math.round(abroadPerHour[abroadPerHour.length-1].win * protoReturnRate / abroadReturnRate * 100)/100;
+			rdraw = Math.round(abroadPerHour[abroadPerHour.length-1].draw * protoReturnRate / abroadReturnRate * 100)/100;	
+			rlose = Math.round(abroadPerHour[abroadPerHour.length-1].lose * protoReturnRate / abroadReturnRate * 100)/100;
+	 		
+
+			//적정배당		
+			rwin = rwin <= 1 ? 1.01 : rwin;
+			rdraw = rdraw <= 0 ? '' : rdraw;
+			rlose = rlose <= 1 ? 1.01 : rlose;
+
+			console.log(rwin, rdraw, rlose);
+			//절삭률
+			cwin = Math.round(-(rwin-changePerHour[changePerHour.length-1].win) / (rwin-1) * 1000) / 10;
+			if(rdraw == ''){
+				cdraw = '';
+			}else{
+				cdraw = Math.round(-(rdraw-changePerHour[changePerHour.length-1].draw) / (rdraw-1) * 1000) / 10;	
+			}			
+			close = Math.round(-(rlose-changePerHour[changePerHour.length-1].lose) / (rlose-1) * 1000) / 10;	
+			console.log(cdraw);
+		}
+		var leagueTable = "";			
+
+		//프로토 배당분석
+		if(abroadPerHour.length > 0){
+			leagueTable += '<div class="protoDivision">프로토/해외 배당분석<span id="explainId" class="numCount explainBtn">용어설명</span></div>';
+
+			leagueTable +=	'<div class="tableWrap">'+
+												'<table class="protoTable">'+
+													'<tr>'+
+														'<td></td>'+
+														'<td>승</td>'+
+														'<td>무</td>'+
+														'<td>패</td>'+
+													'</tr>'+
+													'<tr>'+
+														'<td>해외배당</td>'+
+														'<td>'+abroadPerHour[abroadPerHour.length-1].win+'</td>'+
+														'<td>';
+														if(abroadPerHour[abroadPerHour.length-1].draw == 0){
+			leagueTable +=					'';												
+														}else{
+			leagueTable +=					abroadPerHour[abroadPerHour.length-1].draw;
+														}
+			leagueTable +=				'</td>'+
+														'<td>'+abroadPerHour[abroadPerHour.length-1].lose+'</td>'+
+													'</tr>'+
+													'<tr>'+
+														'<td>적정배당</td>'+
+														'<td>'+rwin+'</td>'+
+														'<td>'+rdraw+'</td>'+
+														'<td>'+rlose+'</td>'+
+													'</tr>'+
+													'<tr>'+
+														'<td>프로토배당</td>'+
+														'<td>'+changePerHour[changePerHour.length-1].win+'</td>'+
+														'<td>';
+														if(changePerHour[changePerHour.length-1].draw == "NULL"){
+			leagueTable +=					'';
+														}else{
+			leagueTable +=					parseDotZero(changePerHour[changePerHour.length-1].draw);
+														}
+			leagueTable +=				'</td>'+
+														'<td>'+parseDotZero(changePerHour[changePerHour.length-1].lose)+'</td>'+
+													'</tr>'+
+													'<tr>'+
+														'<td>절삭률</td>'+
+														'<td>'+parseDotZero(cwin)+'%</td>'+
+														'<td>';
+														if(cdraw <= 0){
+			leagueTable +=					'';
+														}else{
+			leagueTable +=					parseDotZero(cdraw)+'%</td>';
+														}															
+			leagueTable +=				'<td>'+parseDotZero(close)+'%</td>'+														
+													'</tr>'+
+												'</table>'+
+										'</div>';
+		}
+
+
+
+		//시간별 배당 변화
+		if(changePerHour.length > 0){
+			leagueTable += '<div class="leagueDivision">시간별 배당 변화&nbsp;&nbsp;';
+			leagueTable += '<span class="numCount">'+changePerHour.length+'번</span></div>';
+		
+			for(var j=0; j < changePerHour.length; j++){
+				leagueTable += '<div class="betDiv">';
+				leagueTable +=  	'<div class="dateArea">'+monthNDay(changePerHour[j].date)+'</div>';
+												if(changePerHour[j].gameType == 0){
+				leagueTable +=		'<div class="type0 numCount">일반 승무패';
+												}
+												else if(changePerHour[j].gameType == 1){
+				leagueTable +=  	'<div class="type1 numCount">홈 핸디 '+changePerHour[j].handiNum;
+												}
+												else if(changePerHour[j].gameType == 2){
+				leagueTable +=  	'<div class="type2 numCount">언더/오버 '+changePerHour[j].handiNum;
+												}
+				leagueTable +=		'</div>';
+				leagueTable +=  	'<div class="winBet">';
+													if(changePerHour[j].gameType == 2){
+				leagueTable +=			'언더<br>';
+													}else{
+				leagueTable +=			'승<br>';
+													}
+				leagueTable +=    changePerHour[j].win+'</div>';
+				leagueTable +=  	'<div class="drawBet">';
+														if(changePerHour[j].draw != 'NULL'){
+				leagueTable += 				'무<br>'+changePerHour[j].draw;
+														}
+														else {
+				leagueTable += 				'';
+														}
+				leagueTable +=		'</div>';
+				leagueTable += 		'<div class="loseBet">';
+													if(changePerHour[j].gameType == 2){
+				leagueTable +=			'오버<br>';
+													}else{
+				leagueTable +=			'패<br>';
+													}
+				leagueTable +=		changePerHour[j].lose+'</div>';
+				leagueTable += '</div>';
+			}
+		}
+		
+
+		//시간별 해외배당 변화
+		if(abroadPerHour.length > 0){
+			leagueTable += '<div class="leagueDivision">시간별 해외 배당 변화&nbsp;&nbsp;';
+			leagueTable += '<span class="numCount">'+abroadPerHour.length+'번</span></div>';
+
+			for(var k=0; k < abroadPerHour.length; k++){
+				leagueTable += '<div class="betDiv">';
+				leagueTable +=  	'<div class="dateArea">'+monthNDay(abroadPerHour[k].date)+'</div>';
+												if(abroadPerHour[k].gameType == 0){
+				leagueTable +=		'<div class="type0 numCount">일반 승무패';
+												}
+												else if(abroadPerHour[k].gameType == 1){
+				leagueTable +=  	'<div class="type1 numCount">홈 핸디'+abroadPerHour[k].handiNum;
+												}
+												else if(abroadPerHour[k].gameType == 2){
+				leagueTable +=  	'<div class="type2 numCount">언 오버'+abroadPerHour[k].handiNum;
+												}
+				leagueTable +=		'</div>';
+				leagueTable +=  	'<div class="winBet">';
+													if(abroadPerHour[k].gameType == 2){
+				leagueTable +=			'언더<br>';
+													}else{
+				leagueTable +=			'승<br>';
+													}
+				leagueTable +=    abroadPerHour[k].win+'</div>';
+				
+				leagueTable +=  	'<div class="drawBet">';
+														if(abroadPerHour[k].draw){
+				leagueTable += 				'무<br>'+abroadPerHour[k].draw;
+														}
+														else{
+				leagueTable += 				'';
+														}
+				leagueTable +=		'</div>';
+				leagueTable += 		'<div class="loseBet">';
+														if(abroadPerHour[k].gameType == 2){
+				leagueTable +=			'오버<br>';
+														}else{
+				leagueTable +=				'패<br>';
+														}
+				leagueTable +=			abroadPerHour[k].lose+'</div>';				
+				leagueTable += '</div>';
+			}
+		}
+
+
+		//동일 배당 전적
+		var league = data.gameList;	
+			leagueTable += '<div class="leagueDivision">동일 배당 전적&nbsp;&nbsp;';
+			leagueTable += '<span class="numCount">승 '+data.winCount+'개, '+'무 '+data.drawCount+'개, '+'패 '+data.loseCount+'개</span></div>';
+
+
+		for(var i=0; i < league.length; i++){
+			leagueTable += '<div class="chatLeague">';
+			leagueTable += '<table class="leagueTable" realId="'+league[i].realId+'" onclick="moveGame(this)">';
+			leagueTable += '<tr>';
+			leagueTable += '<td class="tdInfo" colspan="3">';
+			leagueTable += '<span class="leagueInfo">&nbsp;'+justYear(league[i].date)+'년&nbsp;'+parseRound(league[i].round)+'회차&nbsp;</span>'+league[i].league;
+			leagueTable += '<span class="leagueDate">'+betChangeDate(league[i].date)+'&nbsp;</span></td>';
+			leagueTable += '</tr>';
+			
+			leagueTable += '<tr>';
+											if(league[i].result == 1){
+			leagueTable += '<td class="leagueChoiceHome choiceHome homeTeam">'	
+											}else{
+			leagueTable += 	'<td class="leagueChoiceHome homeTeam">';								
+											}
+			leagueTable += '<span>&nbsp;'+league[i].home+'</span><span class="win">'+parseDotZero(league[i].win);
+											if(league[i].gameType == 2){
+			leagueTable +=		'<span class="under">&nbsp↓</span>';
+											}else{
+			leagueTable +=  	'';
+											}
+			leagueTable += '</span></td>';
+
+
+											if(league[i].draw){
+												if(league[i].result==4){
+			leagueTable +=		'<td class="leagueChoiceDraw choiceDraw">'+parseDotZero(league[i].draw)+'</td>';
+												}else{
+			leagueTable +=		'<td class="leagueChoiceDraw drawTd">'+parseDotZero(league[i].draw)+'</td>';
+												}
+											}else{
+												if(league[i].gameType == 2){
+			leagueTable +=	 '<td class="leagueChoiceDraw drawTd under">U '+league[i].handiNum+'</td>';
+												}
+												else{
+			leagueTable += 		'<td class="leagueChoiceDraw drawTd"></td>';
+												}					
+											}
+
+
+											if(league[i].result == 2){
+			leagueTable += 		'<td class="leagueChoiceAway choiceAway">';
+											}else{
+			leagueTable += 		'<td class="leagueChoiceAway">';
+											}			
+			leagueTable += '&nbsp;<span class="lose">'+parseDotZero(league[i].lose)+'</span>&nbsp;';
+			leagueTable += (league[i].gameType == 2) ? '<span class="over">↑</span>' : '';
+			leagueTable += '<span class="awayTeam">'+league[i].away+'&nbsp;</span></td>';
+			leagueTable += '</tr>';
+
+			leagueTable += '<tr>';
+			leagueTable += '<td class="gameResult" colspan="3">';
+											if(league[i].homescore == null && league[i].awayscore == null){
+			leagueTable += 		'<span>0</span>';									
+											}else{
+
+												if(league[i].homescore - league[i].awayscore > 0){
+			leagueTable += 		'<span class="orange">'+league[i].homescore;						
+												}else{
+			leagueTable += 		'<span>'+league[i].homescore;										
+												}
+			leagueTable += 		'</span>&nbsp;&nbsp;&nbsp;vs&nbsp;&nbsp;&nbsp;';
+												if(league[i].homescore - league[i].awayscore < 0){
+			leagueTable += 		'<span class="orange">'+league[i].awayscore;						
+												}else{
+			leagueTable += 		'<span>'+league[i].awayscore;			
+												}
+			leagueTable +=		'</span></td>';									
+											}
+			
+			leagueTable += '</tr>';
+			leagueTable += '</table></div>';
+		}
+		
+			$("#allBetArea").append(leagueTable);			
+		removeLoading();
+
+
+		var funcNextPage = funcPage;
+		console.log(funcNextPage);
+
+		$(document).scroll(function(){
+				
+				var scrollHeight = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight); //현재문서의 높이			  
+			  var scrollTop = Math.max(document.documentElement.scrollTop, document.body.scrollTop);//현재 스크롤탑의 값			  
+			  var clientHeight = document.documentElement.clientHeight;//현재 화면 높이 값
+
+			  if((scrollTop+clientHeight) == scrollHeight){ //스크롤이 마지막일때 			  	
+			  	console.log(param);
+			  	$.post('/main/ratioInfo/', {gameId:getParameter("gameId"), page:funcNextPage, state:param}, function(data){
+			  		
+			  		funcNextPage = data.lastFolderId;
+			  		console.log(funcNextPage);
+
+			  		var league = data.gameList;	
+			  		console.log(league);
+			  		var leagueTable = '';
+			  		for(var i=0; i < league.length; i++){			  			
+							leagueTable += '<div class="chatLeague">';
+							leagueTable += '<table class="leagueTable" realId="'+league[i].realId+'" onclick="moveGame(this)">';
+							leagueTable += '<tr>';
+							leagueTable += '<td class="tdInfo" colspan="3">';
+							leagueTable += '<span class="leagueInfo">&nbsp;'+justYear(league[i].date)+'년&nbsp;'+parseRound(league[i].round)+'회차&nbsp;</span>'+league[i].league;
+							leagueTable += '<span class="leagueDate">'+betChangeDate(league[i].date)+'&nbsp;</span></td>';
+							leagueTable += '</tr>';
+							
+							leagueTable += '<tr>';
+															if(league[i].result == 1){
+							leagueTable += '<td class="leagueChoiceHome choiceHome homeTeam">'	
+															}else{
+							leagueTable += 	'<td class="leagueChoiceHome homeTeam">';								
+															}
+							leagueTable += '<span>&nbsp;'+league[i].home+'</span><span class="win">'+parseDotZero(league[i].win);
+															if(league[i].gameType == 2){
+							leagueTable +=		'<span class="under">&nbsp↓</span>';
+															}else{
+							leagueTable +=  	'';
+															}
+							leagueTable += '</span></td>';
+
+
+															if(league[i].draw){
+																if(league[i].result==4){
+							leagueTable +=		'<td class="leagueChoiceDraw choiceDraw">'+parseDotZero(league[i].draw)+'</td>';
+																}else{
+							leagueTable +=		'<td class="leagueChoiceDraw drawTd">'+parseDotZero(league[i].draw)+'</td>';
+																}
+															}else{
+																if(league[i].gameType == 2){
+							leagueTable +=	 '<td class="leagueChoiceDraw drawTd under">U '+league[i].handiNum+'</td>';
+																}
+																else{
+							leagueTable += 		'<td class="leagueChoiceDraw drawTd"></td>';
+																}					
+															}
+
+
+															if(league[i].result == 2){
+							leagueTable += 		'<td class="leagueChoiceAway choiceAway">';
+															}else{
+							leagueTable += 		'<td class="leagueChoiceAway">';
+															}			
+							leagueTable += '&nbsp;<span class="lose">'+parseDotZero(league[i].lose)+'</span>&nbsp;';
+							leagueTable += (league[i].gameType == 2) ? '<span class="over">↑</span>' : '';
+							leagueTable += '<span class="awayTeam">'+league[i].away+'&nbsp;</span></td>';
+							leagueTable += '</tr>';
+
+							leagueTable += '<tr>';
+							leagueTable += '<td class="gameResult" colspan="3">';
+															if(league[i].homescore == null && league[i].awayscore == null){
+							leagueTable += 		'<span>0</span>';									
+															}else{
+
+																if(league[i].homescore - league[i].awayscore > 0){
+							leagueTable += 		'<span class="orange">'+league[i].homescore;						
+																}else{
+							leagueTable += 		'<span>'+league[i].homescore;										
+																}
+							leagueTable += 		'</span>&nbsp;&nbsp;&nbsp;vs&nbsp;&nbsp;&nbsp;';
+																if(league[i].homescore - league[i].awayscore < 0){
+							leagueTable += 		'<span class="orange">'+league[i].awayscore;						
+																}else{
+							leagueTable += 		'<span>'+league[i].awayscore;			
+																}
+							leagueTable +=		'</span></td>';									
+															}
+							
+							leagueTable += '</tr>';
+							leagueTable += '</table></div>';
+						}
+						
+							$("#allBetArea").append(leagueTable);		
+						
+						
+			  	})//post
+			  }//if
+		})//scroll document
+
+	})//post
+
+		
+	//})//done
+
+} //function viewAll
+
+
+
+	//로딩 이미지
+	function removeLoading(){
+		var element = document.getElementById('loading');
+		if(element==null){
+			return;
+		}
+		element.parentNode.removeChild(element);
+	}
+	
+	
+
+
+	function getParameter(name){
+    search=location.search;
+    if(!search){
+        //파라미터가 하나도 없을때
+        document.write("에러 출력 텍스트");
+        return false;
+    }
+ 
+    search=search.split("?");
+    data=search[1].split("=");
+    if(search[1].indexOf(name)==(-1) || data[0]!=name){
+        //해당하는 파라미터가 없을때.
+        return "";
+        return;
+    }
+    if(search[1].indexOf("&")==(-1)){
+        //한개의 파라미터일때.
+        data=search[1].split("=");
+        return data[1];
+    }else{
+    //여러개의 파라미터 일때.
+    data=search[1].split("&"); //엠퍼센트로 자름.
+    for(i=0;i<=data.length-1;i++){
+        l_data=data[i].split("=");
+        if(l_data[0]==name){
+            return l_data[1];
+            break;
+        }else continue;
+        }
+    }
+	}
+	
+
+	function monthNDay(date){	
+		var year = date.substring(0,4);	
+		var month = date.substring(5,7);
+		var day = date.substring(8,10);
+		var hour = date.substring(11,13);
+		var minute = date.substring(14,16);
+
+		var realDate = new Date(year+'-'+month+'-'+day+'T'+hour+':'+minute);
+
+		var mymonth = realDate.getMonth();
+		mymonth = mymonth+1;
+		var myweekday = realDate.getDate();
+		var myhour = realDate.getHours();
+		var myminute = realDate.getMinutes();
+
+		return ((mymonth < 10) ? "0" : "") + mymonth+"-"+ (myweekday <10 ? "0" : "") + myweekday +" "+((myhour < 10) ? "0" : "")+ myhour+":"+((myminute < 10) ? "0" : "") + myminute;
+	}
+
+	function justYear(date){
+		var year = date.substring(0,4);
+		var month = date.substring(5,7);
+		var day = date.substring(8,10);
+		var hour = date.substring(11,13);
+		var minute = date.substring(14,16);
+
+		var realDate = new Date(year+'-'+month+'-'+day+'T'+hour+':'+minute);
+
+		var myyear = realDate.getFullYear();		
+		var breifYear = myyear.toString()//.substring(0,2);
+		
+		return breifYear.substring(2,4);
+	}
+
+	function betChangeDate(date){
+		var year = date.substring(0,4);
+		var month = date.substring(5,7);
+		var day = date.substring(8,10);
+		var hour = date.substring(11,13);
+		var minute = date.substring(14,16);
+		
+		var realDate = new Date(year+'-'+month+'-'+day+'T'+hour+':'+minute);
+		//console.log(realDate)
+		var myyear = realDate.getFullYear();
+		var mymonth = realDate.getMonth();
+		mymonth = mymonth+1;
+		var myweekday = realDate.getDate();
+		var myhour = realDate.getHours();
+		var myminute = realDate.getMinutes();
+		
+		return myyear+'-'+((mymonth < 10) ? "0" : "") + mymonth+"-"+ (myweekday <10 ? "0" : "") + myweekday +" "+((myhour < 10) ? "0" : "")+ myhour+":"+((myminute < 10) ? "0" : "") + myminute;
+	}
+
+	function parseRound(round){
+		var r = round.toString();
+		r = r.substring(4,6);
+		return r;
+	}
+
+	function getParameter(name){
+    search=location.search;
+    if(!search){
+        //파라미터가 하나도 없을때
+        document.write("에러 출력 텍스트");
+        return false;
+    }
+ 
+    search=search.split("?");
+    data=search[1].split("=");
+    if(search[1].indexOf(name)==(-1) || data[0]!=name){
+        //해당하는 파라미터가 없을때.
+        return "";
+        return;
+    }
+    if(search[1].indexOf("&")==(-1)){
+        //한개의 파라미터일때.
+        data=search[1].split("=");
+        return data[1];
+    }else{
+    //여러개의 파라미터 일때.
+    data=search[1].split("&"); //엠퍼센트로 자름.
+    for(i=0;i<=data.length-1;i++){
+        l_data=data[i].split("=");
+        if(l_data[0]==name){
+            return l_data[1];
+            break;
+        }else continue;
+        }
+    }
+	}
+
+	//소수점 만들기
+	function parseDotZero(num){		
+		var str = num.toString()		
+		var dot = str.indexOf(".")		
+		if(dot==-1){			
+			return str+'.0';
+		}
+		else{
+			return num;
+		}
+	}
+
+</script>
+
+
+
+{% endblock %}
+{% endblock %}
+

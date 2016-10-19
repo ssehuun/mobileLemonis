@@ -1,0 +1,182 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>LEMON IS</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta name="mobile-web-app-capable" content="yes">
+	 	<meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+		<link rel="manifest" href="{{STATIC_URL}}mobileWeb_js/manifest.json">
+		
+		<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css" />
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+		<link rel="stylesheet" href="{{STATIC_URL}}mobileWeb_vendor/waves/waves.min.css" />
+		<link rel="stylesheet" href="{{STATIC_URL}}mobileWeb_vendor/wow/animate.css" />
+		<link rel="stylesheet" href="{{STATIC_URL}}mobileWeb_css/nativedroid2.css" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+		
+		<!--nativdroid2.css import를 가져옴-->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
+		<link rel="stylesheet" href="{{STATIC_URL}}mobileWeb_css/flexboxgrid.min.css" />		
+		<link rel="stylesheet" href="//fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic" />
+		<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,300,500,400italic,700,900" />
+		<!-- end nativedroid2.css-->
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/3.1.0/firebase.js"></script>
+		
+		<style>
+			*{
+				-webkit-box-sizing: border-box;
+		    -moz-box-sizing: border-box;
+		    -o-box-sizing: border-box;
+				box-sizing: border-box;
+				-webkit-transition: .25s ease-in-out;
+				-moz-transition: .25s ease-in-out;
+				-o-transition: .25s ease-in-out;
+				transition: .25s ease-in-out;					
+			}
+		/*header*/
+			.zmdi-menu, .zmdi-more-vert, .zmdi-search,.zmdi-arrow-back {
+				color: #999999;
+			}
+			#naviconImg{				
+				margin: 20px 0px 0px 10px;}
+
+		/*로그인전 패널*/
+			.ui-panel-inner{ /*jquery-mobile 수정*/
+				padding: 0;
+			}
+			.guestCmtArea{
+				padding-top: 35px;
+				text-align: center;}
+			.guestCmt{				
+				color: #666666;
+				font-size: 12px;
+			}
+			.loginBtn{
+				line-height: 44px;
+				vertical-align: middle;
+				padding-left: 14px;
+				font-size: 16px;
+				color: #666666;
+				background-color: #fafafa;
+				border-bottom: 1px solid #eaeaea;
+				border-top: 1px solid #eaeaea;
+			}
+			.loginBtn img{				
+				float: right;
+				margin: 15px 10px 0px 0px;
+			}
+			.panelList{
+				vertical-align: middle;
+				line-height: 40px;
+				border-bottom: 1px solid #eaeaea;
+			}
+			.panelList img:nth-child(1){
+				margin: 0px 13px 0px 17px;}
+			.guestMenu{
+				text-decoration: none;
+				font-size: 13px;
+				color: #666666;}
+			.chevron{				
+				float: right;
+				margin: 15px 10px 0px 0px;}
+		</style>
+	
+	</head>
+	<body>
+		
+
+		<div data-role="page">			
+
+			<!--로그인전 panel 'mobileWeb/blocks/panel.html-->
+			
+			<!--end panel-->
+
+			{% block content %}			
+			{% block main %}
+	
+			<!--header-->
+			<!--<div data-role="header" data-position="fixed" class="wow fadeInDown" data-wow-delay="0.2s">				
+				<a href="#leftpanel" class="ui-btn ui-btn-left wow fadeIn" data-wow-delay='0.8s'>
+					<img id="naviconImg" src="{{STATIC_URL}}mobileWeb_img/ic_navicon.png" alt="" width="20px" height="15px">
+				</a>				
+				<h1 class="wow fadeIn" data-wow-delay='0.4s'>
+					<img src="{{STATIC_URL}}mobileWeb_img/ic_logo.png" alt="logo" width="82px" height="28px">
+				</h1>
+			</div>-->
+		
+			<!--main-->
+			<div role="main" id="home" class="ui-content wow fadeIn" data-inset="false" data-wow-delay="0.2s">			
+																				<!--ui-btn ui-btn-inline-->
+																			
+				
+			</div>
+			<!--<a href="/mobile/liveGame" class="ui-btn-fab ui-btn-fab-bottom ui-btn-raised clr-primary ui-mini">	
+				<img src="{{STATIC_URL}}/mobileWeb_img/bt_accountBook.png" width="65px" height="65px">
+			</a>-->					
+			<!--end main-->
+
+			{% endblock %}
+			{% endblock %}
+			
+			
+		
+				
+		</div>
+		<!--end page-->
+
+		
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+		<script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>		
+		<script src="//ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
+		
+		
+		<script src="{{STATIC_URL}}mobileWeb_vendor/waves/waves.min.js"></script>
+		<script src="{{STATIC_URL}}mobileWeb_vendor/wow/wow.min.js"></script>
+		<script src="{{STATIC_URL}}mobileWeb_js/nativedroid2.js"></script>
+		<script src="{{STATIC_URL}}mobileWeb_js/nd2settings.js"></script>
+		
+		<script>
+		/*
+			new $.nd2Search({
+		    placeholder : "Input Placeholder",   // Placeholder in the search field</i>
+		    defaultIcon : "globe-alt", // optional: icon | null</i>
+		    source : [
+		    { label : 'Displayed Value', value : 'real-value', icon : 'custom-icon'}],   // <a href='http://api.jqueryui.com/autocomplete/#option-source'>autocomplete : option-source</a></i>
+		    fn : function(result) { // this function will be executed when a valid result item is selected</i>
+		      console.log('--- Your custom handling ---');
+		      console.log('you picked: ');
+		      console.log(result);
+		    }
+		  });*/
+		</script>
+
+		<script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-auth.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
+
+				
+		<script>
+			$(function(){
+			  // Initialize Firebase
+			  var config = {
+			    apiKey: "AIzaSyCSfoO0hdfjn6SWOdUDybTSGY7alzWXLwI",
+			    authDomain: "picstar-1022.firebaseapp.com",
+			    databaseURL: "https://picstar-1022.firebaseio.com",
+			    storageBucket: "picstar-1022.appspot.com",
+			  };
+			  firebase.initializeApp(config);  
+			}) 
+		</script>
+
+	</body>
+</html>
+
+
+	  
+
+
+

@@ -1,0 +1,620 @@
+{% extends 'mobileWeb/blocks/base.html' %}
+
+{% block content %}
+
+{% block css %}		
+	<style>		
+		[data-role="nd2tab"]{
+			min-height: 400px;				
+		}
+		.boardList{
+			height: 100px;
+			padding: 12px 10px 0px 10px;
+			border-bottom: 1px solid #eaeaea;
+		}
+		.listImg{
+			width: 15%;
+			margin-right: 17px;
+			display: inline-block;
+			text-align: center;							
+		}
+		.listImg img{
+			margin-bottom: 50px;
+		}
+		.listBody{				
+			display: inline-block;
+			width: 70%;								
+		}
+		.listTop{
+			font-size: 11px;	
+			color:#f10000;}
+		.listTheme{
+			font-size: 14px;
+			color: #333333;
+			font-weight: bold;}
+		
+		.listNick{
+			font-size: 12px;
+			color: #666666;}
+		.listBottom{
+			font-size: 11px;
+			color: #999999;}
+
+		/*이벤트*/
+		.eventArea{
+			background-color: #fafafa;
+			text-align: center;
+		}
+		.inner div:hover {
+			color: #f10000;				
+		}
+		.inner div:active {
+			background-color: #f10000;
+		}			
+		.inner{
+			background-color: #fafafa;
+			line-height: 33px;				
+			border-bottom: 1px solid #eaeaea;
+		}			
+		.inner div{
+			margin-right: -3px;
+			color: #999999;
+			font-size: 13px;								 
+			display: inline-block;
+			border-left: 1px solid #cccccc;
+			border-right: 1px solid #cccccc;
+		}
+		.inner div:nth-child(1){				
+			border-right: 1px solid #cccccc;}
+		.inner div:nth-child(2){				
+			border-left: 1px solid #cccccc;
+			border-right: 1px solid #cccccc;}
+
+		.eventCard{				
+			margin: 2% 1% 0px 1%;
+			display: inline-block;
+			height: 200px;
+			width: 45%;
+		}
+		.imgBox{
+			position: relative;
+			width: 100%;
+			height: 63%;}
+
+		
+		.ingDiv, .endDiv, .winnerDiv{
+			position: absolute;
+			top:10px;
+			left:0px;
+			padding: 3px;
+			opacity: 0.7;
+			color: #ffffff;
+			font-size: 13px;	
+		}	
+		.ingDiv{								
+			width: 50px;				
+			background-color: #f10000;				
+		}
+		.endDiv{				
+			width: 50px;				
+			background-color: #000000;				
+		}
+		.winnerDiv{				
+			background-color: #01abff;				
+		}
+		.eventDetail{
+			height: 37%;
+			padding:5px;
+			background-color: #ffffff;
+		}
+		.eventTheme{
+			font-size: 14px;
+			font-weight: bold;
+			color: #333333;
+			margin-bottom: 10px;
+		}
+		.eventDate{
+			font-size: 12px;
+			color: #999999;
+		}
+		#naviconImg{				
+			margin: 20px 0px 0px 10px;}
+
+		/*왼쪽 패널*/
+		.ui-panel-inner{ /*jquery-mobile 수정*/
+			padding: 0;
+		}
+		/*프로필*/
+		.nd2-sidepanel-profile{
+			background-color: #fafafa;
+		}
+		.logoutArea{
+			float: right;
+			margin: 5px 5px 0px 0px;
+		}
+		.logoutBtn{
+			font-size: 11px;
+			color: #cccccc;
+		}
+		.profileArea{
+			text-align: center;
+		}
+		.profileThumbnail{
+			clear: both;
+			border-radius: 50%;
+			margin: 25px 0px 10px 0px;
+		}
+		.profileNickname{
+			font-size: 15px;
+			color: #333333;
+		}
+		.profileEmail{
+			font-size: 11px;
+			color: #666666;	
+		}	
+		/*레몬수*/	
+		div.lemonCount{
+			width: 32%;
+			padding: 5%;
+			font-size: 13px;
+			text-align: center;				
+			display: inline-block;}
+		
+		.lemonArea{
+			background-color: #fafafa;
+		}
+		.lemonArea div{
+			height: 80px;				
+		}
+		.lemonArea div:nth-child(1), .lemonArea div:nth-child(2){
+			border-right: 1px solid rgba(96, 125, 139, .2);
+		}
+		.lemonCount .lemonMenu{
+			font-size: 11px;
+			color: #999999;}
+		
+		/*마이페이지 버튼*/
+		.myPageBtnArea{
+			line-height: 44px;
+			background-color: #fafafa;
+			border-bottom: 1px solid #eaeaea;
+			border-top: 1px solid #eaeaea;
+		}
+		.myPageBtn{
+			vertical-align: middle;				
+			font-size: 16px;
+			color: #666666;
+			margin-left: 14px;
+		}
+		.myPageBtnArea img{				
+			float: right;
+			margin: 15px 10px 0px 0px;
+		}
+		/*아이템 */
+		.itemArea{
+			border-bottom: 1px solid #eaeaea;
+		}
+		.itemArea>.itemContent{
+			padding: 5%;
+			height: 74px;
+			width: 49%;				
+			text-align: center;
+			display: inline-block;
+		}
+		.itemArea div:nth-child(1){
+			border-right: 1px solid rgba(96, 125, 139, .2);	
+		}
+		.itemTheme{
+			margin-bottom: 10px;
+			font-size: 11px;
+			color: #999999;
+			margin-bottom: 8px;
+		}
+		.itemStore{
+			color: #f10000;
+		}
+		/*패널 메뉴*/			
+		.panelList{
+			vertical-align: middle;
+			line-height: 40px;
+			border-bottom: 1px solid #eaeaea;
+		}
+
+		.panelList img:nth-child(1){
+			margin: 0px 13px 0px 17px;}
+		.guestMenu{
+			text-decoration: none;
+			font-size: 13px;
+			color: #666666;}
+		.chevron{				
+			float: right;
+			margin: 15px 10px 0px 0px;}
+		.lemonNumber{
+			font-size: 13px;
+			color: #333333;
+		}
+	</style>
+{% endblock %}
+	
+{% block main %}	
+		
+
+			<!--<nd2-include data-src="examples/fragments/panel.left.html"></nd2-include>
+			<div data-role="panel" id="bottomsheet" data-animate="false" data-position='bottom' data-display="overlay">
+				<nd2-include data-src="examples/fragments/bottom.sheet.html"></nd2-include>
+			</div>-->
+
+
+			<!--header-->
+			<div data-role="header" data-position="fixed" class="wow fadeInDown" data-wow-delay="0.2s">
+				<!--<a href="#leftpanel" class="ui-btn ui-btn-left wow fadeIn" data-wow-delay='0.8s'>
+					<img id="naviconImg" src="{{STATIC_URL}}mobileWeb_img/ic_navicon.png" alt="" width="20px" height="15px">
+				</a>
+
+				<a href="#bottomsheet" class="ui-btn ui-btn-right wow fadeIn" data-wow-delay='1.2s'><i class="zmdi zmdi-more-vert"></i></a>				
+				
+				
+				<h1 class="wow fadeIn" data-wow-delay='0.4s'>
+					<img src="{{STATIC_URL}}mobileWeb_img/ic_logo.png" alt="logo" width="82px" height="28px">
+				</h1>-->
+
+
+				<ul data-role="nd2tabs" data-swipe="true">					
+					<li data-tab="all" class="all" data-tab-active="true">Pick</li>
+					<li data-tab="popular">게시판</li>
+					<li data-tab="predict">랭킹</li>
+					<li data-tab="freeboard"></li>
+					<li data-tab="event">이벤트</li>
+				</ul>
+
+			</div>
+			<!-- end header-->
+
+
+							
+
+
+			
+			<!--class="ui-content wow fadeIn"-->
+			<div role="main" data-inset="false" data-wow-delay="0.2s">
+				
+				<!--class="ui-btn ui-btn-inline"-->
+				<a href="#" class="ui-btn-fab ui-btn-fab-bottom ui-btn-raised clr-primary ui-mini">	
+					<img src="{{STATIC_URL}}/mobileWeb_img/bt_write.png" alt="" width="65px" height="65px">
+				</a>
+
+				<div data-role="nd2tab"	data-tab="all">
+					
+					<div class="boardList" ><!--onclick="boardWriting();"-->
+						<div class="listImg">
+							<img src="{{STATIC_URL}}mobileWeb_img/cheerLeader2.jpg" alt="" width="45px" height="45px" class="img-circle">
+						</div>
+						<div class="listBody">						
+							<div class="listTop">[쉼터 - 유머]</div>
+							<div class="listTheme">우리 연정이 넘나 이쁜것 헤해헤헤 
+								<img src="{{STATIC_URL}}mobileWeb_img/ic_file.png" alt="" width="8px" height="14px">
+							</div>
+							<div class="listNick">아이언맨이요</div>
+							<span class="listBottom">
+								07/04 16:34&nbsp;&nbsp;조회수 102&nbsp;&nbsp;
+								<img src="{{STATIC_URL}}mobileWeb_img/ic_like.png" width="10px" height="10px"> 5&nbsp;&nbsp;
+								<img src="{{STATIC_URL}}mobileWeb_img/ic_chatbubble.png" width="10px" height="10px"> 22
+							</span>
+
+						</div>
+					</div>
+					<div class="boardList">
+						<div class="listImg">
+							<img src="{{STATIC_URL}}mobileWeb_img/cheerLeader2.jpg" alt="" width="45px" height="45px" class="img-circle">
+						</div>
+						<div class="listBody">						
+							<div class="listTop">[쉼터 - 유머]</div>
+							<div class="listTheme">우리 연정이 넘나 이쁜것 헤해헤헤</div>							
+							<div class="listNick">아이언맨이요</div>
+							<span class="listBottom">
+								07/04 16:34&nbsp;&nbsp;조회수 102&nbsp;&nbsp;
+								<img src="{{STATIC_URL}}mobileWeb_img/ic_like.png" width="10px" height="10px"> 5&nbsp;&nbsp;
+								<img src="{{STATIC_URL}}mobileWeb_img/ic_chatbubble.png" width="10px" height="10px"> 22
+							</span>						
+						</div>
+					</div>
+					<div class="boardList">
+						<div class="listImg">
+							<img src="{{STATIC_URL}}mobileWeb_img/cheerLeader2.jpg" alt="" width="50px" height="50px" class="img-circle">
+						</div>
+						<div class="listBody">						
+							<div class="listTop">[쉼터 - 유머]</div>
+							<div class="listTheme">우리 연정이 넘나 이쁜것 헤해헤헤</div>							
+							<div class="listNick">아이언맨이요</div>
+							<span class="listBottom">
+								07/04 16:34&nbsp;&nbsp;조회수 102&nbsp;&nbsp;
+								<img src="{{STATIC_URL}}mobileWeb_img/ic_like.png" width="10px" height="10px"> 5&nbsp;&nbsp;
+								<img src="{{STATIC_URL}}mobileWeb_img/ic_chatbubble.png" width="10px" height="10px"> 22
+							</span>						
+						</div>
+					</div>
+					<div class="boardList">
+						<div class="listImg">
+							<img src="{{STATIC_URL}}mobileWeb_img/cheerLeader2.jpg" alt="" width="50px" height="50px" class="img-circle">
+						</div>
+						<div class="listBody">						
+							<div class="listTop">[쉼터 - 유머]</div>
+							<div class="listTheme">우리 연정이 넘나 이쁜것 헤해헤헤</div>							
+							<div class="listNick">아이언맨이요</div>
+							<span class="listBottom">
+								07/04 16:34&nbsp;&nbsp;조회수 102&nbsp;&nbsp;
+								<img src="{{STATIC_URL}}mobileWeb_img/ic_like.png" width="10px" height="10px"> 5&nbsp;&nbsp;
+								<img src="{{STATIC_URL}}mobileWeb_img/ic_chatbubble.png" width="10px" height="10px"> 22
+							</span>						
+						</div>
+					</div>
+					<div class="boardList">
+						<div class="listImg">
+							<img src="{{STATIC_URL}}mobileWeb_img/cheerLeader2.jpg" alt="" width="50px" height="50px" class="img-circle">
+						</div>
+						<div class="listBody">						
+							<div class="listTop">[쉼터 - 유머]</div>
+							<div class="listTheme">우리 연정이 넘나 이쁜것 헤해헤헤</div>							
+							<div class="listNick">아이언맨이요</div>
+							<span class="listBottom">
+								07/04 16:34&nbsp;&nbsp;조회수 102&nbsp;&nbsp;
+								<img src="{{STATIC_URL}}mobileWeb_img/ic_like.png" width="10px" height="10px"> 5&nbsp;&nbsp;
+								<img src="{{STATIC_URL}}mobileWeb_img/ic_chatbubble.png" width="10px" height="10px"> 22
+							</span>						
+						</div>
+					</div>
+					<div class="boardList">
+						<div class="listImg">
+							<img src="{{STATIC_URL}}mobileWeb_img/cheerLeader2.jpg" alt="" width="50px" height="50px" class="img-circle">
+						</div>
+						<div class="listBody">						
+							<div class="listTop">[쉼터 - 유머]</div>
+							<div class="listTheme">우리 연정이 넘나 이쁜것 헤해헤헤</div>							
+							<div class="listNick">아이언맨이요</div>
+							<span class="listBottom">
+								07/04 16:34&nbsp;&nbsp;조회수 102&nbsp;&nbsp;
+								<img src="{{STATIC_URL}}mobileWeb_img/ic_like.png" width="10px" height="10px"> 5&nbsp;&nbsp;
+								<img src="{{STATIC_URL}}mobileWeb_img/ic_chatbubble.png" width="10px" height="10px"> 22
+							</span>						
+						</div>
+					</div>
+			
+				</div>
+
+				<div data-role="nd2tab"	data-tab="popular">
+					<div class="boardList">
+						<div class="listImg">
+							<img src="{{STATIC_URL}}mobileWeb_img/cheerLeader2.jpg" alt="" width="45px" height="45px" class="img-circle">
+						</div>
+						<div class="listBody">						
+							<div class="listTop">[쉼터 - 유머]</div>
+							<div class="listTheme">우리 연정이 넘나 이쁜것 헤해헤헤 
+								<img src="{{STATIC_URL}}mobileWeb_img/ic_file.png" alt="" width="8px" height="14px">
+							</div>
+							<div class="listNick">아이언맨이요</div>
+							<span class="listBottom">
+								07/04 16:34&nbsp;&nbsp;조회수 102&nbsp;&nbsp;
+								<img src="{{STATIC_URL}}mobileWeb_img/ic_like.png" width="10px" height="10px"> 5&nbsp;&nbsp;
+								<img src="{{STATIC_URL}}mobileWeb_img/ic_chatbubble.png" width="10px" height="10px"> 22
+							</span>						
+						</div>
+					</div>
+				</div>
+
+				<div data-role="nd2tab"	data-tab="predict">
+					
+					<div data-role="navbar">
+						<ul>
+							<li><a href="#one" data-ajax="false">적중</a></li>
+							<li><a href="#two" data-ajax="false">대기중</a></li>				
+						</ul>
+					</div>
+					
+						<div class="boardList">
+							<div class="listImg">
+								<img src="{{STATIC_URL}}mobileWeb_img/cheerLeader2.jpg" alt="" width="45px" height="45px" class="img-circle">
+							</div>
+							<div class="listBody">						
+								<div class="listTop">[쉼터 - 유머]</div>
+								<div class="listTheme">우리 연정이 넘나 이쁜것 헤해헤헤</div>
+								<div class="listNick">아이언맨이요</div>
+								<span class="listBottom">
+									07/04 16:34&nbsp;&nbsp;조회수 102&nbsp;&nbsp;
+									<img src="{{STATIC_URL}}mobileWeb_img/ic_like.png" width="10px" height="10px"> 5&nbsp;&nbsp;
+									<img src="{{STATIC_URL}}mobileWeb_img/ic_chatbubble.png" width="10px" height="10px"> 22
+								</span>						
+							</div>
+						</div>
+					
+					
+						<div class="boardList">
+							<div class="listImg">
+								<img src="{{STATIC_URL}}mobileWeb_img/cheerLeader2.jpg" alt="" width="45px" height="45px" class="img-circle">
+							</div>
+							<div class="listBody">						
+								<div class="listTop">[쉼터 - 유머]</div>
+								<div class="listTheme">우리 연정이 넘나 이쁜것 헤해헤헤</div>
+								<div class="listNick">아이언맨이요</div>
+								<span class="listBottom">
+									07/04 16:34&nbsp;&nbsp;조회수 102&nbsp;&nbsp;
+									<img src="{{STATIC_URL}}mobileWeb_img/ic_like.png" width="10px" height="10px"> 5&nbsp;&nbsp;
+									<img src="{{STATIC_URL}}mobileWeb_img/ic_chatbubble.png" width="10px" height="10px"> 22
+								</span>						
+							</div>
+						</div>				
+				</div>
+
+				<div data-role="nd2tab"	data-tab="freeboard">
+					<div data-role="navbar">
+						<ul>
+							<li><a href="#proto" data-ajax="false">프로토</a></li>
+							<li><a href="#humor" data-ajax="false">유머</a></li>
+						</ul>
+					</div>
+
+					
+						<div class="boardList" onclick="boardWriting();">
+							<div class="listImg">
+								<img src="{{STATIC_URL}}mobileWeb_img/cheerLeader2.jpg" alt="" width="45px" height="45px" class="img-circle">
+							</div>
+							<div class="listBody">						
+								<div class="listTop">[쉼터 - 유머]</div>
+								<div class="listTheme">우리 연정이 넘나 이쁜것 헤해헤헤</div>
+								<div class="listNick">아이언맨이요</div>
+								<span class="listBottom">
+									07/04 16:34&nbsp;&nbsp;조회수 102&nbsp;&nbsp;
+									<img src="{{STATIC_URL}}mobileWeb_img/ic_like.png" width="10px" height="10px"> 5&nbsp;&nbsp;
+									<img src="{{STATIC_URL}}mobileWeb_img/ic_chatbubble.png" width="10px" height="10px"> 22
+								</span>						
+							</div>
+						</div>
+					
+					
+						<div class="boardList" onclick="boardWriting();">
+							<div class="listImg">
+								<img src="{{STATIC_URL}}mobileWeb_img/cheerLeader2.jpg" alt="" width="45px" height="45px" class="img-circle">
+							</div>
+							<div class="listBody">						
+								<div class="listTop">[쉼터 - 유머]</div>
+								<div class="listTheme">우리 연정이 넘나 이쁜것 헤해헤헤</div>
+								<div class="listNick">아이언맨이요</div>
+								<span class="listBottom">
+									07/04 16:34&nbsp;&nbsp;조회수 102&nbsp;&nbsp;
+									<img src="{{STATIC_URL}}mobileWeb_img/ic_like.png" width="10px" height="10px"> 5&nbsp;&nbsp;
+									<img src="{{STATIC_URL}}mobileWeb_img/ic_chatbubble.png" width="10px" height="10px"> 22
+								</span>						
+							</div>
+						</div>
+					
+				
+				</div>
+
+				<div data-role="nd2tab"	data-tab="event">
+					<div class="inner">
+						<div>진행중인 이벤트</div><div>종료된 이벤트</div><div>당첨자 발표</div>
+					</div>
+
+					<div class="eventArea">
+						<div class="eventCard">
+							<div class="imgBox">
+								<img src="{{STATIC_URL}}mobileWeb_img/img_profilepic01.png" alt="" width="100%" height="100%">
+								<div class="ingDiv">진행중</div>
+							</div>
+							<div class="eventDetail">
+								<div class="eventTheme">9인의 야구걸스와 함께 가을 야구 응원가자!</div>
+								<div class="eventDate">2016.05.05~2016.08.01</div>
+							</div>
+						</div>
+						<div class="eventCard">
+							<div class="imgBox">
+								<img src="{{STATIC_URL}}mobileWeb_img/img_profilepic01.png" alt="" width="100%" height="100%">
+								<div class="endDiv">종료</div>
+							</div>
+							<div class="eventDetail">
+								<div class="eventTheme">9인의 야구걸스와 함께 가을 야구 응원가자!</div>
+								<div class="eventDate">2016.05.05~2016.08.01</div>
+							</div>
+						</div>
+						<div class="eventCard">
+							<div class="imgBox">
+								<img src="{{STATIC_URL}}mobileWeb_img/img_profilepic01.png" alt="" width="100%" height="100%">
+								<div class="winnerDiv">당첨자발표</div>
+							</div>
+							<div class="eventDetail">
+								<div class="eventTheme">9인의 야구걸스와 함께 가을 야구 응원가자!</div>
+								<div class="eventDate">2016.05.05~2016.08.01</div>
+							</div>
+						</div>
+						<div class="eventCard">
+							<div class="imgBox">
+								<img src="{{STATIC_URL}}mobileWeb_img/img_profilepic01.png" alt="" width="100%" height="100%">
+							</div>
+							<div class="eventDetail">
+								<div class="eventTheme">9인의 야구걸스와 함께 가을 야구 응원가자!</div>
+								<div class="eventDate">2016.05.05~2016.08.01</div>
+							</div>
+						</div>
+						<div class="eventCard">
+							<div class="imgBox">
+								<img src="{{STATIC_URL}}mobileWeb_img/img_profilepic01.png" alt="" width="100%" height="100%">
+							</div>
+							<div class="eventDetail">
+								<div class="eventTheme">9인의 야구걸스와 함께 가을 야구 응원가자!</div>
+								<div class="eventDate">2016.05.05~2016.08.01</div>
+							</div>
+						</div>
+						<div class="eventCard">
+							<div class="imgBox">
+								<img src="{{STATIC_URL}}mobileWeb_img/img_profilepic01.png" alt="" width="100%" height="100%">
+							</div>
+							<div class="eventDetail">
+								<div class="eventTheme">9인의 야구걸스와 함께 가을 야구 응원가자!</div>
+								<div class="eventDate">2016.05.05~2016.08.01</div>
+							</div>
+						</div>
+						<div class="eventCard">
+							<div class="imgBox">
+								<img src="{{STATIC_URL}}mobileWeb_img/img_profilepic01.png" alt="" width="100%" height="100%">
+							</div>
+							<div class="eventDetail">
+								<div class="eventTheme">9인의 야구걸스와 함께 가을 야구 응원가자!</div>
+								<div class="eventDate">2016.05.05~2016.08.01</div>
+							</div>
+						</div>
+						<div class="eventCard">
+							<div class="imgBox">
+								<img src="{{STATIC_URL}}mobileWeb_img/img_profilepic01.png" alt="" width="100%" height="100%">
+							</div>
+							<div class="eventDetail">
+								<div class="eventTheme">9인의 야구걸스와 함께 가을 야구 응원가자!</div>
+								<div class="eventDate">2016.05.05~2016.08.01</div>
+							</div>
+						</div>
+					</div>					
+				</div>				
+				
+			</div>
+			<!-- end main-->		
+
+		
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+		<script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
+		<script src="{{STATIC_URL}}mobileWeb_vendor/waves/waves.min.js"></script>
+		<script src="{{STATIC_URL}}mobileWeb_vendor/wow/wow.min.js"></script>
+		<script src="{{STATIC_URL}}mobileWeb_js/nativedroid2.js"></script>
+		<script src="{{STATIC_URL}}mobileWeb_js/nd2settings.js"></script>
+		<script src="{{STATIC_URL}}mobileWeb_js/kc.fab.min.js"></script>
+
+<script>
+	
+</script>
+		<script>
+			function boardWriting(){
+				window.location.href = '/mobile/boardWriting';
+			}
+		</script>
+
+	</body>
+</html>
+
+<script>
+//search
+/*
+	new $.nd2Search({
+	  placeholder : "Input Placeholder",   // Placeholder in the search field</i>
+	  defaultIcon : "globe-alt", // optional: icon | null</i>
+	  source : [
+	  { label : 'Displayed Value', value : 'real-value', icon : 'custom-icon'}],   // <a href='http://api.jqueryui.com/autocomplete/#option-source'>autocomplete : option-source</a></i>
+	  fn : function(result) { // this function will be executed when a valid result item is selected</i>
+	    console.log('--- Your custom handling ---');
+	    console.log('you picked: ');
+	    console.log(result);
+	  }
+	});*/
+</script>
+
+
+{% endblock %}
+{% endblock %}
