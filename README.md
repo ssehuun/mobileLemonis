@@ -1,3 +1,28 @@
+# **프로젝트 설명**
+
+* **스포츠 정보 공유 웹/모바일 플랫폼 개발** (2016.02 ~ 2016.10)
+* 스포츠 정보 데이터 마이닝 및 프론트 모바일 웹 개발
+
+#
+### **<디렉토리 설명>**
+
+
+
+
+
+### **<프로젝트 이미지>**
+
+<div>
+<img src="https://user-images.githubusercontent.com/16871390/78991995-43f8f280-7b75-11ea-959f-e82e931e2ad0.png" width="300" hspace=30>
+<img src="https://user-images.githubusercontent.com/16871390/78992020-4d825a80-7b75-11ea-9889-cae7c617bf7e.png" width="300" hspace=30>
+</div>
+</br>
+</br>
+<div>
+<img src="https://user-images.githubusercontent.com/16871390/78992035-5410d200-7b75-11ea-8699-5cb1256dd965.png" width="300" hspace=30>
+<img src="https://user-images.githubusercontent.com/16871390/78992049-5d01a380-7b75-11ea-84e9-e679afb43afb.png" width="300" hspace=30></div>
+
+#
 # nativeDroid2
 
 ![nativeDroid2](http://nativedroid.godesign.ch/material/github_banner.jpg)
